@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @appointment.type %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @appointment.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @appointment.end_time %>
+</p>
+
+<p>
+  <strong>Charge:</strong>
+  <%= @appointment.charge %>
+</p>
+
+<p>
+  <strong>Reminder before:</strong>
+  <%= @appointment.reminder_before %>
+</p>
+
+<p>
+  <strong>Reminder after:</strong>
+  <%= @appointment.reminder_after %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @appointment.status %>
+</p>
+
+<p>
+  <strong>Notes:</strong>
+  <%= @appointment.notes %>
+</p>
+
+<p>
+  <strong>Calendar:</strong>
+  <%= @appointment.calendar %>
+</p>
+
+<p>
+  <strong>Client:</strong>
+  <%= @appointment.client %>
+</p>
+
+<p>
+  <strong>Bill:</strong>
+  <%= @appointment.bill %>
+</p>
+
+<p>
+  <strong>Employee:</strong>
+  <%= @appointment.employee %>
+</p>
+
+<%= link_to 'Edit', edit_appointment_path(@appointment) %> |
+<%= link_to 'Back', appointments_path %>

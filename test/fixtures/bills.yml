@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  total_amount: 1
+  paid_amount: 1
+  date_billed: 2016-05-18 17:32:47
+  date_paid: 2016-05-18 17:32:47
+  discount: 1
+  client_id: 
+
+two:
+  total_amount: 1
+  paid_amount: 1
+  date_billed: 2016-05-18 17:32:47
+  date_paid: 2016-05-18 17:32:47
+  discount: 1
+  client_id: 

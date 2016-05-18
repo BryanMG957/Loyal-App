@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  start_time: 2016-05-18 17:40:34
+  end_time: 2016-05-18 17:40:34
+  charge: 1
+  reminder_before: 1
+  reminder_after: 1
+  status: MyString
+  notes: MyText
+  calendar_id: 
+  client_id: 
+  bill_id: 
+  employee_id: 
+
+two:
+  type: 
+  start_time: 2016-05-18 17:40:34
+  end_time: 2016-05-18 17:40:34
+  charge: 1
+  reminder_before: 1
+  reminder_after: 1
+  status: MyString
+  notes: MyText
+  calendar_id: 
+  client_id: 
+  bill_id: 
+  employee_id: 

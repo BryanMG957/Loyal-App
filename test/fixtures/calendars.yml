@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  type: 
+  server_incoming: MyString
+  server_outgoing: MyString
+  username: MyString
+  password: MyString
+
+two:
+  name: MyString
+  type: 
+  server_incoming: MyString
+  server_outgoing: MyString
+  username: MyString
+  password: MyString

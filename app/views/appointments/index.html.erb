@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Appointments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>Charge</th>
+      <th>Reminder before</th>
+      <th>Reminder after</th>
+      <th>Status</th>
+      <th>Notes</th>
+      <th>Calendar</th>
+      <th>Client</th>
+      <th>Bill</th>
+      <th>Employee</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @appointments.each do |appointment| %>
+      <tr>
+        <td><%= appointment.type %></td>
+        <td><%= appointment.start_time %></td>
+        <td><%= appointment.end_time %></td>
+        <td><%= appointment.charge %></td>
+        <td><%= appointment.reminder_before %></td>
+        <td><%= appointment.reminder_after %></td>
+        <td><%= appointment.status %></td>
+        <td><%= appointment.notes %></td>
+        <td><%= appointment.calendar %></td>
+        <td><%= appointment.client %></td>
+        <td><%= appointment.bill %></td>
+        <td><%= appointment.employee %></td>
+        <td><%= link_to 'Show', appointment %></td>
+        <td><%= link_to 'Edit', edit_appointment_path(appointment) %></td>
+        <td><%= link_to 'Destroy', appointment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Appointment', new_appointment_path %>
