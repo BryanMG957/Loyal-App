@@ -1,6 +1,17 @@
 source 'https://rubygems.org'
 
-gem 'hirb'
+# Runtime dependencies of caldav-icloud
+gem 'builder'
+gem 'icalendar', '1.5.4'
+gem 'net-http-digest_auth'
+gem 'uuid'
+
+
+# Development dependencies of caldav-icloud
+  gem 'rspec'
+  gem 'fakeweb'
+
+gem 'caldav-icloud'
 # gem 'agcaldav'
 gem 'faker'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -37,6 +48,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'hirb'
+
 end
 
 group :development do
