@@ -1,5 +1,6 @@
 class PetsController < ApplicationController
   before_action :set_pet, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_using_omniauth?
 
   # GET /pets
   # GET /pets.json
