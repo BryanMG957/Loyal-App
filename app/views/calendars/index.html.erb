@@ -19,11 +19,11 @@
     <% @calendars.each do |calendar| %>
       <tr>
         <td><%= calendar.name %></td>
-        <td><%= calendar.type %></td>
+        <td><%= calendar.apitype %></td>
         <td><%= calendar.server_incoming %></td>
         <td><%= calendar.server_outgoing %></td>
         <td><%= calendar.username %></td>
-        <td><%= calendar.password %></td>
+        <td>********</td>
         <td><%= link_to 'Show', calendar %></td>
         <td><%= link_to 'Edit', edit_calendar_path(calendar) %></td>
         <td><%= link_to 'Destroy', calendar, method: :delete, data: { confirm: 'Are you sure?' } %></td>

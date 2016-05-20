@@ -1,6 +1,6 @@
 class BillsController < ApplicationController
   before_action :set_bill, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_using_omniauth?
+  # before_action :logged_in_using_omniauth?
 
   # GET /bills
   # GET /bills.json

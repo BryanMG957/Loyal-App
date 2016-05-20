@@ -13,15 +13,19 @@
 
   <div class="field">
     <%= f.label :employee_id %><br>
-    <%= f.text_field :employee_id %>
+    <%= f.collection_select(:employee_id, Employee.all, :id, :full_name) %>
   </div>
   <div class="field">
-    <%= f.label :type %><br>
-    <%= f.select(:type, options_for_select([['Walk', 'Walk'], ['Day Care', 'Day Care'], ['Overnight', 'Overnight']])) %>
+    <%= f.label :service %><br>
+    <%= f.select(:service, options_for_select([['Walk', 'Walk'], ['Day Care', 'Day Care'], ['Overnight', 'Overnight']])) %>
   </div>
   <div class="field">
     <%= f.label :client_id %><br>
-    <%= f.text_field :client_id %>
+    <%= f.collection_select(:client_id, Client.all, :id, :full_name) %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %><br>
   </div>
   <div class="field">
     <%= f.label :start_time %><br>
