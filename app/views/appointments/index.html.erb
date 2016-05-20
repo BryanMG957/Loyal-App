@@ -25,14 +25,14 @@
 <table>
   <thead>
     <tr>
-      <th>Type</th>
+      <th>Service Type</th>
       <th>Start time</th>
       <th>End time</th>
       <th>Charge</th>
       <th>Reminder before</th>
       <th>Reminder after</th>
       <th>Status</th>
-      <th>Notes</th>
+      <th>Description</th>
       <th>Calendar</th>
       <th>Client</th>
       <th>Bill</th>
@@ -44,14 +44,14 @@
   <tbody>
     <% @appointments.each do |appointment| %>
       <tr>
-        <td><%= appointment.type %></td>
+        <td><%= appointment.service %></td>
         <td><%= appointment.start_time %></td>
         <td><%= appointment.end_time %></td>
         <td><%= appointment.charge %></td>
         <td><%= appointment.reminder_before %></td>
         <td><%= appointment.reminder_after %></td>
         <td><%= appointment.status %></td>
-        <td><%= appointment.notes %></td>
+        <td><%= appointment.description %></td>
         <td><%= appointment.calendar %></td>
         <td><%= appointment.client %></td>
         <td><%= appointment.bill %></td>

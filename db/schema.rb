@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520130459) do
+ActiveRecord::Schema.define(version: 20160520223651) do
 
   create_table "appointments", force: :cascade do |t|
-    t.string   "type"
     t.datetime "start_time"
     t.datetime "end_time"
     t.integer  "charge"
@@ -29,6 +28,8 @@ ActiveRecord::Schema.define(version: 20160520130459) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "uuid"
+    t.string   "service"
+    t.string   "description"
   end
 
   add_index "appointments", ["bill_id"], name: "index_appointments_on_bill_id"
@@ -51,7 +52,6 @@ ActiveRecord::Schema.define(version: 20160520130459) do
 
   create_table "calendars", force: :cascade do |t|
     t.string   "name"
-    t.string   "type"
     t.string   "server_incoming"
     t.string   "server_outgoing"
     t.string   "username"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20160520130459) do
     t.datetime "updated_at",      null: false
     t.string   "url"
     t.string   "uid"
+    t.string   "apitype"
   end
 
   create_table "clients", force: :cascade do |t|

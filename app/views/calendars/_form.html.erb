@@ -16,11 +16,11 @@
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :type %><br>
-    <%= f.radio_button(:type, "icloud") %>
-    <%= f.label(:type_icloud, "iCloud") %>
-    <%= f.radio_button(:type, "google") %>
-    <%= f.label(:type_google, "Google") %>
+    <%= f.label :apitype %><br>
+    <%= f.radio_button(:apitype, "icloud") %>
+    <%= f.label(:apitype_icloud, "iCloud") %>
+    <%= f.radio_button(:apitype, "google") %>
+    <%= f.label(:apitype_google, "Google") %>
 
   </div>
   <div class="field">
@@ -45,7 +45,7 @@
   </div>
   <div class="field">
     <%= f.label :password %><br>
-    <%= f.text_field :password %>
+    <%= f.password_field :password %>
   </div>
   <div class="actions">
     <%= f.submit %>

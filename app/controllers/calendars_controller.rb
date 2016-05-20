@@ -1,6 +1,6 @@
 class CalendarsController < ApplicationController
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
-  before_action :logged_in_using_omniauth?
+  # before_action :logged_in_using_omniauth?
 
   # GET /calendars
   # GET /calendars.json
@@ -72,6 +72,6 @@ class CalendarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def calendar_params
-      params.require(:calendar).permit(:name, :type, :server_incoming, :server_outgoing, :username, :password, :uid, :url)
+      params.require(:calendar).permit(:name, :apitype, :server_incoming, :server_outgoing, :username, :password, :uid, :url)
     end
 end

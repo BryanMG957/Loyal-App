@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Type:</strong>
-  <%= @appointment.type %>
+  <strong>Service Type:</strong>
+  <%= @appointment.service %>
 </p>
 
 <p>
@@ -28,6 +28,11 @@
 <p>
   <strong>Reminder after:</strong>
   <%= @appointment.reminder_after %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @appointment.description %>
 </p>
 
 <p>
