@@ -24,10 +24,12 @@ class CalendarsController < ApplicationController
   # POST /calendars
   # POST /calendars.json
   def create
+    p calendar_params
     @calendar = Calendar.new(calendar_params)
 
     respond_to do |format|
       if @calendar.save
+        
         format.html { redirect_to @calendar, notice: 'Calendar was successfully created.' }
         format.json { render :show, status: :created, location: @calendar }
       else
@@ -69,6 +71,6 @@ class CalendarsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def calendar_params
-      params.require(:calendar).permit(:name, :type, :server_incoming, :server_outgoing, :username, :password)
+      params.require(:calendar).permit(:name, :type, :server_incoming, :server_outgoing, :username, :password, :uid, :url)
     end
 end
