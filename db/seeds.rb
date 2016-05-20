@@ -23,7 +23,7 @@ example_co = Company.create(name: "Auston's Dogs",
 end
 
 pets = ["Bailey", "Bella", "Max", "Lucy", "Charlene", "Molly",
- "Buddy", "Daisy", "Rocky", "Maggie", "Jake", "Jack", "Sophie", "Toby", "Clhoe", "Kody", "Lola", "Duke", "Cooper", "Coco", "Bear"]
+ "Buddy", "Daisy", "Rocky", "Maggie", "Jake", "Jack", "Sophie", "Toby", "Chloe", "Kody", "Lola", "Duke", "Cooper", "Coco", "Bear"]
 
 20.times do |n|
 	Pet.create(name: pets[rand(0..pets.length)],

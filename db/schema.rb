@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160518214034) do
+ActiveRecord::Schema.define(version: 20160520132214) do
 
   create_table "appointments", force: :cascade do |t|
     t.string   "type"
@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20160518214034) do
     t.integer  "employee_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "uuid"
   end
 
   add_index "appointments", ["bill_id"], name: "index_appointments_on_bill_id"
@@ -57,6 +58,8 @@ ActiveRecord::Schema.define(version: 20160518214034) do
     t.string   "password"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "url"
+    t.string   "uid"
   end
 
   create_table "clients", force: :cascade do |t|
