@@ -1,10 +1,16 @@
 source 'https://rubygems.org'
 
+
+#Dependencies of Auth0
+gem 'omniauth', '~> 1.3'
+gem 'omniauth-auth0', '~> 1.4'
+
 # Runtime dependencies of caldav-icloud
 gem 'builder'
 gem 'icalendar', '1.5.4'
 gem 'net-http-digest_auth'
 gem 'uuid'
+
 
 
 # Development dependencies of caldav-icloud

@@ -1,3 +1,22 @@
+<script src="https://cdn.auth0.com/js/lock-passwordless-1.0.min.js"></script>
+<script type="text/javascript">
+  var clientID = 'OZE54fxgtytTr1xQqdPyYtEkLA2QDZyc';
+  var domain = 'bryanmg957.auth0.com';
+
+  var lock = new Auth0LockPasswordless(clientID, domain);
+
+  function open() {
+    lock.emailcode({
+      callbackURL: 'localhost:3000',
+      authParams: {
+        scope: 'openid email'  // Learn about scopes: https://auth0.com/docs/scopes
+      }
+    });
+  }
+</script>
+<button onclick="window.open();">Email Code</button>
+
+
 <p id="notice"><%= notice %></p>
 
 <h1>Listing Appointments</h1>
