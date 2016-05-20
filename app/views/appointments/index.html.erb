@@ -1,21 +1,20 @@
-
-<script src="https://cdn.auth0.com/js/lock-passwordless-1.0.min.js"></script>
+<script src="https://cdn.auth0.com/js/lock-9.1.min.js"></script>
 <script type="text/javascript">
-  var clientID = 'OZE54fxgtytTr1xQqdPyYtEkLA2QDZyc';
-  var domain = 'bryanmg957.auth0.com';
 
-  var lock = new Auth0LockPasswordless(clientID, domain);
+  var lock = new Auth0Lock('OZE54fxgtytTr1xQqdPyYtEkLA2QDZyc', 'bryanmg957.auth0.com');
 
-  function open() {
-    lock.magiclink({
-      callbackURL: 'http://localhost:3000',
-      authParams: {
-        scope: 'openid email' // Learn about scopes: https://auth0.com/docs/scopes
+
+  function signin() {
+    lock.show({
+        callbackURL: 'http://localhost:3000'
+      , responseType: 'code'
+      , authParams: {
+        scope: 'openid email'  // Learn about scopes: https://auth0.com/docs/scopes
       }
     });
   }
 </script>
-<button onclick="window.open();">Magic Link</button>
+<button onclick="window.signin();">Login</button>
 
 
 <p id="notice"><%= notice %></p>
