@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get "/auth/auth0/callback" => "auth0#callback"
+  get "/auth/failure" => "auth0#failure"
+
+  root 'appointments#index'
+
   resources :appointments
   resources :bills
   resources :calendars

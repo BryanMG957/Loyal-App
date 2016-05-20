@@ -1,5 +1,6 @@
 class CalendarsController < ApplicationController
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
+  before_action :logged_in_using_omniauth?
 
   # GET /calendars
   # GET /calendars.json
