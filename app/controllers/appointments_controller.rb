@@ -32,14 +32,20 @@ class AppointmentsController < ApplicationController
         notice = "Appointment was successfully created"
         case @appointment.calendar.apitype
         when "icloud"
-          cal = icloud_connect
-          result = cal.create_event(:start => @appointment.start_time.to_s, :end => (@appointment.start_time + 1200).to_s, :title => @appointment.description, :description => @appointment.notes)
-          @appointment.uuid = result.properties["uid"]
-          @appointment.save
-          if result
-            notice += " and added to iCloud calendar #{@appointment.calendar.name}."
-          else
-            notice += ". Unable to add to iCloud calendar #{@appointment.calendar.name}."
+          begin
+            cal = icloud_connect
+            result = cal.create_event(:start => @appointment.start_time.to_s, :end => (@appointment.start_time + 1200).to_s, :title => @appointment.description, :description => @appointment.notes)
+            @appointment.uuid = result.properties["uid"]
+            @appointment.save
+            if result
+              notice += " and added to iCloud calendar #{@appointment.calendar.name}."
+            else
+              notice += ". Unable to add to iCloud calendar #{@appointment.calendar.name}."
+            end
+          rescue CalDAViCloud::NotExistError
+            notice += ". Calendar not found in iCloud."
+          rescue CalDAViCloud::AuthenticationError
+            notice += ". Calendar not authorized in iCloud."
           end
         when ""
           notice += " in the local calendar."
