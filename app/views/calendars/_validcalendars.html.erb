@@ -1,0 +1,4 @@
+<div class="field">
+		<%= f.select_tag 'name', options_for_select(calendarcandidates.collect{ |u| [u.displayname, u] }) %>
+    <%# f.text_field :name %>
+</div>
