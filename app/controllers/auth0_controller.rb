@@ -5,7 +5,7 @@ class Auth0Controller < ApplicationController
     session[:userinfo] = request.env['omniauth.auth']
 
     # Redirect to the URL you want after successfull auth
-    redirect_to '/appointments'
+    redirect_to appointments_path
   end
 
   def failure
