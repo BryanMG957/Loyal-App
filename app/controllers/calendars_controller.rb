@@ -1,6 +1,6 @@
 class CalendarsController < ApplicationController
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
-  # before_action :logged_in_using_omniauth?
+  before_action :logged_in_using_omniauth?
 
   # GET /calendars
   # GET /calendars.json
@@ -30,7 +30,7 @@ class CalendarsController < ApplicationController
 
     respond_to do |format|
       if @calendar.save
-        
+
         format.html { redirect_to @calendar, notice: 'Calendar was successfully created.' }
         format.json { render :show, status: :created, location: @calendar }
       else
