@@ -5,12 +5,35 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-<button type="button"><a href="https://bryanmg957.auth0.com/v2/logout?returnTo=http://localhost:3000">Log Out</a></button>
+  <!-- <nav>
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo">Loyal</a>
+      <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-and-down">
+        <li> <%= link_to "Calendars", calendars_path %></li>
+        <li> <%= link_to "Clients", clients_path %></li>
+        <li> <%= link_to "Billing", bills_path %></li>
+        <li> <%= link_to "Settings", calendars_path %></li>
+        <li> <a href="https://bryanmg957.auth0.com/v2/logout?returnTo=http://localhost:3000">Log Out</a></li>
+      </ul>
+      <ul class="side-nav" id="mobile-demo">
+        <li> <%= link_to "Calendars", calendars_path %></li>
+        <li> <%= link_to "Clients", clients_path %></li>
+        <li> <%= link_to "Billing", bills_path %></li>
+        <li> <%= link_to "Settings", calendars_path %></li>
+        <li> <a href="https://bryanmg957.auth0.com/v2/logout?returnTo=http://localhost:3000">Log Out</a></li>
+      </ul>
+    </div>
+  </nav> -->
 <%= yield %>
-<% if Rails.env.development? %>
-  <%= console %>
-<% end %>
+
 </body>
 </html>
+
+
+<!-- <#% if Rails.env.development? %>
+ <#%= console %>
+<#% end %> -->

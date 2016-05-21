@@ -1,0 +1,25 @@
+.container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+.loyal {
+  display: flex;
+  color: white;
+  font-family: cursive;
+}
+.logo{
+  display: flex;
+}
+
+.button {
+  display: flex;
+  
+  background-color: #21CE99;
+}
+button {
+  background-color: white;
+  color: #5C5757;
+}
