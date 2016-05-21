@@ -10,15 +10,13 @@ gem 'icalendar', '1.5.4'
 gem 'net-http-digest_auth'
 gem 'uuid'
 
-
-
 # Development dependencies of caldav-icloud
   gem 'rspec'
   gem 'fakeweb'
 
 gem 'caldav-icloud'
-# gem 'agcaldav'
 gem 'faker'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use sqlite3 as the database for Active Record
