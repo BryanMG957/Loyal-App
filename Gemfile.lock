@@ -207,6 +207,7 @@ DEPENDENCIES
   jquery-rails
   materialize-sass
   net-http-digest_auth
+  nokogiri
   omniauth (~> 1.3)
   omniauth-auth0 (~> 1.4)
   rails (= 4.2.6)
