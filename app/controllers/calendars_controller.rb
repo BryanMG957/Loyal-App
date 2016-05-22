@@ -2,7 +2,9 @@ class CalendarsController < ApplicationController
   include CalendarsHelper
   before_action :set_calendar, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_using_omniauth?
-
+  skip_before_action :logged_in_using_omniauth?, only: [:pull_calendars]
+  skip_before_filter :verify_authenticity_token, only: [:pull_calendars]
+  layout(false, only: [:pull_calendars])
   # GET /calendars
   # GET /calendars.json
   def index
@@ -62,6 +64,15 @@ class CalendarsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to calendars_url, notice: 'Calendar was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def pull_calendars
+    @icloudcalendarlist = icloud_get_calendars(params[:username], params[:password])
+    if (@icloudcalendarlist.class == Symbol)
+      render plain: @icloudcalendarlist.to_s
+    else
+      render '_validcalendars'
     end
   end
 

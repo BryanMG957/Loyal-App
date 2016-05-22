@@ -6,6 +6,12 @@ module CalendarsHelper
 	# 													{ displayname: "work", href: "/123456789/calendars/work"},
 	# 													{ displayname: "test", href: "/123456789/calendars/15E146A2-B280-48EA-A27D-7E7D9CD3EFD1/" }]}
 	def icloud_get_calendars(username, password)
+		if (username.nil? || password.nil?)
+			return :nil_username_or_password
+		elsif (username == "" || password == "")
+			return :blank_username_or_password
+		end
+
     servernum = sprintf("%02d", rand(1..24))
     url = "https://p#{servernum}-caldav.icloud.com"
     uri = URI.parse(url)

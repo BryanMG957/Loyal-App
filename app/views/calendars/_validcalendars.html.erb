@@ -1,4 +1,4 @@
+Available Calendars:
 <div class="field">
-		<%= f.select_tag 'name', options_for_select(calendarcandidates.collect{ |u| [u.displayname, u] }) %>
-    <%# f.text_field :name %>
+   <%= select_tag "calendars[name]", options_for_select(@icloudcalendarlist[:calendars].collect{ |u| [u[:displayname], u[:displayname]] }) %>
 </div>

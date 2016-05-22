@@ -4,7 +4,8 @@ Rails.application.routes.draw do
 
   get "/pull_calendars" => "calendars#pull_calendars"
   get "/calendars/pull_calendars" => "calendars#pull_calendars"
-  
+  post "/pull_calendars" => "calendars#pull_calendars"
+  post "/calendars/pull_calendars" => "calendars#pull_calendars"
   root 'homes#index'
 
   resources :appointments
