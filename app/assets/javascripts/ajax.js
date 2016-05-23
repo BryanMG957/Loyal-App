@@ -1,3 +1,3 @@
-$(".pull_calendars").live("click", function() {
+$(".pull_calendars").on("click", function() {
   $.ajax("/pull_calendars")
 });

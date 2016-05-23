@@ -13,13 +13,9 @@
  *= require_tree .
  *= require_self
  */
-@import "materialize";
 
-.nav-wrapper {
-  background-color: #21CE99;
-  color: #5C5757;
-  font-family: cursive;
-}
+@import "bootstrap-sprockets";
+@import "bootstrap";
 
 html,
 body {
@@ -30,4 +26,9 @@ body {
   background-color: #21CE99;
   margin: 0;
   padding: 0;
+}
+
+#main{
+  position: fixed;
+  top: 20%;
 }

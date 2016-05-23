@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-#css materialize
-gem 'materialize-sass'
+gem 'bootstrap-sass'
+gem 'normalize-rails'
 #Dependencies of Auth0
 gem 'omniauth', '~> 1.3'
 gem 'omniauth-auth0', '~> 1.4'
@@ -13,8 +13,8 @@ gem 'net-http-digest_auth'
 gem 'uuid'
 
 # Development dependencies of caldav-icloud
-  gem 'rspec'
-  gem 'fakeweb'
+gem 'rspec'
+gem 'fakeweb'
 
 gem 'caldav-icloud'
 gem 'faker'
