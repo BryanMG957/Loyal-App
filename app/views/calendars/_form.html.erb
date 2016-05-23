@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.radio_button(:apitype, "none", {checked: true, id: "api_none_button"}) %>
+    <%= f.radio_button(:apitype, "none", {id: "api_none_button"}) %>
     <%= f.label(:apitype_icloud, "Web only") %>
     <%= f.radio_button(:apitype, "icloud", {id: "api_icloud_button"}) %>
     <%= f.label(:apitype_icloud, "iCloud") %>
@@ -36,7 +36,10 @@
     <br />
     <button type="button" name="pull_calendars" id="pull_calendars">Pull Calendars</button>
     <br /><br />
-    <div id="calendar_list">
+    Available Calendars:
+    <div class="field">
+      <div id="calendar_list">
+      </div>
     </div>
   </div>
 <!--   <div class="field">

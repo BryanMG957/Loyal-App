@@ -71,10 +71,11 @@ class AppointmentsController < ApplicationController
         when "icloud"
           begin
             cal = icloud_connect
-            event = {:start => @appointment.start_time.to_s, :end => (@appointment.start_time + 1200).to_s, :title => @appointment.description, :description => @appointment.notes}
-            # set UUID 
-            event[:uid] = @appointment.uuid
-            c = cal.update_event(event)
+            event = cal.find_event(@appointment.uuid)
+            cal.delete_event(@appointment.uuid)
+            newevent = cal.create_event(:start => @appointment.start_time.to_s, :end => (@appointment.start_time + 1200).to_s, :title => @appointment.description, :description => @appointment.notes)
+            @appointment.uuid = newevent.properties["uid"]
+            @appointment.save    
           rescue CalDAViCloud::NotExistError
             notice += " Item not found in iCloud."
           end
@@ -115,7 +116,7 @@ class AppointmentsController < ApplicationController
     end
     def icloud_connect
       servernum = sprintf("%02d", rand(1..24))
-      url = "https://p#{servernum}-caldav.icloud.com/#{@appointment.calendar.uid}/calendars/#{@appointment.calendar.name}/"
+      url = "https://p#{servernum}-caldav.icloud.com#{@appointment.calendar.url}"
       CalDAViCloud::Client.new(:uri => url, :user => @appointment.calendar.username , :password => @appointment.calendar.password)
     end
     # Never trust parameters from the scary internet, only allow the white list through.
