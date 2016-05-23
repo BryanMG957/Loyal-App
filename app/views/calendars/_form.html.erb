@@ -12,24 +12,32 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :apitype %><br>
-    <%= f.radio_button(:apitype, "icloud") %>
+    <%= f.radio_button(:apitype, "none", {checked: true, id: "api_none_button"}) %>
+    <%= f.label(:apitype_icloud, "Web only") %>
+    <%= f.radio_button(:apitype, "icloud", {id: "api_icloud_button"}) %>
     <%= f.label(:apitype_icloud, "iCloud") %>
-    <%= f.radio_button(:apitype, "google") %>
+    <%= f.radio_button(:apitype, "google", {id: "api_google_button"}) %>
     <%= f.label(:apitype_google, "Google") %>
 
   </div>
-
-  <div class="field">
+  <div class="field api api_none">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>    
+  <div class="field api api_icloud api_google">
     <%= f.label :username %><br>
     <%= f.text_field :username %>
   </div>
-  <div class="field">
+  <div class="field api api_icloud api_google">
     <%= f.label :password %><br>
     <%= f.password_field :password %>
   </div>
-  <div class="pull_calendars">
-    <button name="pull_calendars" onclick="">Pull Calendars</button>
+  <div class="pull_calendars api api_icloud api_google">
+    <br />
+    <button type="button" name="pull_calendars" id="pull_calendars">Pull Calendars</button>
+    <br /><br />
+    <div id="calendar_list">
+    </div>
   </div>
 <!--   <div class="field">
     <%= f.label :server_incoming %><br>
@@ -39,15 +47,11 @@
     <%= f.label :server_outgoing %><br>
     <%= f.text_field :server_outgoing %>
   </div> -->
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
+  <div class="field api api_icloud">
     <%= f.label :url %><br>
     <%= f.text_field :url %>
   </div>
-  <div class="field">
+  <div class="field api api_icloud">
     <%= f.label :uid %><br>
     <%= f.text_field :uid %>
   </div>

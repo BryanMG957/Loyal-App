@@ -1,4 +1,5 @@
 class Auth0Controller < ApplicationController
+
   def callback
     # This stores all the user information that came from Auth0
     # and the IdP

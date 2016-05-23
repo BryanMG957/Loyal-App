@@ -1,7 +1,6 @@
 class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_using_omniauth?
-
   # GET /appointments
   # GET /appointments.json
   def index
