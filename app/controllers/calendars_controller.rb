@@ -19,6 +19,7 @@ class CalendarsController < ApplicationController
   # GET /calendars/new
   def new
     @calendar = Calendar.new
+    @calendar.apitype = "none"
   end
 
   # GET /calendars/1/edit

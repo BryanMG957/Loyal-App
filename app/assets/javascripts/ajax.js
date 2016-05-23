@@ -17,19 +17,31 @@ function loadPageHandler() {
 	  });
 	});
 
+	function setApiType(apitype) {
+		if (apitype === "none") {
+			$(".api").hide();
+			$(".api_none").show();
+		}
+		else if (apitype === "icloud") {
+			$(".api").hide();
+			$(".api_icloud").show();
+		}
+		else if (apitype === "google") {
+			$(".api").hide();
+			$(".api_google").show();
+		}
+	}
+
 	$("#api_none_button").on("click", function(){
-		$(".api").hide();
-		$(".api_none").show();
+		setApiType("none");
 	});
 
 	$("#api_icloud_button").on("click", function(){
-		$(".api").hide();
-		$(".api_icloud").show();
+		setApiType("icloud");
 	});
 
 	$("#api_google_button").on("click", function(){
-		$(".api").hide();
-		$(".api_google").show();
+		setApiType("google");
 	});
 }
 

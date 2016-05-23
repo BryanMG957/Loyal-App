@@ -1,4 +1,9 @@
-Available Calendars:
-<div class="field">
-   <%= select_tag "calendars[name]", options_for_select(@icloudcalendarlist[:calendars].collect{ |u| [u[:displayname], u[:displayname]] }) %>
-</div>
+
+<% uid = @icloudcalendarlist[:uid] %>
+<% selectoptions = @icloudcalendarlist[:calendars].collect{ |u|
+		"<option value='#{u[:displayname]}' class='icloud_cal_option'
+		onclick=\"document.getElementById('calendar_name').value='#{u[:displayname]}';
+				 document.getElementById('calendar_url').value='#{u[:href]}';
+				 document.getElementById('calendar_uid').value='#{uid}';\">
+		     #{u[:displayname]}</option>" }.join %>
+<%= select_tag "calendars[name]", selectoptions.html_safe %>
