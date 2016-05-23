@@ -11,8 +11,8 @@ gem 'net-http-digest_auth'
 gem 'uuid'
 
 # Development dependencies of caldav-icloud
-  gem 'rspec'
-  gem 'fakeweb'
+gem 'fakeweb'
+gem 'rspec'
 
 gem 'caldav-icloud'
 gem 'faker'
@@ -52,7 +52,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'hirb'
-
+  # gem 'rspec-rails'
+  # gem 'capybara'
+  # gem 'capybara-webkit'
+  # gem 'selenium-webdriver'
 end
 
 group :development do
