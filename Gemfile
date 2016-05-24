@@ -56,7 +56,7 @@ group :development, :test do
   gem 'hirb'
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'capybara-webkit'
+  # gem 'capybara-webkit'
   gem 'selenium-webdriver'
 end
 
