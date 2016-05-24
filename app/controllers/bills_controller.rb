@@ -7,7 +7,13 @@ class BillsController < ApplicationController
   def index
     @bills = Bill.all
   end
-
+  def unbilled
+    @clienthash = {}
+    @appointments = Appointment.where("start_time < '" + Time.now.to_s + "'").order(:start_time).order(:client_id)
+    @appointments.each do |appt|
+      @clienthash[appt.client_id] = @clienthash.fetch(appt.client_id, 0) + 1
+    end
+  end
   # GET /bills/1
   # GET /bills/1.json
   def show

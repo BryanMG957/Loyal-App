@@ -1,0 +1,40 @@
+<div id='calendarmain' class="white">
+	<section id='cal-container'>
+		<script>
+		$(document).ready(function() {
+		  $('#calendar').fullCalendar({
+		    events: [
+				<% @appointments.each do |appt| %>
+			      {
+			      	  id     : '<%= appt.id %>',
+		            title  : '<%= appt.description %>',
+		            start  : '<%= appt.start_time.strftime("%Y-%m-%d") %>'
+		        },
+		    <% end %>
+		    ],
+    		dayClick: function(date, jsEvent, view) {
+					$.ajax({
+				    url: "/appointments/new",
+				    type: 'GET'
+				  }).done(function(html) {
+				  	document.getElementById("appt-modifier").innerHTML = html;
+				  })
+
+  			},
+  			eventClick: function(calEvent, jsEvent, view) {
+					$.ajax({
+				    url: "/appointments/" + calEvent.id + "/edit",
+				    type: 'GET'
+				  }).done(function(html) {
+				  	document.getElementById("appt-modifier").innerHTML = html;
+				  })
+    		}
+		  })
+		});
+		</script>
+		<div id='calendar'></div>
+	</section>
+	<aside id='appt-modifier'>
+		someasidetext
+	</aside>
+</div>
