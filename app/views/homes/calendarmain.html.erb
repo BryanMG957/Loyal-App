@@ -1,2 +1,35 @@
-The Calendar
-<div id='calendar'></div>
+<div id='calendarmain'>
+	<section id='cal-container'>
+		<script>
+		$(document).ready(function() {
+		  $('#calendar').fullCalendar({
+		    events: [
+				<% @appointments.each do |appt| %>
+			      {
+		            title  : '<%= appt.description %>',
+		            start  : '<%= appt.start_time.strftime("%Y-%m-%d") %>'
+		        },
+		    <% end %>
+		    ],
+    		dayClick: function(date, jsEvent, view) {
+					$.ajax({
+				    url: "/appointments/new",
+				    type: 'GET'
+				  }).done(function(html) {
+				  	document.getElementById("appt-modifier").innerHTML = html;
+				  })
+		      // alert('Clicked on: ' + date.format());
+		      // alert('Current view: ' + view.name);
+		      // // change the day's background color just for fun
+		      // $(this).css('background-color', 'red');
+  			}
+
+		  })
+		});
+		</script>
+		<div id='calendar'></div>
+	</section>
+	<aside id='appt-modifier'>
+		someasidetext
+	</aside>
+</div>
