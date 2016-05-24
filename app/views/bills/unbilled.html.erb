@@ -3,9 +3,10 @@
 	<thead>
 		<tr>
 			<th>Select</th>
-			<th>Dates</th>
-			<th># of items</th>
+			<th style='padding: 5px'>Dates</th>
+			<th style='padding: 5px'># of items</th>
 			<th>Client</th>
+			<th>Charge</th>
 			<th>Expand</th>
 			<th></th>
 		</tr>
@@ -13,10 +14,10 @@
 	<tbody>
 		<% @clienthash.each do |key, value| %>
 			<% clientappts = @appointments.where(client_id: key).order(:start_time) %>
-			<tr>
+			<tr style='padding: 5px'>
 				<td>
 				</td>
-				<td>
+				<td style='padding: 5px'>
 					<%= clientappts.first.start_time.strftime("%m/%d/%y") %> - 
 					<%= clientappts.last.start_time.strftime("%m/%d/%y") %>
 				</td>
@@ -28,13 +29,15 @@
 					<%= clientappts.first.client.last_name %>
 				</td>
 				<td>
-					Javascript
+				</td>
+				<td>
+					<a href='#' class='expand' tag='client<%= key %>'>Expand</a>
 				</td>
 				<td>
 				</td>
 			</tr>
 			<% clientappts.each do |appt| %>
-				<tr>
+				<tr class='client<%= key %>' hidden='hidden'>
 					<td>
 						<%= check_box "bill", appt.id %>
 					</td>
@@ -42,8 +45,11 @@
 						<%= appt.start_time.strftime("%m/%d/%y") %>
 						<%= appt.start_time.strftime("%I:%M %P") %>
 					</td>
-					<td colspan='3'>
+					<td colspan='2'>
 						<%= appt.description %>
+					</td>
+					<td>
+						<%= appt.charge %>
 					</td>
 					<td>
 						<%= link_to "Open Appt", appt %>
@@ -54,3 +60,4 @@
 		<% end %>
 	</tbody>
 </table>
+<%= submit_tag "Create Bill" %>

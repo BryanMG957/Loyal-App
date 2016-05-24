@@ -51,6 +51,10 @@ function loadPageHandler() {
 		document.getElementById("calendar_uid").value = cal_list_hash['uid'];
 		document.getElementById("calendar_name").value = cal_list_hash['displayname'];
 	});
+	$(".expand").on("click", function(){
+		$("." + $(this).attr("tag")).fadeToggle(200);
+
+	});
 }
 
 //Turbolinks specific linking (works when using link_to)
