@@ -1,5 +1,5 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: [:show, :edit, :update, :destroy]
+  before_action :set_appointment, only: [:show, :edit, :editappt_calendar_window, :update, :destroy]
   before_action :logged_in_using_omniauth?
   # GET /appointments
   # GET /appointments.json
@@ -17,9 +17,22 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new
   end
 
+  # GET /appointments/newappt_calendar_window
+  # used to render 'New Appointment' as a sidebar on calendarmain
+  def newappt_calendar_window
+    @appointment = Appointment.new
+    render 'new', layout: false
+  end  
+
   # GET /appointments/1/edit
   def edit
   end
+
+  # GET /appointments/:id/editappt_calendar_window
+  # used to render 'Edit Appointment' as a sidebar on calendarmain
+  def editappt_calendar_window
+    render 'edit', params: {id: params[:id]}, layout: false
+  end 
 
   # POST /appointments
   # POST /appointments.json
