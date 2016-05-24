@@ -16,7 +16,6 @@ gem 'uuid'
 
 gem 'fakeweb'
 gem 'rspec'
-
 gem 'caldav-icloud'
 gem 'faker'
 gem 'nokogiri'
@@ -55,10 +54,10 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'hirb'
-  # gem 'rspec-rails'
-  # gem 'capybara'
-  # gem 'capybara-webkit'
-  # gem 'selenium-webdriver'
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'selenium-webdriver'
 end
 
 group :development do

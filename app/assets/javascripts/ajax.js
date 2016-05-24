@@ -43,6 +43,14 @@ function loadPageHandler() {
 	$("#api_google_button").on("click", function(){
 		setApiType("google");
 	});
+
+	$("#calendar_list").on("change", function(){
+		dropdown = document.getElementById("calendars_name");
+		var cal_list_hash = JSON.parse(dropdown.options[dropdown.selectedIndex].value);
+		document.getElementById("calendar_url").value = cal_list_hash['url'];
+		document.getElementById("calendar_uid").value = cal_list_hash['uid'];
+		document.getElementById("calendar_name").value = cal_list_hash['displayname'];
+	});
 }
 
 //Turbolinks specific linking (works when using link_to)
