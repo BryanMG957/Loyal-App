@@ -1,4 +1,4 @@
-<div id='calendarmain'>
+<div id='calendarmain' class="white">
 	<section id='cal-container'>
 		<script>
 		$(document).ready(function() {
@@ -6,6 +6,7 @@
 		    events: [
 				<% @appointments.each do |appt| %>
 			      {
+			      	  id     : '<%= appt.id %>',
 		            title  : '<%= appt.description %>',
 		            start  : '<%= appt.start_time.strftime("%Y-%m-%d") %>'
 		        },
@@ -18,12 +19,16 @@
 				  }).done(function(html) {
 				  	document.getElementById("appt-modifier").innerHTML = html;
 				  })
-		      // alert('Clicked on: ' + date.format());
-		      // alert('Current view: ' + view.name);
-		      // // change the day's background color just for fun
-		      // $(this).css('background-color', 'red');
-  			}
 
+  			},
+  			eventClick: function(calEvent, jsEvent, view) {
+					$.ajax({
+				    url: "/appointments/" + calEvent.id + "/edit",
+				    type: 'GET'
+				  }).done(function(html) {
+				  	document.getElementById("appt-modifier").innerHTML = html;
+				  })
+    		}
 		  })
 		});
 		</script>
