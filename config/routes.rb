@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get "/calendars/pull_calendars" => "calendars#pull_calendars"
   post "/pull_calendars" => "calendars#pull_calendars"
   post "/calendars/pull_calendars" => "calendars#pull_calendars"
+  get "/calendarmain" => "homes#calendarmain"
+  get "/bills" => "bills#unbilled"
   root 'homes#index'
 
   resources :appointments

@@ -1,9 +1,7 @@
 
 <% uid = @icloudcalendarlist[:uid] %>
 <% selectoptions = @icloudcalendarlist[:calendars].collect{ |u|
-		"<option value='#{u[:displayname]}' class='icloud_cal_option'
-		onclick=\"document.getElementById('calendar_name').value='#{u[:displayname]}';
-				 document.getElementById('calendar_url').value='#{u[:href]}';
-				 document.getElementById('calendar_uid').value='#{uid}';\">
+		"<option class='icloud_cal_option'
+		value='{\"displayname\": \"#{u[:displayname]}\", \"url\": \"#{u[:href]}\", \"uid\": \"#{uid}\"}'>
 		     #{u[:displayname]}</option>" }.join %>
 <%= select_tag "calendars[name]", selectoptions.html_safe %>

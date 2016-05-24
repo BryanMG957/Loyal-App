@@ -36,6 +36,7 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
+    addressable (2.4.0)
     arel (6.0.3)
     autoprefixer-rails (6.3.6)
       execjs
@@ -51,6 +52,15 @@ GEM
       icalendar
       net-http-digest_auth
       uuid
+    capybara (2.7.1)
+      addressable
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    childprocess (0.5.9)
+      ffi (~> 1.0, >= 1.0.11)
     coffee-rails (4.1.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.1.x)
@@ -68,6 +78,11 @@ GEM
     fakeweb (1.3.0)
     faraday (0.9.2)
       multipart-post (>= 1.2, < 3)
+    ffi (1.9.10)
+    fullcalendar-rails (2.6.1.0)
+      jquery-rails (>= 4.0.5, < 5.0.0)
+      jquery-ui-rails (>= 5.0.2)
+      momentjs-rails (>= 2.9.0)
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     hashie (3.4.4)
@@ -81,6 +96,8 @@ GEM
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
+    jquery-ui-rails (5.0.5)
+      railties (>= 3.2.16)
     json (1.8.3)
     jwt (1.5.1)
     loofah (2.0.3)
@@ -94,6 +111,8 @@ GEM
     mime-types-data (3.2016.0221)
     mini_portile2 (2.0.0)
     minitest (5.9.0)
+    momentjs-rails (2.11.1)
+      railties (>= 3.1)
     multi_json (1.12.0)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -157,7 +176,16 @@ GEM
     rspec-mocks (3.4.1)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.4.0)
+    rspec-rails (3.4.2)
+      actionpack (>= 3.0, < 4.3)
+      activesupport (>= 3.0, < 4.3)
+      railties (>= 3.0, < 4.3)
+      rspec-core (~> 3.4.0)
+      rspec-expectations (~> 3.4.0)
+      rspec-mocks (~> 3.4.0)
+      rspec-support (~> 3.4.0)
     rspec-support (3.4.1)
+    rubyzip (1.2.0)
     sass (3.4.22)
     sass-rails (5.0.4)
       railties (>= 4.0.0, < 5.0)
@@ -168,6 +196,10 @@ GEM
     sdoc (0.4.1)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    selenium-webdriver (2.53.0)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     spring (1.7.1)
     sprockets (3.6.0)
       concurrent-ruby (~> 1.0)
@@ -194,6 +226,9 @@ GEM
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
       sprockets-rails (>= 2.0, < 4.0)
+    websocket (1.2.3)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
@@ -203,13 +238,16 @@ DEPENDENCIES
   builder
   byebug
   caldav-icloud
+  capybara
   coffee-rails (~> 4.1.0)
   faker
   fakeweb
+  fullcalendar-rails
   hirb
   icalendar (= 1.5.4)
   jbuilder (~> 2.0)
   jquery-rails
+  momentjs-rails
   net-http-digest_auth
   nokogiri
   normalize-rails
@@ -217,8 +255,10 @@ DEPENDENCIES
   omniauth-auth0 (~> 1.4)
   rails (= 4.2.6)
   rspec
+  rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
+  selenium-webdriver
   spring
   sqlite3
   turbolinks
