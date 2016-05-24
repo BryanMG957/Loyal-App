@@ -1,5 +1,6 @@
 class Client < ActiveRecord::Base
   belongs_to :company
+  has_many :pets
   def to_s
   	return full_name
   end

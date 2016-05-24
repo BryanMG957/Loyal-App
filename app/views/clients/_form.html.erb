@@ -11,53 +11,45 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :first_name %><br>
-    <%= f.text_field :first_name %>
+  <div class="field" >
+    <%= f.text_field :first_name, :placeholder => "First name", :class => "form-control"%>
   </div>
   <div class="field">
-    <%= f.label :last_name %><br>
-    <%= f.text_field :last_name %>
+    <%= f.text_field :last_name, :class => "form-control", :placeholder => "Last name" %>
   </div>
   <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.text_field :email, :class => "form-control", :placeholder => "E-mail" %>
   </div>
   <div class="field">
-    <%= f.label :phone1 %><br>
-    <%= f.text_field :phone1 %>
+    <%= f.text_field "pets", :class => "form-control", :placeholder => "Pet name" %>
   </div>
   <div class="field">
-    <%= f.label :phone2 %><br>
-    <%= f.text_field :phone2 %>
+    <%= f.text_field :phone1, :class => "form-control", :placeholder => "Primary phone #" %>
   </div>
   <div class="field">
-    <%= f.label :phone3 %><br>
-    <%= f.text_field :phone3 %>
+    <%= f.text_field :phone2, :class => "form-control", :placeholder => "Secondary phone #" %>
   </div>
   <div class="field">
-    <%= f.label :phone4 %><br>
-    <%= f.text_field :phone4 %>
+    <%= f.text_field :phone3, :class => "form-control", :placeholder => "Additional phone #" %>
   </div>
   <div class="field">
-    <%= f.label :address %><br>
-    <%= f.text_field :address %>
+    <%= f.text_field :phone4, :class => "form-control", :placeholder => "Additional phone #" %>
   </div>
   <div class="field">
-    <%= f.label :notes %><br>
-    <%= f.text_area :notes %>
+    <%= f.text_field :address, :class => "form-control", :placeholder => "Address" %>
   </div>
   <div class="field">
+    <%= f.text_area :notes, :class => "form-control", :placeholder => "Notes" %>
+  </div>
+  <!-- <div class="company">
     <%= f.label :company_id %><br>
     <%= f.collection_select(:company_id, Company.all, :id, :name) %>
+  </div> -->
+  <div class="field">
+    <%= f.text_field :first_name_2, :class => "form-control", :placeholder => "Additional first name" %>
   </div>
   <div class="field">
-    <%= f.label :first_name_2 %><br>
-    <%= f.text_field :first_name_2 %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name_2 %><br>
-    <%= f.text_field :last_name_2 %>
+    <%= f.text_field :last_name_2, :class => "form-control", :placeholder => "Additional last name" %>
   </div>
   <div class="actions">
     <%= f.submit %>

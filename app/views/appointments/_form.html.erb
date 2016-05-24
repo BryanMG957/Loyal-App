@@ -11,10 +11,14 @@
     </div>
   <% end %>
 
-  <div class="field">
+
+  <!-- <div class="field" >
+    <#%= f.text_field :first_name, :placeholder => "First name", :class => "form-control"%>
+  </div> -->
+  <!-- <div class="field">
     <%= f.label :employee_id %><br>
     <%= f.collection_select(:employee_id, Employee.all, :id, :full_name) %>
-  </div>
+  </div> -->
   <div class="field">
     <%= f.label :service %><br>
     <%= f.select(:service, options_for_select([['Walk', 'Walk'], ['Day Care', 'Day Care'], ['Overnight', 'Overnight']])) %>
