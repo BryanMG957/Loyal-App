@@ -21,41 +21,81 @@
   </div> -->
   <div class="field">
     <%= f.label :service %><br>
-    <%= f.select(:service, options_for_select([['Walk', 'Walk'], ['Day Care', 'Day Care'], ['Overnight', 'Overnight']])) %>
+    <%= f.select(:service, options_for_select([['Walk', 'Walk'], ['Day Care', 'Day Care'], ['Overnight', 'Overnight']]),{}, {:class => "form-control"})  %>
   </div>
   <div class="field">
     <%= f.label :calendar_id %><br>
-    <%= f.collection_select(:calendar_id, Calendar.all, :id, :name) %>
+    <%= f.collection_select(:calendar_id, Calendar.all, :id, :name,{}, {:class => "form-control"})%>
   </div>
   <div class="field">
     <%= f.label :client_id %><br>
-    <%= f.collection_select(:client_id, Client.all, :id, :full_name) %>
+    <%= f.collection_select(:client_id, Client.all, :id, :full_name,{}, {:class => "form-control"}) %>
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_field :description %><br>
+    <%= f.text_field :description, :class => "form-control" %><br>
   </div>
-  <div class="field">
+
+<div class="field">
     <%= f.label :start_time %><br>
-    <%= f.datetime_select :start_time %>
-  </div>
+    <div class="input-group">
+      <!-- <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" /> -->
+      <%= f.datetime_field :start_time, :class => "form-control", :id => "name", :name => "date", :placeholder => "MM/DD/YYYY", :type => "text" %>
+      <div class="input-group-addon">
+        <i class="fa fa-calendar">
+        </i>
+      </div>
+    </div>
+</div>
+
+  <!-- <div class="field">
+    <%= f.label :start_time %><br>
+    <%= f.datetime_select :start_time, :class => "form-control" %>
+  </div> -->
   <div class="field">
     <%= f.label :reminder_before %><br>
-    <%= f.number_field :reminder_before %>
+    <%= f.number_field :reminder_before, :class => "form-control" %>
   </div>
   <div class="field">
     <%= f.label :reminder_after %><br>
-    <%= f.number_field :reminder_after %>
+    <%= f.number_field :reminder_after, :class => "form-control" %>
   </div>
   <div class="field">
     <%= f.label :charge %><br>
-    <%= f.number_field :charge %>
+    <%= f.number_field :charge, :class => "form-control" %>
   </div>
   <div class="field">
     <%= f.label :notes %><br>
-    <%= f.text_area :notes %>
+    <%= f.text_area :notes, :class => "form-control" %>
   </div>
   <div class="actions">
     <%= f.submit %>
   </div>
+
+
+
+
+
+
+  <!-- Extra JavaScript/CSS added manually in "Settings" tab -->
+<!-- Include jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<script>
+    $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+</script>
+
 <% end %>
