@@ -32,8 +32,7 @@
     <%= f.number_field :discount %>
   </div>
   <div class="field">
-    <%= f.label :client_id %><br>
-    <%= f.text_field :client_id %>
+    <%= f.collection_select(:client_id, Client.all, :id, :full_name) %>
   </div>
   <div class="actions">
     <%= f.submit %>

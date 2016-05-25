@@ -1,65 +1,89 @@
 <h1>Unbilled Items</h1>
 <div class="white">
-<table id="unbilled">
-	<thead>
-		<tr>
-			<th>Select</th>
-			<th style='padding: 5px'>Dates</th>
-			<th style='padding: 5px'># of items</th>
-			<th>Client</th>
-			<th>Charge</th>
-			<th>Expand</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<% @clienthash.each do |key, value| %>
-			<% clientappts = @appointments.where(client_id: key).order(:start_time) %>
-			<tr style='padding: 5px'>
-				<td>
-				</td>
-				<td style='padding: 5px'>
-					<%= clientappts.first.start_time.strftime("%m/%d/%y") %> - 
-					<%= clientappts.last.start_time.strftime("%m/%d/%y") %>
-				</td>
-				<td>
-					<%= value %>
-				</td>
-				<td>
-					<%= clientappts.first.client.first_name %>&nbsp;
-					<%= clientappts.first.client.last_name %>
-				</td>
-				<td>
-				</td>
-				<td>
-					<a href='#' class='expand' tag='client<%= key %>'>Expand</a>
-				</td>
-				<td>
-				</td>
+	<table id="unbilled">
+		<thead>
+			<tr>
+				<th>Select</th>
+				<th style='padding: 5px'>Dates</th>
+				<th style='padding: 5px'># of items</th>
+				<th>Client</th>
+				<th>Charge</th>
+				<th>Expand</th>
+				<th></th>
 			</tr>
-			<% clientappts.each do |appt| %>
-				<tr class='client<%= key %>' hidden='hidden'>
+		</thead>
+		<tbody>
+			<% @clienthash.each do |key, value| %>
+				<% clientappts = @appointments.where(client_id: key).order(:start_time) %>
+				<tr style='padding: 5px'>
 					<td>
-						<%= check_box "bill", appt.id %>
+					</td>
+					<td style='padding: 5px'>
+						<%= clientappts.first.start_time.strftime("%m/%d/%y") %> - 
+						<%= clientappts.last.start_time.strftime("%m/%d/%y") %>
 					</td>
 					<td>
-						<%= appt.start_time.strftime("%m/%d/%y") %>
-						<%= appt.start_time.strftime("%I:%M %P") %>
-					</td>
-					<td colspan='2'>
-						<%= appt.description %>
+						<%= value %>
 					</td>
 					<td>
-						<%= appt.charge %>
+						<%= clientappts.first.client.first_name %>&nbsp;
+						<%= clientappts.first.client.last_name %>
 					</td>
 					<td>
-						<%= link_to "Open Appt", appt %>
+					</td>
+					<td>
+						<a href='#' class='expand' tag='client<%= key %>'>Expand</a>
+					</td>
+					<td>
 					</td>
 				</tr>
+				<% clientappts.each do |appt| %>
+					<tr class='client<%= key %>' hidden='hidden'>
+						<td>
+							<% clicklistener = 
+								"appts_to_bill = $('#appt_ids_to_bill').val();
+								$('#bill_client_id').val('#{appt.client_id}');
+								$('#bill_total_amount').val($('#bill_total_amount').val() + #{appt.charge});"
+							%>
+							<%= check_box_tag "bill", onclick: clicklistener %>
+						</td>
+						<td>
+							<%= appt.start_time.strftime("%m/%d/%y") %>
+							<%= appt.start_time.strftime("%I:%M %P") %>
+						</td>
+						<td colspan='2'>
+							<%= appt.description %>
+						</td>
+						<td>
+							<%= appt.charge %>
+						</td>
+						<td>
+							<%= link_to "Open Appt", appt %>
+						</td>
+					</tr>
+				<% end %>
+
 			<% end %>
+		</tbody>
+	</table>
+	<p><br />
+		<%= form_for(@bill) do |f| %>
+			<%= hidden_field_tag "appt_ids_to_bill" %>
+			<div class="field">
+				<%= f.label :discount %>: &nbsp;&nbsp;$<%= f.number_field :discount, value: '0' %>
+			</div>
+			<div class="field">
+				<%= f.label :total_amount %>: &nbsp;&nbsp;$<%= f.number_field :total_amount, readonly: 'readonly' %>
+			</div>
+			<div class="field">
+				<%= f.label "Bill to:" %> &nbsp;&nbsp;
+				<%= f.collection_select :client_id, Client.all, :id, :full_name %>
+			<div class="field">
+				<%= f.label :date_billed %><br>
+				<%= f.datetime_select :date_billed %>
+			</div>
+			<%= f.submit "Create Bill" %>
 
 		<% end %>
-	</tbody>
-</table>
-<%= submit_tag "Create Bill" %>
+	</p>
 </div>

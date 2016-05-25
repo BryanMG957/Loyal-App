@@ -13,6 +13,7 @@ class BillsController < ApplicationController
     @appointments.each do |appt|
       @clienthash[appt.client_id] = @clienthash.fetch(appt.client_id, 0) + 1
     end
+    @bill = Bill.new
   end
   # GET /bills/1
   # GET /bills/1.json
