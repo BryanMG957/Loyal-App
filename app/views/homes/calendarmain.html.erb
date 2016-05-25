@@ -1,4 +1,4 @@
-<div id='calendarmain' class="white">
+<div id='calendarmain' class='white'>
 	<section id='cal-container'>
 		<script>
 		$(document).ready(function() {
@@ -14,16 +14,21 @@
 		    ],
     		dayClick: function(date, jsEvent, view) {
 					$.ajax({
-				    url: "/appointments/new",
+				    url: "/appointments/newappt_calendar_window",
 				    type: 'GET'
 				  }).done(function(html) {
 				  	document.getElementById("appt-modifier").innerHTML = html;
 				  })
-
+					// $("#appt-modifier").load("/appointments/new", function(){
+     //         $("#content-m").mCustomScrollbar({theme:"minimal"});
+     //     	});
+				  $('#appt-modifier').each(function(){
+				    $(this).resize();
+				  });
   			},
   			eventClick: function(calEvent, jsEvent, view) {
 					$.ajax({
-				    url: "/appointments/" + calEvent.id + "/edit",
+				    url: "/appointments/" + calEvent.id + "/editappt_calendar_window",
 				    type: 'GET'
 				  }).done(function(html) {
 				  	document.getElementById("appt-modifier").innerHTML = html;
