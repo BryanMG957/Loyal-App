@@ -36,17 +36,21 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href="http://localhost:3000/calendarmain">Calendar</a></li>
-          <li><a href="http://localhost:3000/appointments">Appointmenta</a></li>
-          <li><a href="http://localhost:3000/clients">Clients</a></li>
-          <li><a href="http://localhost:3000/bills">Billing</a></li>
+          <li><%= link_to 'Calendar', calendarmain_path %></li>
+          <li><%= link_to 'Appointments', appointments_path %></li>
+          <li><%= link_to 'Clients', clients_path %></li>
+          <li><%= link_to 'Bills', bills_path %></li>
+<!--           <li><a href="calendarmain">Calendar</a></li>
+          <li><a href="appointments">Appointmenta</a></li>
+          <li><a href="clients">Clients</a></li>
+          <li><a href="bills">Billing</a></li> -->
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="/calendars">Calendar Setup</a></li>
-              <li><a href="/clients">Clients</a></li>
+              <li><%= link_to 'Calendar Setup', calendars_path %></li>
+              <li><%= link_to 'Company Setup', companies_path %></li>
             </ul>
           </li>
         </ul>
