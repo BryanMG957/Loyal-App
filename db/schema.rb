@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160520223651) do
+ActiveRecord::Schema.define(version: 20160526135951) do
 
   create_table "appointments", force: :cascade do |t|
     t.datetime "start_time"
@@ -61,6 +61,7 @@ ActiveRecord::Schema.define(version: 20160520223651) do
     t.string   "url"
     t.string   "uid"
     t.string   "apitype"
+    t.string   "color"
   end
 
   create_table "clients", force: :cascade do |t|

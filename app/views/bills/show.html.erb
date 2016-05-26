@@ -1,44 +1,49 @@
 <!-- <p id="notice"><%= notice %></p> -->
-<header class='bill_header'>
-  <div class='company'>
-    <%= @company = Company.find_by(id: 1)
-        render 'companies/letterhead' %>
-  </div>
-  <div class='invoice_num'>
-    Invoice #<%= @bill.id %>
-  </div>
-  <div class='client'>
-    <%= @client = @bill.client
-      render 'clients/letterhead' %>
-  </div>  
-</header>
-<hr />
-<section class='bill_body'>
-  <% @bill.appointments.each do |appt| %>
+<div class="white">
+  <header class='bill_header'>
+    <div class='company'>
+      <%= @company = Company.find_by(id: 1)
+          render 'companies/letterhead' %>
+    </div><br />
+    <div class='invoice_num'>
+      Invoice #<%= @bill.id %>
+    </div><br />
+    <div class='client'>
+      <strong>For: </strong>
+      <%= @client = @bill.client
+        render 'clients/letterhead' %>
+    </div>  <br />
+    <div class='billdate'><strong>Date of Bill:</strong>
+      <%= @bill.date_billed.strftime("%m/%d/%y") %>
+    </div>
+  </header>
+  <hr />
+  <section class='bill_body'>
+    <% @bill.appointments.each do |appt| %>
+      <p>
+        <strong>Service Type:</strong>&nbsp;<%= appt.service.capitalize %>&nbsp;-&nbsp;
+        <strong>Day:</strong>&nbsp;<%= appt.start_time.strftime("%m/%d/%y") %>&nbsp;-&nbsp;
+        <strong>Charge:</strong>&nbsp;$<%= appt.charge.to_i %><br />
+        <%= appt.description %>
+      </p>
+    <% end %>
+  </section>
+  <hr />
+  <section class='bill_totals'>
     <p>
-      <strong>Service Type:</strong>&nbsp;<%= appt.service.capitalize %>&nbsp;-&nbsp;
-      <strong>Day:</strong>&nbsp;<%= appt.start_time.strftime("%m/%d/%y") %>&nbsp;-&nbsp;
-      <strong>Charge:</strong>&nbsp;$<%= appt.charge %><br />
-      <%= appt.description %>
+      <% if (@bill.discount && @bill.discount > 0) %>
+        <strong>Subtotal:</strong>
+        $<%= @bill.total_amount.to_i %><br />
+        <strong>Discount:</strong>
+        $<%= @bill.discount.to_i %><br />
+        <hr />
+      <% end %>
+
+      <strong>Total:</strong>
+      $<%= @bill.total_amount.to_i - @bill.discount.to_i %>
     </p>
-  <% end %>
-</section>
-<hr />
-<section class='bill_totals'>
-
-  <p>
-    <strong>Date of Bill:</strong>
-    <%= @bill.date_billed %>
-  </p>
-  <p>
-    <strong>Subtotal:</strong>
-    $<%= @bill.total_amount %>
-  </p>
-  <p>
-    <strong>Discount:</strong>
-    $<%= @bill.discount %>
-  </p>
-</section>
-
+    <br />  <br />  <br />  <br />  <br />  <br />
+  </section>
+</div>
 <%= link_to 'Edit', edit_bill_path(@bill) %> |
 <%= link_to 'Back', bills_path %>
