@@ -21,6 +21,9 @@ class AppointmentsController < ApplicationController
   # used to render 'New Appointment' as a sidebar on calendarmain
   def newappt_calendar_window
     @appointment = Appointment.new
+    if params[:new_date]
+      @appointment.start_time = DateTime.parse(params[:new_date])
+    end
     render 'new', layout: false
   end  
 
@@ -134,6 +137,6 @@ class AppointmentsController < ApplicationController
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
-      params.require(:appointment).permit(:service, :start_time, :end_time, :charge, :description, :reminder_before, :reminder_after, :status, :notes, :calendar_id, :client_id, :bill_id, :employee_id)
+      params.require(:appointment).permit(:service, :start_time, :end_time, :charge, :description, :reminder_before, :reminder_after, :status, :notes, :calendar_id, :client_id, :bill_id, :employee_id, :new_date)
     end
 end

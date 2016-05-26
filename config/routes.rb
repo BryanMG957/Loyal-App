@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   post "/pull_calendars" => "calendars#pull_calendars"
   post "/calendars/pull_calendars" => "calendars#pull_calendars"
   get "/calendarmain" => "homes#calendarmain"
-  get "/bills" => "bills#unbilled"
-  get "/appointments/newappt_calendar_window" => "appointments#newappt_calendar_window"
+  get "/bills/unbilled" => "bills#unbilled"
+  get "/appointments/newappt_calendar_window/:new_date" => "appointments#newappt_calendar_window"
   get "/appointments/:id/editappt_calendar_window" => "appointments#editappt_calendar_window"
   root 'homes#index'
 
