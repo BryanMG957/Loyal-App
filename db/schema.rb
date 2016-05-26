@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(version: 20160526202349) do
 
+
   create_table "appointments", force: :cascade do |t|
     t.datetime "start_time"
     t.datetime "end_time"
@@ -61,6 +62,7 @@ ActiveRecord::Schema.define(version: 20160526202349) do
     t.string   "url"
     t.string   "uid"
     t.string   "apitype"
+    t.string   "color"
   end
 
   create_table "clients", force: :cascade do |t|
