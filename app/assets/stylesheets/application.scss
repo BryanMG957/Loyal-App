@@ -13,10 +13,13 @@
  *= require_tree .
  *= require_self
  *= require fullcalendar
+ # Or if using bootstrap v3:
+ *= require bootstrap-datepicker3
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
 
 
 html,

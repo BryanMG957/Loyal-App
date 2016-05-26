@@ -13,18 +13,18 @@
 <!--Extra stuff, be careful... this could be deleted if causes a problem -->
 
 <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
-<link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+<!-- <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" /> -->
 
 <!--Font Awesome (added because you use icons in your prepend/append)-->
-<link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+<!-- <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" /> -->
 
 <!-- Inline CSS based on choices in "Settings" tab -->
-<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+<!-- /*<style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>*/ -->
 
 <!-- end of extra stuff that could be deleted -->
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <!-- <#%= javascript_include_tag 'application', 'data-turbolinks-track' => true %> -->
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,24 +41,24 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="http://loyal.fwd.wf">Loyal</a>
+        <a class="navbar-brand" href=/>Loyal</a>
         <button type="button" onclick="window.signin();" class="btn btn-default navbar-btn" id="login-button">Sign in</button>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-          <li><a href=calendarmain>Calendar</a></li>
-          <li><a href=appointments>Appointments</a></li>
-          <li><a href=clients>Clients</a></li>
-          <li><a href=bills>Billing</a></li>
+          <li><%= link_to 'Calendar', calendarmain_path %></li>
+        <li><%= link_to 'Appointments', appointments_path %></li>
+        <li><%= link_to 'Clients', clients_path %></li>
+        <li><%= link_to 'Bills', bills_path %></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span></a>
             <ul class="dropdown-menu">
-              <li><a href="/calendars">Calendar Setup</a></li>
-              <li><a href="/clients">Clients</a></li>
+              <li><%= link_to 'Calendar Setup', calendars_path %></li>
+            <li><%= link_to 'Company Setup', companies_path %></li>
             </ul>
           </li>
         </ul>

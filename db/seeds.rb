@@ -12,6 +12,8 @@ example_co = Company.create(name: "Auston's Dogs",
 								phone: Faker::PhoneNumber.phone_number,
 								website: Faker::Internet.url)
 
+Calendar.create(name: "Test Calendar", apitype: "none")
+
 10.times do
 	Client.create(first_name: Faker::Name.first_name,
 								last_name: Faker::Name.last_name,

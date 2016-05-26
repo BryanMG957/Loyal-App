@@ -36,17 +36,22 @@
     <%= f.text_field :description, :class => "form-control" %><br>
   </div>
 
-<div class="field">
+  <div class="field">
     <%= f.label :start_time %><br>
-    <div class="input-group">
-      <!-- <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text" /> -->
-      <%= f.datetime_field :start_time, :class => "form-control", :id => "name", :name => "date", :placeholder => "MM/DD/YYYY", :type => "text" %>
+    <input type="text" class='datepicker' class='form-control'>
+    <script type="text/javascript">
+    $(document).ready(function(){
+      $('.datepicker').datepicker();
+    });
+    </script>
+    <!-- <div class="input-group">
+      <%= f.text_field :start_time, :class => "form-control", :id => "name", :name => "date", :placeholder => "MM/DD/YYYY", :type => "text" %>
       <div class="input-group-addon">
         <i class="fa fa-calendar">
         </i>
       </div>
-    </div>
-</div>
+    </div> -->
+  </div>
 
   <!-- <div class="field">
     <%= f.label :start_time %><br>
@@ -73,16 +78,11 @@
   </div>
 
 
-
-
-
-
   <!-- Extra JavaScript/CSS added manually in "Settings" tab -->
-<!-- Include jQuery -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
 
 <!-- Include Date Range Picker -->
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
 
 <script>
@@ -96,6 +96,6 @@
             autoclose: true,
         })
     })
-</script>
+</script> -->
 
 <% end %>
