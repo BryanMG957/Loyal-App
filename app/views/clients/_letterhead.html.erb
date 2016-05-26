@@ -1,0 +1,19 @@
+<div class="client_letterhead">
+  <p class="client_letterhead_name">
+    <%= @client.first_name %>&nbsp;<%= @client.last_name %><br />
+    <% if (@client.first_name_2 && @client.first_name_2 != "") %>
+       <%= @client.first_name_2 %>&nbsp;<%= @client.last_name_2 %>
+       <br />
+    <% end %>   
+  </p>
+  <p class="client_letterhead_address">
+    <%= @client.address %>
+  </p>
+  <p class="client_letterhead_phone">
+    <%= @client.phone1 %>
+    <%= @client.phone2 %>
+  </p>
+  <p class="client_letterhead_email">
+    <%= @client.email %>
+  </p>
+</div>

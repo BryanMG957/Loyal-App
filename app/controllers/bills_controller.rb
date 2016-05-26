@@ -13,6 +13,7 @@ class BillsController < ApplicationController
     @appointments.each do |appt|
       @clienthash[appt.client_id] = @clienthash.fetch(appt.client_id, 0) + 1
     end
+    @bill = Bill.new
   end
   # GET /bills/1
   # GET /bills/1.json
@@ -32,9 +33,18 @@ class BillsController < ApplicationController
   # POST /bills.json
   def create
     @bill = Bill.new(bill_params)
-
     respond_to do |format|
       if @bill.save
+        # Add appointments to bill
+        appt_ids = params["bill"][:appt_ids_to_bill].map { |n|
+          appt = Appointment.find_by(id: n)
+          if appt
+            appt.bill = @bill
+            appt.status = "billed"
+            appt.save
+          end
+        }
+
         format.html { redirect_to @bill, notice: 'Bill was successfully created.' }
         format.json { render :show, status: :created, location: @bill }
       else
@@ -76,6 +86,6 @@ class BillsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bill_params
-      params.require(:bill).permit(:total_amount, :paid_amount, :date_billed, :date_paid, :discount, :client_id)
+      params.require(:bill).permit(:total_amount, :paid_amount, :date_billed, :date_paid, :discount, :client_id, :appt_ids_to_bill)
     end
 end

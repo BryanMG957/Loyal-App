@@ -1,34 +1,44 @@
-<p id="notice"><%= notice %></p>
+<!-- <p id="notice"><%= notice %></p> -->
+<header class='bill_header'>
+  <div class='company'>
+    <%= @company = Company.find_by(id: 1)
+        render 'companies/letterhead' %>
+  </div>
+  <div class='invoice_num'>
+    Invoice #<%= @bill.id %>
+  </div>
+  <div class='client'>
+    <%= @client = @bill.client
+      render 'clients/letterhead' %>
+  </div>  
+</header>
+<hr />
+<section class='bill_body'>
+  <% @bill.appointments.each do |appt| %>
+    <p>
+      <strong>Service Type:</strong>&nbsp;<%= appt.service.capitalize %>&nbsp;-&nbsp;
+      <strong>Day:</strong>&nbsp;<%= appt.start_time.strftime("%m/%d/%y") %>&nbsp;-&nbsp;
+      <strong>Charge:</strong>&nbsp;$<%= appt.charge %><br />
+      <%= appt.description %>
+    </p>
+  <% end %>
+</section>
+<hr />
+<section class='bill_totals'>
 
-<p>
-  <strong>Total amount:</strong>
-  <%= @bill.total_amount %>
-</p>
-
-<p>
-  <strong>Paid amount:</strong>
-  <%= @bill.paid_amount %>
-</p>
-
-<p>
-  <strong>Date billed:</strong>
-  <%= @bill.date_billed %>
-</p>
-
-<p>
-  <strong>Date paid:</strong>
-  <%= @bill.date_paid %>
-</p>
-
-<p>
-  <strong>Discount:</strong>
-  <%= @bill.discount %>
-</p>
-
-<p>
-  <strong>Client:</strong>
-  <%= @bill.client %>
-</p>
+  <p>
+    <strong>Date of Bill:</strong>
+    <%= @bill.date_billed %>
+  </p>
+  <p>
+    <strong>Subtotal:</strong>
+    $<%= @bill.total_amount %>
+  </p>
+  <p>
+    <strong>Discount:</strong>
+    $<%= @bill.discount %>
+  </p>
+</section>
 
 <%= link_to 'Edit', edit_bill_path(@bill) %> |
 <%= link_to 'Back', bills_path %>
