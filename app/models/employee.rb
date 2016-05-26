@@ -1,4 +1,5 @@
 class Employee < ActiveRecord::Base
+  validates :first_name, :last_name, presence: true
   belongs_to :company
   belongs_to :calendar
   def to_s

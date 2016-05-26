@@ -38,19 +38,12 @@
 
   <div class="field">
     <%= f.label :start_time %><br>
-    <input type="text" class='datepicker' class='form-control'>
+    <%= f.text_field :start_time, :class => "form-control datepicker" %><br>
     <script type="text/javascript">
     $(document).ready(function(){
       $('.datepicker').datepicker();
     });
     </script>
-    <!-- <div class="input-group">
-      <%= f.text_field :start_time, :class => "form-control", :id => "name", :name => "date", :placeholder => "MM/DD/YYYY", :type => "text" %>
-      <div class="input-group-addon">
-        <i class="fa fa-calendar">
-        </i>
-      </div>
-    </div> -->
   </div>
 
   <!-- <div class="field">
