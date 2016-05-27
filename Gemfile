@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+# Calendar display gems
 gem 'fullcalendar-rails'
 gem 'momentjs-rails'
 gem 'bootstrap-datepicker-rails'
@@ -17,16 +18,11 @@ gem 'net-http-digest_auth'
 gem 'uuid'
 
 # Development dependencies of caldav-icloud
-
 gem 'fakeweb'
 gem 'rspec'
 gem 'caldav-icloud'
 gem 'faker'
 gem 'nokogiri'
-
-# Calendar display gems
-gem 'fullcalendar-rails'
-gem 'momentjs-rails'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
