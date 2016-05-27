@@ -33,8 +33,13 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <%= link_to 'Loyal', root_path, class: 'navbar-brand' %>
-        <button type="button" onclick="window.signin();" class="btn btn-default navbar-btn" id="login-button">Sign in</button>
+
+        <a class="navbar-brand" href=/>Loyal</a>
+        <% unless session[:userinfo].present? %>
+        <button type="button" onclick="window.signin();" class="btn btn-default navbar-btn" id="login-button">Sign In</button>
+        <% else %>
+        <a href="https://bryanmg957.auth0.com/v2/logout?returnTo=http://<%=root_path%>" type="button" class="btn btn-default navbar-btn" >Sign Out</a>
+        <% end %>
       </div>
 
       <!-- Collect the nav links, forms, and other content for toggling -->
@@ -62,14 +67,12 @@
     <%= yield %>
   </div>
 
-
   <% if Rails.env.development? %>
   <%# console %>
   <% end %>
 
 </body>
 </html>
-
 
 <!-- <#% if Rails.env.development? %>
 <#%= console %>

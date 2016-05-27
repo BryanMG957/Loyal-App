@@ -5,18 +5,18 @@
 <h1>Appointments</h1>
 
 <div class="row">
-  <div class="col-xs-3"><strong>Service Type</strong></div>
+  <div class="col-xs-2"><strong>Service Type</strong></div>
   <div class="col-xs-3"><strong>Start time</strong></div>
-  <div class="col-xs-3"><strong>Description</strong></div>
-  <div class="col-xs-3"><strong>Options</strong></div>
+  <div class="col-xs-2"><strong>Status</strong></div>
+  <div class="col-xs-5"><strong>Options</strong></div>
 </div>
 
 <% @appointments.each do |appointment| %>
 <div class="row">
-    <div class="col-xs-3"><%= appointment.service %> </div>
+    <div class="col-xs-2"><%= appointment.service %> </div>
     <div class="col-xs-3"><%= appointment.start_time %> </div>
-    <div class="col-xs-3"><%= appointment.description %> </div>
-    <div class="col-xs-3"><%= link_to '<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>'.html_safe,appointment %><%= link_to '  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>'.html_safe, edit_appointment_path(appointment) %> <%= link_to '  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>'.html_safe, appointment, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
+    <div class="col-xs-2"><%= appointment.description %> </div>
+    <div class="col-xs-5"><%= link_to '<span class="label label-success">Show</span>'.html_safe,appointment %> <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_appointment_path(appointment) %> <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, appointment, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
   </div>
 <% end %>
 <br>

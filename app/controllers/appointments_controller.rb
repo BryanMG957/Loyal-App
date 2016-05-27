@@ -25,7 +25,7 @@ class AppointmentsController < ApplicationController
       @appointment.start_time = DateTime.parse(params[:new_date])
     end
     render 'new', layout: false
-  end  
+  end
 
   # GET /appointments/1/edit
   def edit
@@ -35,11 +35,12 @@ class AppointmentsController < ApplicationController
   # used to render 'Edit Appointment' as a sidebar on calendarmain
   def editappt_calendar_window
     render 'edit', params: {id: params[:id]}, layout: false
-  end 
+  end
 
   # POST /appointments
   # POST /appointments.json
   def create
+    appointment_params[:start_time] = DateTime.parse(appointment_params[:start_time])
     @appointment = Appointment.new(appointment_params)
 
     respond_to do |format|
@@ -91,7 +92,7 @@ class AppointmentsController < ApplicationController
             cal.delete_event(@appointment.uuid)
             newevent = cal.create_event(:start => @appointment.start_time.to_s, :end => (@appointment.start_time + 1200).to_s, :title => @appointment.description, :description => @appointment.notes)
             @appointment.uuid = newevent.properties["uid"]
-            @appointment.save    
+            @appointment.save
           rescue CalDAViCloud::NotExistError
             notice += " Item not found in iCloud."
           end

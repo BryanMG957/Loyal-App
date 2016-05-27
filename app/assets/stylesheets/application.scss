@@ -13,10 +13,14 @@
  *= require_tree .
  *= require_self
  *= require fullcalendar
+ # Or if using bootstrap v3:
+ *= require bootstrap-datepicker3
  */
 
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+
 
 html,
 body {
@@ -24,7 +28,10 @@ body {
 }
 
 body {
-  background-color: #21CE99;
+  background-image: url(http://wallpapercave.com/wp/b3bNN7x.png);
+  background-size: cover;
+
+
   margin: 0;
   padding: 0;
 }

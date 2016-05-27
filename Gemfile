@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'fullcalendar-rails'
+gem 'momentjs-rails'
+gem 'bootstrap-datepicker-rails'
+
 gem 'bootstrap-sass'
 gem 'normalize-rails'
 #Dependencies of Auth0
