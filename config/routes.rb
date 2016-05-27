@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   get "/bills" => "bills#unbilled"
   get "/appointments/newappt_calendar_window" => "appointments#newappt_calendar_window"
   get "/appointments/:id/editappt_calendar_window" => "appointments#editappt_calendar_window"
+  get "/loyal.fwd.wf/sign_out" => "auth0#destroy"
+  get "/sign_out" => "auth0#destroy"
   root 'homes#index'
 
   resources :appointments

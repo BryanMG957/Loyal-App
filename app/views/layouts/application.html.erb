@@ -37,7 +37,7 @@
         <% unless session[:userinfo].present? %>
         <button type="button" onclick="window.signin();" class="btn btn-default navbar-btn" id="login-button">Sign In</button>
         <% else %>
-        <a href="https://bryanmg957.auth0.com/v2/logout?returnTo=http://<%=root_path%>" type="button" class="btn btn-default navbar-btn" >Sign Out</a>
+        <a href="https://bryanmg957.auth0.com/v2/logout?returnTo=http://loyal.fwd.wf/sign_out" type="button" class="btn btn-default navbar-btn" >Sign Out</a>
         <% end %>
       </div>
 

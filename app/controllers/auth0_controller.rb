@@ -13,4 +13,9 @@ class Auth0Controller < ApplicationController
     # show a failure page or redirect to an error page
     @error_msg = request.params['message']
   end
+
+  def destroy
+    session.delete(:userinfo)
+    redirect_to root_url
+  end
 end
