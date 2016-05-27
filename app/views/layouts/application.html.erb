@@ -13,6 +13,7 @@
   <!-- BOOTSTRAP - Latest compiled and minified JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
+  <!-- RAILS INCLUDES -->
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -47,7 +48,7 @@
           <li><%= link_to 'Calendar', calendarmain_path %></li>
           <li><%= link_to 'Appointments', appointments_path %></li>
           <li><%= link_to 'Clients', clients_path %></li>
-          <li><%= link_to 'Bills', bills_path %></li>
+          <li><%= link_to 'Bills', bills_unbilled_path %></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown">
@@ -66,14 +67,12 @@
     <%= yield %>
   </div>
 
-
   <% if Rails.env.development? %>
   <%# console %>
   <% end %>
 
 </body>
 </html>
-
 
 <!-- <#% if Rails.env.development? %>
 <#%= console %>

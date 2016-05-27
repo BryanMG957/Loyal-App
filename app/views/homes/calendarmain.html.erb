@@ -1,10 +1,22 @@
 <div id='calendarmain' class='white'>
 	<section id='cal-container'>
 		<script>
+		<%# Display FullCalendar widget %>
 		$(document).ready(function() {
 		  $('#calendar').fullCalendar({
+		  	<%# Calendar header bar %>
+				header: {
+					left: 'prev,next',
+					center: 'title',
+					right: 'month,agendaWeek,agendaDay'
+				},
+		  	<%# Loop through and display events %>
 		    events: [
 				<% @appointments.each do |appt| %>
+						<%# Skip anything without a start time %>
+						<% if appt.start_time.nil? %>
+						  <% next %>
+						<% end %>
 			      {
 			      	  id     : '<%= appt.id %>',
 		            title  : '<%= appt.description %>',
@@ -12,20 +24,19 @@
 		        },
 		    <% end %>
 		    ],
+		    <%# Event listener for clicking on empty space - create new appt %>
     		dayClick: function(date, jsEvent, view) {
 					$.ajax({
-				    url: "/appointments/newappt_calendar_window",
+				    url: "/appointments/newappt_calendar_window/" + date.format(),
 				    type: 'GET'
 				  }).done(function(html) {
 				  	document.getElementById("appt-modifier").innerHTML = html;
 				  })
-					// $("#appt-modifier").load("/appointments/new", function(){
-     //         $("#content-m").mCustomScrollbar({theme:"minimal"});
-     //     	});
 				  $('#appt-modifier').each(function(){
 				    $(this).resize();
 				  });
   			},
+		    <%# Event listener for clicking on appointments - edit appt %>
   			eventClick: function(calEvent, jsEvent, view) {
 					$.ajax({
 				    url: "/appointments/" + calEvent.id + "/editappt_calendar_window",
@@ -34,13 +45,13 @@
 				  	document.getElementById("appt-modifier").innerHTML = html;
 				  })
     		},
-    		// defaultView: "basicWeek"
+    		fixedWeekCount: false,
+    		defaultView: "agendaWeek"
 		  })
 		});
 		</script>
 		<div id='calendar'></div>
 	</section>
 	<aside id='appt-modifier'>
-		someasidetext
 	</aside>
 </div>
