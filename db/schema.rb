@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160526202349) do
+ActiveRecord::Schema.define(version: 20160527231253) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "appointments", force: :cascade do |t|
     t.datetime "start_time"
@@ -32,10 +35,10 @@ ActiveRecord::Schema.define(version: 20160526202349) do
     t.string   "description"
   end
 
-  add_index "appointments", ["bill_id"], name: "index_appointments_on_bill_id"
-  add_index "appointments", ["calendar_id"], name: "index_appointments_on_calendar_id"
-  add_index "appointments", ["client_id"], name: "index_appointments_on_client_id"
-  add_index "appointments", ["employee_id"], name: "index_appointments_on_employee_id"
+  add_index "appointments", ["bill_id"], name: "index_appointments_on_bill_id", using: :btree
+  add_index "appointments", ["calendar_id"], name: "index_appointments_on_calendar_id", using: :btree
+  add_index "appointments", ["client_id"], name: "index_appointments_on_client_id", using: :btree
+  add_index "appointments", ["employee_id"], name: "index_appointments_on_employee_id", using: :btree
 
   create_table "bills", force: :cascade do |t|
     t.integer  "total_amount"
@@ -48,7 +51,7 @@ ActiveRecord::Schema.define(version: 20160526202349) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "bills", ["client_id"], name: "index_bills_on_client_id"
+  add_index "bills", ["client_id"], name: "index_bills_on_client_id", using: :btree
 
   create_table "calendars", force: :cascade do |t|
     t.string   "name"
@@ -66,7 +69,7 @@ ActiveRecord::Schema.define(version: 20160526202349) do
 
   create_table "clients", force: :cascade do |t|
     t.string   "first_name",   null: false
-    t.string   "last_name"
+    t.string   "last_name",    null: false
     t.string   "email"
     t.string   "phone1"
     t.string   "phone2"
@@ -81,7 +84,7 @@ ActiveRecord::Schema.define(version: 20160526202349) do
     t.datetime "updated_at",   null: false
   end
 
-  add_index "clients", ["company_id"], name: "index_clients_on_company_id"
+  add_index "clients", ["company_id"], name: "index_clients_on_company_id", using: :btree
 
   create_table "companies", force: :cascade do |t|
     t.string   "name"
@@ -95,17 +98,17 @@ ActiveRecord::Schema.define(version: 20160526202349) do
 
   create_table "employees", force: :cascade do |t|
     t.string   "first_name",  null: false
-    t.string   "last_name"
+    t.string   "last_name",   null: false
     t.string   "username"
     t.string   "password"
     t.integer  "company_id"
-    t.integer  "calendar_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "calendar_id"
   end
 
-  add_index "employees", ["calendar_id"], name: "index_employees_on_calendar_id"
-  add_index "employees", ["company_id"], name: "index_employees_on_company_id"
+  add_index "employees", ["calendar_id"], name: "index_employees_on_calendar_id", using: :btree
+  add_index "employees", ["company_id"], name: "index_employees_on_company_id", using: :btree
 
   create_table "pets", force: :cascade do |t|
     t.string   "name"
@@ -115,6 +118,15 @@ ActiveRecord::Schema.define(version: 20160526202349) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "pets", ["client_id"], name: "index_pets_on_client_id"
+  add_index "pets", ["client_id"], name: "index_pets_on_client_id", using: :btree
 
+  add_foreign_key "appointments", "bills"
+  add_foreign_key "appointments", "calendars"
+  add_foreign_key "appointments", "clients"
+  add_foreign_key "appointments", "employees"
+  add_foreign_key "bills", "clients"
+  add_foreign_key "clients", "companies"
+  add_foreign_key "employees", "calendars"
+  add_foreign_key "employees", "companies"
+  add_foreign_key "pets", "clients"
 end

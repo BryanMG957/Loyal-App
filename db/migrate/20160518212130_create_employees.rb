@@ -6,7 +6,6 @@ class CreateEmployees < ActiveRecord::Migration
       t.string :username
       t.string :password
       t.references :company, index: true, foreign_key: true
-      t.references :calendar, index: true, foreign_key: true
 
       t.timestamps null: false
     end
