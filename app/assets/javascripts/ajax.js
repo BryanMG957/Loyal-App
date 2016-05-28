@@ -46,7 +46,7 @@ function loadPageHandler() {
 	});
 
 	$("#calendar_list").on("change", function(){
-		dropdown = document.getElementById("calendars_name");
+		var dropdown = document.getElementById("calendars_name");
 		var cal_list_hash = JSON.parse(dropdown.options[dropdown.selectedIndex].value);
 		document.getElementById("calendar_url").value = cal_list_hash['url'];
 		document.getElementById("calendar_uid").value = cal_list_hash['uid'];

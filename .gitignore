@@ -17,3 +17,4 @@
 /tmp
 # Ignore byebug
 /.byebug_history
+/public/assets/*
