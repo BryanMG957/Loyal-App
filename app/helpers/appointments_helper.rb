@@ -6,4 +6,11 @@ module AppointmentsHelper
 			nil
 		end
 	end
+	def displayDateNoYear(dt)
+		if ((dt.class == DateTime) || (dt.class == ActiveSupport::TimeWithZone))
+			dt.strftime("%b %d %I:%M%p")
+		else
+			nil
+		end
+	end
 end

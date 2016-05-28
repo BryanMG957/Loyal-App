@@ -18,12 +18,15 @@
     <%= f.label(:apitype_icloud, "iCloud") %>
     <%= f.radio_button(:apitype, "google", {id: "api_google_button"}) %>
     <%= f.label(:apitype_google, "Google") %>
-
   </div>
   <div class="field api api_none">
     <%= f.label :name %><br>
-    <%= f.text_field :name %>
+    <%= f.text_field :name %><br />
   </div>    
+  <div class="field api api_none api_icloud api_google">
+    <%= f.label :color %><br />
+    <%= f.color_field :color %>
+  </div>
   <div class="field api api_icloud api_google">
     <%= f.label :username %><br>
     <%= f.text_field :username %>
@@ -61,4 +64,9 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+  <script>
+  $(document).on('page:load', function() {
+    setApiType('<%= @calendar.apitype %>');
+  });
+  </script>
 <% end %>

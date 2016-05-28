@@ -9,6 +9,7 @@
       </ul>
     </div>
   <% end %>
+  <!-- Employee info - for future use -->
   <!-- <div class="field" >
     <#%= f.text_field :first_name, :placeholder => "First name", :class => "form-control"%>
   </div> -->
@@ -30,7 +31,7 @@
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_field :description, :class => "form-control" %><br>
+    <%= f.text_field :description, :class => "form-control" %>
   </div>
   <div class="field">
     <%= f.label :start_time %>
@@ -42,10 +43,10 @@
     <%= f.label :reminder_before %><br>
     <%= f.number_field :reminder_before, :class => "form-control" %>
   </div>
-  <div class="field">
+<!--   <div class="field">
     <%= f.label :reminder_after %><br>
     <%= f.number_field :reminder_after, :class => "form-control" %>
-  </div>
+  </div> -->
   <div class="field">
     <%= f.label :charge %><br>
     <%= f.number_field :charge, :class => "form-control" %>

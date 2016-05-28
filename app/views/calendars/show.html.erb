@@ -1,42 +1,44 @@
-<p id="notice"><%= notice %></p>
+<div class="white">
+  <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @calendar.name %>
-</p>
+  <p>
+    <strong>Name:</strong>
+    <%= @calendar.name %>
+  </p>
 
-<p>
-  <strong>API Type:</strong>
-  <%= @calendar.apitype %>
-</p>
-<p>
-  <strong>URL:</strong>
-  <%= @calendar.url %>
-</p>
-<p>
-  <strong>UID:</strong>
-  <%= @calendar.uid %>
-</p>
-<!--
-<p>
-  <strong>Server incoming:</strong>
-  <%= @calendar.server_incoming %>
-</p>
+  <p>
+    <strong>API Type:</strong>
+    <%= @calendar.apitype %>
+  </p>
+  <p>
+    <strong>URL:</strong>
+    <%= @calendar.url %>
+  </p>
+  <p>
+    <strong>UID:</strong>
+    <%= @calendar.uid %>
+  </p>
+  <!--
+  <p>
+    <strong>Server incoming:</strong>
+    <%= @calendar.server_incoming %>
+  </p>
 
-<p>
-  <strong>Server outgoing:</strong>
-  <%= @calendar.server_outgoing %>
-</p>
--->
-<p>
-  <strong>Username:</strong>
-  <%= @calendar.username %>
-</p>
+  <p>
+    <strong>Server outgoing:</strong>
+    <%= @calendar.server_outgoing %>
+  </p>
+  -->
+  <p>
+    <strong>Username:</strong>
+    <%= @calendar.username %>
+  </p>
 
-<p>
-  <strong>Password:</strong>
-  ********
-</p>
+  <p>
+    <strong>Password:</strong>
+    ********
+  </p>
 
-<%= link_to 'Edit', edit_calendar_path(@calendar) %> |
-<%= link_to 'Back', calendars_path %>
+  <%= link_to 'Edit', edit_calendar_path(@calendar) %> |
+  <%= link_to 'Back', calendars_path %>
+</div>
