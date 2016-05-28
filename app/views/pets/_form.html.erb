@@ -23,7 +23,10 @@
     <%= f.label :client_id %><br>
     <%= f.text_field :client_id %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="row">
+    <div class="actions col-xs-12" id="index-main-button">
+  <%= f.submit :class => "btn btn-primary"%>
+  </div>
   </div>
 <% end %>

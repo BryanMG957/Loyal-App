@@ -23,7 +23,7 @@
   <div class="field api api_none">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
-  </div>    
+  </div>
   <div class="field api api_icloud api_google">
     <%= f.label :username %><br>
     <%= f.text_field :username %>
@@ -58,7 +58,10 @@
     <%= f.label :uid %><br>
     <%= f.text_field :uid %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+  
+  <div class="row">
+    <div class="actions col-xs-12" id="index-main-button">
+  <%= f.submit :class => "btn btn-primary"%>
+  </div>
   </div>
 <% end %>

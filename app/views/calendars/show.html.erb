@@ -41,5 +41,8 @@
   ********
 </p>
 
-<%= link_to 'Edit', edit_calendar_path(@calendar) %> |
-<%= link_to 'Back', calendars_path %>
+<div class="row">
+  <div class="col-xs-12" id="index-main-button">
+<%= link_to '<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_calendar_path(@calendar) %> <%= link_to '<button type="button" class="btn btn-default">Back</button>'.html_safe, calendars_path %>
+</div>
+</div>

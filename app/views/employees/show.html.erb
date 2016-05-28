@@ -27,5 +27,8 @@
   <%= @employee.company %>
 </p>
 
-<%= link_to 'Edit', edit_employee_path(@employee) %> |
-<%= link_to 'Back', employees_path %>
+<div class="row">
+  <div class="col-xs-12" id="index-main-button">
+<%= link_to '<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_employee_path(@employee) %> <%= link_to '<button type="button" class="btn btn-default">Back</button>'.html_safe, employees_path %>
+</div>
+</div>
