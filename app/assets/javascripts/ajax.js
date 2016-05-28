@@ -57,7 +57,6 @@ function loadPageHandler() {
 		$("." + $(this).attr("tag")).fadeToggle(200);
 
 	});
-
 }
 
 //Turbolinks specific linking (works when using link_to)

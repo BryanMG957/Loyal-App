@@ -23,8 +23,9 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new
     if params[:new_date]
       @appointment.start_time = DateTime.parse(params[:new_date])
+      @appointment.end_time = DateTime.parse(params[:new_date]) + (1.0/24/2)
     end
-    render 'new', layout: false
+    render 'new', layout: "calendarsidebar"
   end
 
   # GET /appointments/1/edit
@@ -34,15 +35,15 @@ class AppointmentsController < ApplicationController
   # GET /appointments/:id/editappt_calendar_window
   # used to render 'Edit Appointment' as a sidebar on calendarmain
   def editappt_calendar_window
-    render 'edit', params: {id: params[:id]}, layout: false
+    render 'edit', params: {id: params[:id]}, layout: "calendarsidebar"
   end
 
   # POST /appointments
   # POST /appointments.json
   def create
     appointment_params[:start_time] = DateTime.parse(appointment_params[:start_time])
+    appointment_params[:end_time] = DateTime.parse(appointment_params[:end_time])
     @appointment = Appointment.new(appointment_params)
-
     respond_to do |format|
       if @appointment.save
         notice = "Appointment was successfully created"
@@ -59,6 +60,8 @@ class AppointmentsController < ApplicationController
   # PATCH/PUT /appointments/1
   # PATCH/PUT /appointments/1.json
   def update
+    appointment_params[:start_time] = DateTime.parse(appointment_params[:start_time])
+    appointment_params[:end_time] = DateTime.parse(appointment_params[:end_time])
     respond_to do |format|
       if @appointment.update(appointment_params)
         notice = "Appointment was successfully updated"
