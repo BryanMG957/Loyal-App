@@ -38,4 +38,8 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Loyal App - configure server name:
+  config.x.protocol = "http://"
+  config.x.host = "localhost:3000"
 end

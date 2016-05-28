@@ -76,4 +76,8 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  # Loyal App - configure server name:
+  config.x.protocol = "http://"
+  config.x.host = "localhost:3000"
 end
