@@ -11,13 +11,8 @@
 </p>
 
 <p>
-  <strong>Start time:</strong>
-  <%= @appointment.start_time %>
-</p>
-
-<p>
-  <strong>End time:</strong>
-  <%= @appointment.end_time %>
+  <strong>Time:</strong>
+  <%= displayDate(@appointment.start_time) %> - <%= displayDate(@appointment.end_time) %>
 </p>
 
 <p>

@@ -1,5 +1,19 @@
 //Adds event listeners
 //namely, for submit button click
+function setApiType(apitype) {
+	if (apitype === "none") {
+		$(".api").hide();
+		$(".api_none").show();
+	}
+	else if (apitype === "icloud") {
+		$(".api").hide();
+		$(".api_icloud").show();
+	}
+	else if (apitype === "google") {
+		$(".api").hide();
+		$(".api_google").show();
+	}
+}
 function loadPageHandler() {
 	/* Used by views/calendars/new.html.erb */
 	$("#pull_calendars").on("click", function() {
@@ -18,21 +32,6 @@ function loadPageHandler() {
 	  });
 	});
 
-	function setApiType(apitype) {
-		if (apitype === "none") {
-			$(".api").hide();
-			$(".api_none").show();
-		}
-		else if (apitype === "icloud") {
-			$(".api").hide();
-			$(".api_icloud").show();
-		}
-		else if (apitype === "google") {
-			$(".api").hide();
-			$(".api_google").show();
-		}
-	}
-
 	$("#api_none_button").on("click", function(){
 		setApiType("none");
 	});
@@ -46,7 +45,7 @@ function loadPageHandler() {
 	});
 
 	$("#calendar_list").on("change", function(){
-		dropdown = document.getElementById("calendars_name");
+		var dropdown = document.getElementById("calendars_name");
 		var cal_list_hash = JSON.parse(dropdown.options[dropdown.selectedIndex].value);
 		document.getElementById("calendar_url").value = cal_list_hash['url'];
 		document.getElementById("calendar_uid").value = cal_list_hash['uid'];
@@ -57,7 +56,6 @@ function loadPageHandler() {
 		$("." + $(this).attr("tag")).fadeToggle(200);
 
 	});
-
 }
 
 //Turbolinks specific linking (works when using link_to)

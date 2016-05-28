@@ -2,7 +2,6 @@
   <% if @appointment.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
-
       <ul>
       <% @appointment.errors.full_messages.each do |message| %>
         <li><%= message %></li>
@@ -10,8 +9,7 @@
       </ul>
     </div>
   <% end %>
-
-
+  <!-- Employee info - for future use -->
   <!-- <div class="field" >
     <#%= f.text_field :first_name, :placeholder => "First name", :class => "form-control"%>
   </div> -->
@@ -33,29 +31,22 @@
   </div>
   <div class="field">
     <%= f.label :description %><br>
-    <%= f.text_field :description, :class => "form-control" %><br>
+    <%= f.text_field :description, :class => "form-control" %>
   </div>
-
   <div class="field">
-    <%= f.label :start_time %><br>
-    <%= f.text_field :start_time, :class => "form-control datepicker" %><br>
-    <script type="text/javascript">
-    $(document).ready(function(){
-      $('.datepicker').datetimepicker({
-        format: "dd MM yyyy - hh:ii"
-      });
-    });
-    </script>
+    <%= f.label :start_time %>
+    <%= f.text_field :start_time, :class => "form-control datepicker", :value => displayDate(@appointment.start_time) %><br>
+    <%= f.label :end_time %>
+    <%= f.text_field :end_time, :class => "form-control datepicker", :value => displayDate(@appointment.end_time) %><br>
   </div>
-
   <div class="field">
     <%= f.label :reminder_before %><br>
     <%= f.number_field :reminder_before, :class => "form-control" %>
   </div>
-  <div class="field">
+<!--   <div class="field">
     <%= f.label :reminder_after %><br>
     <%= f.number_field :reminder_after, :class => "form-control" %>
-  </div>
+  </div> -->
   <div class="field">
     <%= f.label :charge %><br>
     <%= f.number_field :charge, :class => "form-control" %>
@@ -70,6 +61,4 @@
   <%= f.submit :class => "btn btn-primary"%>
   </div>
   </div>
-
-
 <% end %>

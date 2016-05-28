@@ -20,7 +20,14 @@
 			      {
 			      	  id     : '<%= appt.id %>',
 		            title  : '<%= appt.description %>',
-		            start  : '<%= appt.start_time.strftime("%Y-%m-%d") %>'
+		            start  : '<%= appt.start_time.strftime("%Y-%m-%dT%H:%M:%S") %>',
+		            <% if !(appt.end_time.nil?) %>
+		            end    : '<%= appt.end_time.strftime("%Y-%m-%dT%H:%M:%S") %>',
+		            <% end %>
+		            color	 : '<%= appt.calendar.color %>',
+		            <% if (appt.calendar.color == "#FFFFFF") %>
+		            textColor : '#000000',
+		            <% end %>
 		        },
 		    <% end %>
 		    ],
@@ -31,10 +38,12 @@
 				    type: 'GET'
 				  }).done(function(html) {
 				  	document.getElementById("appt-modifier").innerHTML = html;
+					  $('.datepicker').datetimepicker({
+					    format: "M dd yyyy - HH:ii P",
+					    startView: 1,
+					    showMeridian: true
+					  });
 				  })
-				  $('#appt-modifier').each(function(){
-				    $(this).resize();
-				  });
   			},
 		    <%# Event listener for clicking on appointments - edit appt %>
   			eventClick: function(calEvent, jsEvent, view) {
@@ -43,9 +52,15 @@
 				    type: 'GET'
 				  }).done(function(html) {
 				  	document.getElementById("appt-modifier").innerHTML = html;
+					  $('.datepicker').datetimepicker({
+					    format: "M dd yyyy - HH:ii P",
+					    startView: 1,
+					    showMeridian: true
+					  });
 				  })
     		},
     		fixedWeekCount: false,
+    		allDayDefault: false,
     		defaultView: "agendaWeek"
 		  })
 		});

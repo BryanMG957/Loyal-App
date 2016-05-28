@@ -17,4 +17,14 @@
 //= require moment
 //= require fullcalendar
 //= require bootstrap
-//= require bootstrap-datepicker
+
+// Dirty fix for bootstrap nav dropdown not working with Turbolinks
+// Thank you user652908 on stackOverflow
+// http://stackoverflow.com/questions/20711474/bootstrap-navbar-collapse-menu-not-working-with-turbolinks#20711475
+  $(document).on("page:change", function() {
+     $(".navbar .dropdown").hover((function() {
+         $(this).find(".dropdown-menu").first().stop(true, true).delay(150).slideDown();
+    }), function() {
+         $(this).find(".dropdown-menu").first().stop(true, true).delay(50).slideUp();
+    });
+  });
