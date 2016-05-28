@@ -1,70 +1,71 @@
 <div class="white">
 
-  <div class="alert alert-success" role="alert">
+  <div class="alert alert-success alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <p id="notice" ><%= notice %></p>
   </div>
-  
-<p>
-  <strong>First name:</strong>
-  <%= @client.first_name %>
-</p>
 
-<p>
-  <strong>Last name:</strong>
-  <%= @client.last_name %>
-</p>
+  <p>
+    <strong>First name:</strong>
+    <%= @client.first_name %>
+  </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @client.email %>
-</p>
+  <p>
+    <strong>Last name:</strong>
+    <%= @client.last_name %>
+  </p>
 
-<p>
-  <strong>Phone1:</strong>
-  <%= @client.phone1 %>
-</p>
+  <p>
+    <strong>Email:</strong>
+    <%= @client.email %>
+  </p>
 
-<p>
-  <strong>Phone2:</strong>
-  <%= @client.phone2 %>
-</p>
+  <p>
+    <strong>Phone1:</strong>
+    <%= @client.phone1 %>
+  </p>
 
-<p>
-  <strong>Phone3:</strong>
-  <%= @client.phone3 %>
-</p>
+  <p>
+    <strong>Phone2:</strong>
+    <%= @client.phone2 %>
+  </p>
 
-<p>
-  <strong>Phone4:</strong>
-  <%= @client.phone4 %>
-</p>
+  <p>
+    <strong>Phone3:</strong>
+    <%= @client.phone3 %>
+  </p>
 
-<p>
-  <strong>Address:</strong>
-  <%= @client.address %>
-</p>
+  <p>
+    <strong>Phone4:</strong>
+    <%= @client.phone4 %>
+  </p>
 
-<p>
-  <strong>Notes:</strong>
-  <%= @client.notes %>
-</p>
+  <p>
+    <strong>Address:</strong>
+    <%= @client.address %>
+  </p>
 
-<p>
-  <strong>Company:</strong>
-  <%= @client.company %>
-</p>
+  <p>
+    <strong>Notes:</strong>
+    <%= @client.notes %>
+  </p>
 
-<p>
-  <strong>First name 2:</strong>
-  <%= @client.first_name_2 %>
-</p>
+  <p>
+    <strong>Company:</strong>
+    <%= @client.company %>
+  </p>
 
-<p>
-  <strong>Last name 2:</strong>
-  <%= @client.last_name_2 %>
-</p>
+  <p>
+    <strong>First name 2:</strong>
+    <%= @client.first_name_2 %>
+  </p>
 
-<%= link_to 'Edit', edit_client_path(@client) %> |
-<%= link_to 'Back', clients_path %>
+  <p>
+    <strong>Last name 2:</strong>
+    <%= @client.last_name_2 %>
+  </p>
+
+  <%= link_to 'Edit', edit_client_path(@client) %> |
+  <%= link_to 'Back', clients_path %>
 
 </div>
