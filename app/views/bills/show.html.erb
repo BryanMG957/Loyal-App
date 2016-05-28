@@ -45,5 +45,9 @@
     <br />  <br />  <br />  <br />  <br />  <br />
   </section>
 </div>
-<%= link_to 'Edit', edit_bill_path(@bill) %> |
-<%= link_to 'Back', bills_path %>
+
+<div class="row">
+  <div class="col-xs-12" id="index-main-button">
+<%= link_to '<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_bill_path(@bill) %> <%= link_to '<button type="button" class="btn btn-default">Back</button>'.html_safe, bills_path %>
+</div>
+</div>

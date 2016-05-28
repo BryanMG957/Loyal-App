@@ -1,5 +1,12 @@
+<<<<<<< HEAD
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <p id="notice" ><%= notice %></p>
+</div>
+=======
 <div class="white">
   <p id="notice"><%= notice %></p>
+>>>>>>> 8a930db3e015c3f614355a383236818beb555768
 
   <p>
     <strong>Name:</strong>
@@ -39,6 +46,8 @@
     ********
   </p>
 
-  <%= link_to 'Edit', edit_calendar_path(@calendar) %> |
-  <%= link_to 'Back', calendars_path %>
+<div class="row">
+  <div class="col-xs-12" id="index-main-button">
+<%= link_to '<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_calendar_path(@calendar) %> <%= link_to '<button type="button" class="btn btn-default">Back</button>'.html_safe, calendars_path %>
+</div>
 </div>

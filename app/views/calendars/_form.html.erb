@@ -22,7 +22,7 @@
   <div class="field api api_none">
     <%= f.label :name %><br>
     <%= f.text_field :name %><br />
-  </div>    
+  </div>
   <div class="field api api_none api_icloud api_google">
     <%= f.label :color %><br />
     <%= f.color_field :color %>
@@ -61,8 +61,11 @@
     <%= f.label :uid %><br>
     <%= f.text_field :uid %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="row">
+    <div class="actions col-xs-12" id="index-main-button">
+  <%= f.submit :class => "btn btn-primary"%>
+  </div>
   </div>
   <script>
   $(document).on('page:load', function() {

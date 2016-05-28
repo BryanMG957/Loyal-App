@@ -68,9 +68,11 @@
   </nav>
 
   <div id="main" class="container-fluid">
+
     <%= yield :head %>
       <%= yield %>
     <%= yield :foot %>
+
   </div>
 
   <% if Rails.env.development? %>

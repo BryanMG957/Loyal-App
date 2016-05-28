@@ -31,7 +31,10 @@
     <%= f.label :company_id %><br>
     <%= f.collection_select(:company_id, Company.all, :id, :name) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="row">
+    <div class="actions col-xs-12" id="index-main-button">
+  <%= f.submit :class => "btn btn-primary"%>
+  </div>
   </div>
 <% end %>
