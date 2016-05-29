@@ -1,19 +1,25 @@
-<!-- <p id="notice"><%= notice %></p> -->
+<div class="alert alert-success alert-dismissible" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  <p id="notice" ><%= notice %></p>
+</div>
+
 <div class="white">
   <header class='bill_header'>
+
     <div class='company'>
       <%= @company = Company.find_by(id: 1)
           render 'companies/letterhead' %>
     </div><br />
-    <div class='client'>
-      <strong>For: </strong>
-      <%= @client = @bill.client
-        render 'clients/letterhead' %>
-    </div>  <br />
-    <div class='billdate'><strong>Date of Bill:</strong>
-      <%= @bill.date_billed.strftime("%m/%d/%y") %>
-    </div>
+
+    <hr />
   </header>
+
+  <section class='client'>
+    <strong>For: </strong>
+    <%= @client = @bill.client
+      render 'clients/letterhead' %>
+  </section>  <br />
+
   <hr />
   <section class='bill_body'>
     <% @bill.appointments.each do |appt| %>
