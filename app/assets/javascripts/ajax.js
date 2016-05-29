@@ -1,19 +1,4 @@
-//Adds event listeners
-//namely, for submit button click
-function setApiType(apitype) {
-	if (apitype === "none") {
-		$(".api").hide();
-		$(".api_none").show();
-	}
-	else if (apitype === "icloud") {
-		$(".api").hide();
-		$(".api_icloud").show();
-	}
-	else if (apitype === "google") {
-		$(".api").hide();
-		$(".api_google").show();
-	}
-}
+//Global page load JS - TODO split this up into different functions
 function loadPageHandler() {
 	/* Used by views/calendars/new.html.erb */
 	$("#pull_calendars").on("click", function() {
@@ -51,16 +36,21 @@ function loadPageHandler() {
 		document.getElementById("calendar_uid").value = cal_list_hash['uid'];
 		document.getElementById("calendar_name").value = cal_list_hash['displayname'];
 	});
-	/* Used by views/bills/unbilled.html.erb */
-	$(".expand").on("click", function(){
-		$("." + $(this).attr("tag")).fadeToggle(200);
-	});
 
-	/* Used by views/clients/_form.html.erb (Expander buttons) */
-	$("#client-name-expander").on("click", function() {
-		$("#client-name2").fadeToggle(200);
-		button = $("#client-name-expander");
-		if ( button[0]["classList"][1] == "glyphicon-plus-sign") {
+	$.fn.classList = function() {return this[0].className.split(/\s+/);};
+
+	/* Generic plus/minus expander button class */
+	/* ----------------------------------------- */
+	/* Looks at button's tag attr, toggles visibility by specified element id */
+	/* Used by views/bills/unbilled.html.erb */
+	/* Used by views/clients/_form.html.erb */
+	$(".expander").on("click", function(){
+		$("#" + $(this).attr("tag")).fadeToggle(200);
+		button = $(this);
+		console.log (button.classList())
+		if ( button.classList().find(function(item)
+			 { return (item == "glyphicon-plus-sign") })) 
+		{
 			button.removeClass("glyphicon-plus-sign");
 			button.addClass("glyphicon-minus-sign");
 		}
@@ -69,6 +59,7 @@ function loadPageHandler() {
 			button.addClass("glyphicon-plus-sign");			
 		}
 	});
+
 	$("#client-phone-expander").on("click", function() {
 		phonefields = $(".client-phone")
 		for ( var i = 2; i <= 4; i++ ) {
