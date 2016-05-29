@@ -37,28 +37,15 @@
 						<td>
 						</td>
 						<td>
-							<a href='#' class='expand' tag='client<%= key %>'>Expand</a>
+							<span class='expander glyphicon glyphicon-plus-sign' tag='client<%= key %>'></span>
 						</td>
 						<td>
 						</td>
 					</tr>
 					<% clientappts.each do |appt| %>
-						<tr class='client<%= key %>' hidden='hidden'>
+						<tr id='client<%= key %>' hidden='hidden'>
 							<td>
-								<% clicklistener = 
-									"$(\"#bill_client_id\").val(\"#{appt.client_id}\");
-									curamt = Number($(\"#bill_total_amount\").val());
-									charge = #{appt.charge.to_i};
-									apptid = '#{appt.id}';
-
-									if (this.checked == true) {
-									  $(\"#bill_total_amount\").val(curamt + charge);
-									}
-								  else {
-									  $(\"#bill_total_amount\").val(curamt - charge);
-									}"
-								%>
-								<%= check_box_tag "bill[appt_ids_to_bill][]", appt.id, false, onclick: clicklistener %>
+								<%= check_box_tag "bill[appt_ids_to_bill][]", appt.id, false, onclick: "unbilledItemCheckbox(this, #{appt.charge.to_i}, #{appt.client.id});" %>
 							</td>
 							<td>
 								<%= appt.start_time.strftime("%m/%d/%y") %>
