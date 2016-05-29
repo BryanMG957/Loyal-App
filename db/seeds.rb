@@ -14,11 +14,6 @@ example_co = Company.create(name: "Auston's Dogs",
 
 Calendar.create(name: "Test Calendar", apitype: "none", color: "#9999FF")
 
-# Create a blank client - do not remove this!
-Client.create(first_name: "(",
-							last_name: "none)",
-							company: example_co)
-
 10.times do
 	Client.create(first_name: Faker::Name.first_name,
 								last_name: Faker::Name.last_name,

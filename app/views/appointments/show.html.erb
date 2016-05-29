@@ -59,15 +59,17 @@
   <strong>Bill:</strong>
   <%= @appointment.bill %>
 </p>
-
+<!--
 <p>
   <strong>Employee:</strong>
   <%= @appointment.employee %>
 </p>
-
+-->
 <div class="row">
   <div class="col-xs-12" id="index-main-button">
-<%= link_to '<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_appointment_path(@appointment) %> <%= link_to '<button type="button" class="btn btn-default">Back</button>'.html_safe, appointments_path %>
+<%= link_to '<button type="button" class="btn btn-warning">Back to Calendar</button>'.html_safe, calendarmain_path %>&nbsp;
+<%= link_to '<button type="button" class="btn btn-default">Edit Appt</button>'.html_safe, edit_appointment_path(@appointment) %>&nbsp;
+<%= link_to '<button type="button" class="btn btn-default">Appts List</button>'.html_safe, appointments_path %>
 </div>
 </div>
 

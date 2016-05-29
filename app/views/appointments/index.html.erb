@@ -5,27 +5,27 @@
 <h1>Appointments</h1>
 
 <div class="row">
-  <div class="col-xs-2"><strong>Service Type</strong></div>
-  <div class="col-xs-3"><strong>Start time</strong></div>
-  <div class="col-xs-2"><strong>Calendar</strong></div>
-  <div class="col-xs-2"><strong>Title</strong></div>
-  <div class="col-xs-2"><strong>Options</strong></div>
+  <div class="col-sm-2"><strong>Type</strong></div>
+  <div class="col-sm-3"><strong>Start time</strong></div>
+  <div class="col-sm-2"><strong>Calendar</strong></div>
+  <div class="col-sm-3"><strong>Description</strong></div>
+  <div class="col-sm-2"><strong>Options</strong></div>
 </div>
 
 <% @appointments.each do |appointment| %>
 <div class="row">
-    <div class="col-xs-2"><%= appointment.service %> </div>
-    <div class="col-xs-3"><%= displayDateNoYear(appointment.start_time) %> </div>
-    <div class="col-xs-2"><%= appointment.calendar %></div>
-    <div class="col-xs-2"><%= appointment.description %> </div>
-    <div class="col-xs-5"><%= link_to '<span class="label label-success">More</span>'.html_safe,appointment %> <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_appointment_path(appointment) %> <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, appointment, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
+    <div class="col-sm-2"><%= appointment.service %> </div>
+    <div class="col-sm-3"><%= displayDateNoYear(appointment.start_time) %> </div>
+    <div class="col-sm-2"><%= appointment.calendar %></div>
+    <div class="col-sm-3"><%= appointment.description %> </div>
+    <div class="col-sm-2"><%= link_to '<span class="label label-success">More</span>'.html_safe,appointment %> <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_appointment_path(appointment) %> <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, appointment, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
   </div>
 <% end %>
 <br>
 <br>
 
 <div class="row">
-  <div class="col-xs-12" id="index-main-button">
+  <div class="col-sm-12" id="index-main-button">
 <%= link_to '<button type="button" class="btn btn-primary">New Appointment</button>'.html_safe, new_appointment_path %>
 </div>
 </div>

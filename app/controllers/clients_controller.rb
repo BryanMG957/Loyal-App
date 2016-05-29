@@ -25,7 +25,13 @@ class ClientsController < ApplicationController
   # POST /clients
   # POST /clients.json
   def create
+    pets = params[:client].delete(:petlist)
     @client = Client.new(client_params)
+    pets.each do |petname|
+      if (petname != "")
+        Pet.create(name: petname, client: @client)
+      end
+    end
 
     respond_to do |format|
       if @client.save
@@ -41,6 +47,19 @@ class ClientsController < ApplicationController
   # PATCH/PUT /clients/1
   # PATCH/PUT /clients/1.json
   def update
+    pets = params[:client].delete(:petlist)
+    # Create any pets not found
+    pets.each do |petname|
+      if ((petname != "") && !(Pet.find_by(name: petname)))
+        Pet.create(name: petname, client: @client)
+      end
+    end
+    # Delete any pets that were removed or name changed
+    @client.pets.each do |pet|
+      unless pets.include? pet.name
+        pet.destroy
+      end
+    end
     respond_to do |format|
       if @client.update(client_params)
         format.html { redirect_to @client, notice: 'Client was successfully updated.' }
@@ -70,6 +89,6 @@ class ClientsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def client_params
-      params.require(:client).permit(:first_name, :last_name, :email, :phone1, :phone2, :phone3, :phone4, :address, :notes, :company_id, :first_name_2, :last_name_2)
+      params.require(:client).permit(:first_name, :last_name, :email, :phone1, :phone2, :phone3, :phone4, :address, :notes, :company_id, :first_name_2, :last_name_2, :petlist)
     end
 end
