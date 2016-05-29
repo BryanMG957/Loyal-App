@@ -45,6 +45,9 @@ class CalendarsController < ApplicationController
   # PATCH/PUT /calendars/1
   # PATCH/PUT /calendars/1.json
   def update
+    if calendar_params[:password] == "********"
+      params[:calendar].delete(:password)
+    end  
     respond_to do |format|
       if @calendar.update(calendar_params)
         format.html { redirect_to @calendar, notice: 'Calendar was successfully updated.' }

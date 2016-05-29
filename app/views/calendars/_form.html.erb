@@ -33,7 +33,11 @@
   </div>
   <div class="field api api_icloud api_google">
     <%= f.label :password %><br>
-    <%= f.password_field :password %>
+    <% if (@calendar.password) %>
+      <%= f.password_field :password, value: "********" %>
+    <% else %>
+      <%= f.password_field :password %>
+    <% end %>    
   </div>
   <div class="pull_calendars api api_icloud api_google">
     <br />
