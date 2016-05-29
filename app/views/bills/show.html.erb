@@ -5,9 +5,6 @@
       <%= @company = Company.find_by(id: 1)
           render 'companies/letterhead' %>
     </div><br />
-    <div class='invoice_num'>
-      Invoice #<%= @bill.id %>
-    </div><br />
     <div class='client'>
       <strong>For: </strong>
       <%= @client = @bill.client

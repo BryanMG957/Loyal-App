@@ -1,6 +1,21 @@
-<h3>
+<div class="row">
+<h5 id="date-billed">
+  <div class="">
+    <div class="col-xs-6">
+      <strong>Invoice Number:</strong> <%= @bill.id%>
+    </div>
+    <div class="col-xs-6">
+      <span id="date"><strong>Date:</strong> <%= @bill.date_billed.strftime("%m/%d/%y") %></span>
+    </div>
+  </div>
+</h5>
+
+
+</div>
+<h1 id="company-name">
   <%= @company.name %>
-</h3>
+</h1>
+
 <strong>Email:</strong> <%= @company.email %>
 <strong>Phone:</strong> <%= @company.phone %>
 <strong>Website:</strong><%= @company.website %>

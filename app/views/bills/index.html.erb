@@ -5,17 +5,17 @@
 <h1>Billed Items</h1>
 
 <div class="row">
-  <div class="col-xs-2"><strong>Client</strong></div>
+  <div class="col-xs-3"><strong>Client</strong></div>
+  <div class="col-xs-2"><strong>Invoice Number</strong></div>
   <div class="col-xs-2"><strong>Total</strong></div>
-  <div class="col-xs-3"><strong>Date billed</strong></div>
   <div class="col-xs-5"><strong>Options</strong></div>
 </div>
 
 <% @bills.each do |bill| %>
 <div class="row">
-    <div class="col-xs-2"><%= bill.client %> </div>
+    <div class="col-xs-3"><%= bill.client %> </div>
+    <div class="col-xs-2">#<%= bill.id %> </div>
     <div class="col-xs-2">$<%= bill.total_amount %> </div>
-    <div class="col-xs-3"><%= bill.date_billed.strftime("%b %d %I:%M%p") %> </div>
     <div class="col-xs-5"><%= link_to '<span class="label label-success">More</span>'.html_safe, bill %>
       <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_bill_path(bill) %>
       <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, bill, method: :delete, data: { confirm: 'Are you sure?' } %> </div>

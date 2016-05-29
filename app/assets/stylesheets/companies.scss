@@ -1,3 +1,18 @@
 // Place all the styles related to the companies controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+h5 #date-billed {
+  display: flex;
+  justify-content: space-between;
+}
+
+h5 #date-billed span #date {
+  position: fixed;
+  right: 100%
+}
+
+h1 #company-name {
+  display: flex;
+  justify-content: center;
+}
