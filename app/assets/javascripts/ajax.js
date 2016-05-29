@@ -1,32 +1,3 @@
-//Adds event listeners for calendar API type radio buttons
-function setApiType(apitype) {
-	if (apitype === "none") {
-		$(".api").hide();
-		$(".api_none").show();
-	}
-	else if (apitype === "icloud") {
-		$(".api").hide();
-		$(".api_icloud").show();
-	}
-	else if (apitype === "google") {
-		$(".api").hide();
-		$(".api_google").show();
-	}
-}
-
-//Event listener function for unbilled item checkbox
-//Adds charge to bill amount, sets client dropdown
-function unbilledItemCheckbox(cb, charge, clientid) {
-	curamt = Number($("#bill_total_amount").val());
-	if (cb.checked == true) {
-		$("#bill_client_id").val(clientid);
-	  $("#bill_total_amount").val(curamt + charge);
-	}
-  else {
-	  $("#bill_total_amount").val(curamt - charge);
-	}
-}
-
 //Global page load JS - TODO split this up into different functions
 function loadPageHandler() {
 	/* Used by views/calendars/new.html.erb */
