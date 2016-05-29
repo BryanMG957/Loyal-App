@@ -116,7 +116,7 @@ class AppointmentsController < ApplicationController
             newevent = cal.create_event(:start => @appointment.start_time.to_s, :end => (@appointment.start_time + 1200).to_s, :title => @appointment.description, :description => @appointment.notes)
             @appointment.uuid = newevent.properties["uid"]
             @appointment.save
-            if result
+            if newevent
               return " and updated on iCloud calendar #{@appointment.calendar.name}."
             else
               return " locally. Unable to update iCloud calendar #{@appointment.calendar.name}."
