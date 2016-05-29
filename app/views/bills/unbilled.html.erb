@@ -43,7 +43,7 @@
 						</td>
 					</tr>
 					<% clientappts.each do |appt| %>
-						<tr id='client<%= key %>' hidden='hidden'>
+						<tr class='client<%= key %>' hidden='hidden'>
 							<td>
 								<%= check_box_tag "bill[appt_ids_to_bill][]", appt.id, false, onclick: "unbilledItemCheckbox(this, #{appt.charge.to_i}, #{appt.client.id});" %>
 							</td>
