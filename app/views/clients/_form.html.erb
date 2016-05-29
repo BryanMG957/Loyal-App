@@ -14,11 +14,11 @@
   <!-- Name entry fields - expandable to 2 names -->
   <div class="field" >
     <span class="glyphicon glyphicon-user" />
-    <span id="client-name1">
+    <span class="client-name1">
       <%= f.text_field :first_name, :placeholder => "First name", :class => "form-control"%>
       <%= f.text_field :last_name, :class => "form-control", :placeholder => "Last name" %>
     </span>
-    <span id="client-name2"
+    <span class="client-name2"
     <%# Hide second name if null or blank %>
     <% if !((@client.first_name_2) && (@client.first_name_2 != "")) %>
        hidden='hidden'

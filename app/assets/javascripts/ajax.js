@@ -45,7 +45,7 @@ function loadPageHandler() {
 	/* Used by views/bills/unbilled.html.erb */
 	/* Used by views/clients/_form.html.erb */
 	$(".expander").on("click", function(){
-		$("#" + $(this).attr("tag")).fadeToggle(200);
+		$("." + $(this).attr("tag")).fadeToggle(200);
 		button = $(this);
 		console.log (button.classList())
 		if ( button.classList().find(function(item)
@@ -80,6 +80,7 @@ function loadPageHandler() {
 			}
 		}
 	});
+	dtpicker();
 }
 
 //Turbolinks specific linking (works when using link_to)
