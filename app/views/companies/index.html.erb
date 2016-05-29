@@ -1,35 +1,24 @@
-<p id="notice"><%= notice %></p>
+<p id="notice" ><%= notice %></p>
 
-<h1>Listing Companies</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Phone</th>
-      <th>Website</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="white">
 
-  <tbody>
-    <% @companies.each do |company| %>
-      <tr>
-        <td><%= company.name %></td>
-        <td><%= company.email %></td>
-        <td><%= company.phone %></td>
-        <td><%= company.website %></td>
-        <td><%= company.description %></td>
-        <td><%= link_to 'Show', company %></td>
-        <td><%= link_to 'Edit', edit_company_path(company) %></td>
-        <td><%= link_to 'Destroy', company, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<h1>Company Info</h1>
 
+<div class="row">
+  <div class="col-xs-3"><strong>Name</strong></div>
+  <div class="col-xs-5"><strong>Website</strong></div>
+  <div class="col-xs-4"><strong>Options</strong></div>
+</div>
+
+<% @companies.each do |company| %>
+<div class="row">
+    <div class="col-xs-3"><%= company.name %> </div>
+    <div class="col-xs-5"><%= company.website %> </div>
+    <div class="col-xs-4"><%= link_to '<span class="label label-success">More</span>'.html_safe, company %>
+      <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_company_path(company) %>
+  </div>
+<% end %>
 <br>
-
-<%= link_to 'New Company', new_company_path %>
+<br>
+</div>

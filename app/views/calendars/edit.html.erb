@@ -3,6 +3,10 @@
 
 	<%= render 'form' %>
 
-	<%= link_to 'Show', @calendar %> |
-	<%= link_to 'Back', calendars_path %>
+	<div class="row">
+	  <div class="col-xs-12" id="index-main-button">
+	<%= link_to '<button type="button" class="btn btn-warning">More</button>'.html_safe, @calendar %> <%= link_to '<button type="button" class="btn btn-default">Back</button>'.html_safe, calendars_path %>
+	</div>
+	</div>
+	
 </div>

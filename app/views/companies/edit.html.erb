@@ -1,6 +1,12 @@
+<div class="white">
+
 <h1>Editing Company</h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @company %> |
-<%= link_to 'Back', companies_path %>
+<div class="row">
+  <div class="col-xs-12" id="index-main-button">
+<%= link_to '<button type="button" class="btn btn-warning">More</button>'.html_safe, @company %> <%= link_to '<button type="button" class="btn btn-default">Back</button>'.html_safe, companies_path %>
+</div>
+</div>
+</div>

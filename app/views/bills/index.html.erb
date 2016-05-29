@@ -1,38 +1,26 @@
+<p id="notice" ><%= notice %></p>
+
 <div class="white">
-  <p id="notice"><%= notice %></p>
 
-  <h1>Listing Bills</h1>
+<h1>Billed Items</h1>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Total amount</th>
-        <th>Paid amount</th>
-        <th>Date billed</th>
-        <th>Date paid</th>
-        <th>Discount</th>
-        <th>Client</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @bills.each do |bill| %>
-        <tr>
-          <td><%= bill.total_amount %></td>
-          <td><%= bill.paid_amount %></td>
-          <td><%= bill.date_billed %></td>
-          <td><%= bill.date_paid %></td>
-          <td><%= bill.discount %></td>
-          <td><%= bill.client %></td>
-          <td><%= link_to 'Show', bill %></td>
-          <td><%= link_to 'Edit', edit_bill_path(bill) %></td>
-          <td><%= link_to 'Destroy', bill, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-
-  <br>
+<div class="row">
+  <div class="col-xs-2"><strong>Client</strong></div>
+  <div class="col-xs-2"><strong>Total</strong></div>
+  <div class="col-xs-3"><strong>Date billed</strong></div>
+  <div class="col-xs-5"><strong>Options</strong></div>
 </div>
-<%= link_to 'New Bill', new_bill_path %>
+
+<% @bills.each do |bill| %>
+<div class="row">
+    <div class="col-xs-2"><%= bill.client %> </div>
+    <div class="col-xs-2">$<%= bill.total_amount %> </div>
+    <div class="col-xs-3"><%= bill.date_billed.strftime("%b %d %I:%M%p") %> </div>
+    <div class="col-xs-5"><%= link_to '<span class="label label-success">More</span>'.html_safe, bill %>
+      <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_bill_path(bill) %>
+      <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, bill, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
+  </div>
+<% end %>
+<br>
+<br>
+</div>

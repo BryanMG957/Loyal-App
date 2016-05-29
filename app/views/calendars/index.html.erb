@@ -1,37 +1,32 @@
+<p id="notice"><%= notice %></p>
+
 <div class="white">
-  <p id="notice"><%= notice %></p>
 
-  <h1>Listing Calendars</h1>
+<h1>Calendars</h1>
 
-  <table>
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Type</th>
-        <th>URL</th>
-        <th>Username</th>
-        <th>Password</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
+<div class="row">
+  <div class="col-xs-2"><strong>Name</strong></div>
+  <div class="col-xs-3"><strong>Type</strong></div>
+  <div class="col-xs-2"><strong>Color</strong></div>
+  <div class="col-xs-5"><strong>Options</strong></div>
+</div>
 
-    <tbody>
-      <% @calendars.each do |calendar| %>
-        <tr>
-          <td><%= calendar.name %></td>
-          <td><%= calendar.apitype %></td>
-          <td><%= calendar.url %></td>
-          <td><%= calendar.username %></td>
-          <td>********</td>
-          <td><%= link_to 'Show', calendar %></td>
-          <td><%= link_to 'Edit', edit_calendar_path(calendar) %></td>
-          <td><%= link_to 'Destroy', calendar, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
+<% @calendars.each do |calendar| %>
+<div class="row">
+    <div class="col-xs-2"><%= calendar.name %> </div>
+    <div class="col-xs-3"><%= calendar.apitype %> </div>
+    <div class="col-xs-2" id="calendar-color" style="background-color: <%= calendar.color %>; height: 20px;"></div>
+    <div class="col-xs-5"><%= link_to '<span class="label label-success">More</span>'.html_safe,calendar %> <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_calendar_path(calendar) %> <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, calendar, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
+  </div>
+<% end %>
+<br>
+<br>
 
-  <br>
+<div class="row">
+  <div class="col-sm-12" id="index-main-button">
+<%= link_to '<button type="button" class="btn btn-primary">New Calendar</button>'.html_safe, new_calendar_path %>
+</div>
+</div>
 
-  <%= link_to 'New Calendar', new_calendar_path %>
+
 </div>

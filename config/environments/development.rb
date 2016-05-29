@@ -41,5 +41,5 @@ Rails.application.configure do
 
   # Loyal App - configure server name:
   config.x.protocol = "http://"
-  config.x.host = "loyal.fwd.wf"
+  config.x.host = "localhost:3000"
 end
