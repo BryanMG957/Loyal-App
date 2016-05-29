@@ -9,7 +9,7 @@ class BillsController < ApplicationController
   end
   def unbilled
     @clienthash = {}
-    @appointments = Appointment.where("start_time < '" + Time.now.to_s + "'").order(:start_time).order(:client_id)
+    @appointments = Appointment.where("start_time < '" + Time.now.to_s + "' AND bill_id IS NULL" )
     @appointments.each do |appt|
       @clienthash[appt.client_id] = @clienthash.fetch(appt.client_id, 0) + 1
     end
