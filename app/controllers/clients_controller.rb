@@ -50,7 +50,7 @@ class ClientsController < ApplicationController
     pets = params[:client].delete(:petlist)
     # Create any pets not found
     pets.each do |petname|
-      if ((petname != "") && !(Pet.find_by(name: petname)))
+      if ((petname != "") && !(Pet.find_by(name: petname, client: @client)))
         Pet.create(name: petname, client: @client)
       end
     end

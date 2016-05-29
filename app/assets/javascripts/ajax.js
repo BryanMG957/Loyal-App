@@ -80,7 +80,8 @@ function loadPageHandler() {
 			}
 		}
 	});
-	dtpicker();
+
+	appointmentLoad();
 }
 
 //Turbolinks specific linking (works when using link_to)

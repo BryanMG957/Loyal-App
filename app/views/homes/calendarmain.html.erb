@@ -38,7 +38,7 @@
 				    type: 'GET'
 				  }).done(function(html) {
 				  	document.getElementById("appt-modifier").innerHTML = html;
-				  	dtpicker();
+				  	appointmentLoad();
 				  })
   			},
 		    <%# Event listener for clicking on appointments - edit appt %>
@@ -48,7 +48,7 @@
 				    type: 'GET'
 				  }).done(function(html) {
 				  	document.getElementById("appt-modifier").innerHTML = html;
-				  	dtpicker();
+				  	appointmentLoad();
 				  })
     		},
     		fixedWeekCount: false,

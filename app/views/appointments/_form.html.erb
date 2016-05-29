@@ -27,7 +27,9 @@
   </div>
   <div class="field">
     <%= f.label :client_id %><br>
-    <%= f.collection_select(:client_id, Client.all, :id, :full_name,{}, {:class => "form-control"}) %>
+    <%= search_field_tag "client-searcher", nil, class: "form-control", placeholder: "Search clients and pets" %>
+    <%= f.collection_select(:client_id, Client.all, :id, 
+        :dropdown_label, {}, {:class => "form-control"}) %>
   </div>
   <div class="field">
     <%= f.label :description %><br>

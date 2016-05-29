@@ -11,4 +11,11 @@ class Client < ActiveRecord::Base
   def petlist
   	self.pets.map { |pet| pet.name }
   end
+  def dropdown_label
+    if (petlist.length > 0)
+      full_name + " - " + petlist.join(", ")
+    else
+      full_name
+    end
+  end
 end

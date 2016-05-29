@@ -13,3 +13,6 @@ function setApiType(apitype) {
 		$(".api_google").show();
 	}
 }
+function calendarLoad() {
+	
+}
