@@ -27,8 +27,12 @@
 							<%= value %>
 						</td>
 						<td>
-							<%= clientappts.first.client.first_name %>&nbsp;
-							<%= clientappts.first.client.last_name %>
+							<% if (clientappts.first.client) %>
+								<%= clientappts.first.client.first_name %>&nbsp;
+								<%= clientappts.first.client.last_name %>
+							<% else %>
+								No Client
+							<% end %>
 						</td>
 						<td>
 						</td>

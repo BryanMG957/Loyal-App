@@ -54,7 +54,40 @@ function loadPageHandler() {
 	/* Used by views/bills/unbilled.html.erb */
 	$(".expand").on("click", function(){
 		$("." + $(this).attr("tag")).fadeToggle(200);
+	});
 
+	/* Used by views/clients/_form.html.erb (Expander buttons) */
+	$("#client-name-expander").on("click", function() {
+		$("#client-name2").fadeToggle(200);
+		button = $("#client-name-expander");
+		if ( button[0]["classList"][1] == "glyphicon-plus-sign") {
+			button.removeClass("glyphicon-plus-sign");
+			button.addClass("glyphicon-minus-sign");
+		}
+		else {
+			button.removeClass("glyphicon-minus-sign");
+			button.addClass("glyphicon-plus-sign");			
+		}
+	});
+	$("#client-phone-expander").on("click", function() {
+		phonefields = $(".client-phone")
+		for ( var i = 2; i <= 4; i++ ) {
+			if (phonefields[i-1]["hidden"] == true) {
+				$("#client-phone" + i).fadeIn(200);
+				$("#client-phone" + i).removeAttr("hidden");
+				break;
+			}
+		}
+	});
+	$("#client-pet-expander").on("click", function() {
+		petfields = $(".client-pets")
+		for ( var i = 0; i <= petfields.length; i++ ) {
+			if (petfields[i]["hidden"] == true) {
+				$("#client-pet-" + i).fadeIn(200);
+				$("#client-pet-" + i).removeAttr("hidden");
+				break;
+			}
+		}
 	});
 }
 

@@ -25,7 +25,6 @@ class CalendarsController < ApplicationController
 
   # GET /calendars/1/edit
   def edit
-    p calendar_params
   end
 
   # POST /calendars

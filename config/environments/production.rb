@@ -78,6 +78,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Loyal App - configure server name:
-  config.x.protocol = "http://"
-  config.x.host = "localhost:3000"
+  config.x.protocol = "https://"
+  config.x.host = "loyal-app.herokuapp.com"
 end

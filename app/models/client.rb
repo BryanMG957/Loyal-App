@@ -8,4 +8,7 @@ class Client < ActiveRecord::Base
   def full_name
   	return self.first_name.to_s + " " + self.last_name.to_s
   end
+  def petlist
+  	self.pets.map { |pet| pet.name }
+  end
 end
