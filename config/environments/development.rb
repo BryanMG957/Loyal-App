@@ -42,4 +42,8 @@ Rails.application.configure do
   # Loyal App - configure server name:
   config.x.protocol = "http://"
   config.x.host = "localhost:3000"
+
+  # Auth0 ID and domain
+  config.x.auth0_domain = 'bryanmg957.auth0.com'
+  config.x.auth0_client_ID = 'OZE54fxgtytTr1xQqdPyYtEkLA2QDZyc'
 end

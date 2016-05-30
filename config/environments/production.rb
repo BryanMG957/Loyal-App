@@ -80,4 +80,8 @@ Rails.application.configure do
   # Loyal App - configure server name:
   config.x.protocol = "https://"
   config.x.host = "loyal-app.herokuapp.com"
+
+  # Auth0 ID and domain
+  config.x.auth0_domain = 'app51444444.auth0.com'
+  config.x.auth0_client_ID = 'BoaqBRsZcUMQWfcLYQb6xsrKedImSVoq'
 end
