@@ -84,4 +84,5 @@ Rails.application.configure do
   # Auth0 ID and domain
   config.x.auth0_domain = 'app51444444.auth0.com'
   config.x.auth0_client_ID = 'BoaqBRsZcUMQWfcLYQb6xsrKedImSVoq'
+  config.x.auth0_client_secret = 'orEV70LcbNmV9Kuo4TgUI_LD1BO5lVpU3l_6LSu8ZA-xB4ivLmP9dc3DbuMeZKv9'
 end

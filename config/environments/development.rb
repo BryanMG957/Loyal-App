@@ -44,6 +44,10 @@ Rails.application.configure do
   config.x.host = "localhost:3000"
 
   # Auth0 ID and domain
-  config.x.auth0_domain = 'bryanmg957.auth0.com'
-  config.x.auth0_client_ID = 'OZE54fxgtytTr1xQqdPyYtEkLA2QDZyc'
+  # config.x.auth0_domain = 'bryanmg957.auth0.com'
+  # config.x.auth0_client_ID = 'OZE54fxgtytTr1xQqdPyYtEkLA2QDZyc'
+  # confix.x.auth0_client_secret = '6IDYcGHZhcnA4BV3Y_D3GmU6BjtDEXwnOz6rsVszdSFOJiarWPnHeBhJCV2SRKF9'
+  config.x.auth0_domain = 'app51444444.auth0.com'
+  config.x.auth0_client_ID = 'BoaqBRsZcUMQWfcLYQb6xsrKedImSVoq'
+  config.x.auth0_client_secret = 'orEV70LcbNmV9Kuo4TgUI_LD1BO5lVpU3l_6LSu8ZA-xB4ivLmP9dc3DbuMeZKv9'
 end
