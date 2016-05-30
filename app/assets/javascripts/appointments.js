@@ -11,7 +11,7 @@ function appointmentLoad() {
 		var dropdown = $("#appointment_client_id");
 		var clients = dropdown.children();
 		for ( var i = 0; i < clients.length; i++ ) {
-		  if (clients[i].innerText.toLowerCase().search($(this).val().toLowerCase()) > -1) {
+		  if (clients[i].innerHTML.toLowerCase().search($(this).val().toLowerCase()) > -1) {
 		  	dropdown.val(clients[i].value);
 		  	break;
 		  }
