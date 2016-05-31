@@ -12,91 +12,111 @@
     </div>
   <% end %>
   <!-- Name entry fields - expandable to 2 names -->
-  <div class="field">
-    <span class="glyphicon glyphicon-user"></span>
-    <span class="client-name1">
-      <%= f.text_field :first_name, :placeholder => "First name", :class => "form-control"%>
-      <%= f.text_field :last_name, :class => "form-control", :placeholder => "Last name" %>
-    </span>
-    <span class="client-name2"
-    <%# Hide second name if null or blank %>
-    <% if !((@client.first_name_2) && (@client.first_name_2 != "")) %>
-       hidden='hidden'
-    <% end %>>
-      <%= f.text_field :first_name_2, :class => "form-control", :placeholder => "Additional first name" %>
-      <%= f.text_field :last_name_2, :class => "form-control", :placeholder => "Additional last name" %>
-    </span>
-    <span id="client-name-expander" tag="client-name2" class="expander glyphicon glyphicon-<% if !((@client.first_name_2) && (@client.first_name_2 != "")) %>plus<% else %>minus<% end %>-sign"></span>
-  </div>
+  <div class="client-editor">
+    <div class="field client-editor-field">
+      <span class="client-editor-input">
+        <span class="glyphicon glyphicon-user client-editor-icon"></span>
+        <span class="client-name1 client-editor-name">
+          <%= f.text_field :first_name, :placeholder => "First name", :class => "form-control"%>
+          <%= f.text_field :last_name, :class => "form-control", :placeholder => "Last name" %>
+        </span>
+      </span>
 
-  <!-- Email entry field -->
-  <div class="field">
-    <span class="glyphicon glyphicon-envelope"></span>
-    <%= f.text_field :email, :class => "form-control", :placeholder => "E-mail" %>
-  </div>
-  
-  <!-- Pet entry fields - expandable to 10 -->
-  <div class="field">
-    <i class="fa fa-paw"></i>
-    <% petcount = @client.pets.count %>
-    <% (10).times do |i| %>
-    <span id="client-pet-<%= i %>" class="client-pets"
-      <% if (i < petcount) %>
-        >
-        <%= text_field_tag "client[petlist][]", @client.pets[i].name, class: "form-control", placeholder: "Pet name" %>
-      <% else %>
-        hidden="true">
-        <%= text_field_tag "client[petlist][]", "", class: "form-control", placeholder: "Pet name" %>
+      <span class="client-editor-input">
+        <span class="glyphicon glyphicon-user client-editor-icon"></span>
+        <span class="client-name2 client-editor-name"
+        <%# Hide second name if null or blank %>
+        <% if !((@client.first_name_2) && (@client.first_name_2 != "")) %>
+           hidden='hidden'
+        <% end %>>
+          <%= f.text_field :first_name_2, :class => "form-control", :placeholder => "Additional first name" %>
+          <%= f.text_field :last_name_2, :class => "form-control", :placeholder => "Additional last name" %>
+        </span>
+        <span id="client-name-expander" tag="client-name2" class="expander glyphicon glyphicon-<% if !((@client.first_name_2) && (@client.first_name_2 != "")) %>plus<% else %>minus<% end %>-sign"></span>
+      </span>
+    </div>
+
+    <!-- Email entry field -->
+    <div class="field client-editor-field">
+      <span class="client-editor-input">
+        <span class="glyphicon glyphicon-envelope client-editor-icon"></span>
+        <%= f.text_field :email, :class => "form-control", :placeholder => "E-mail" %>
+      </span>
+    </div>
+    
+    <!-- Pet entry fields - expandable to 10 -->
+    <div class="field client-editor-field">
+      <% petcount = @client.pets.count %>
+      <% (10).times do |i| %>
+      <span id="client-pet-<%= i %>" class="client-pets"
+        <% if (i < petcount) %>
+          >
+          <span class="client-editor-input">
+            <i class="fa fa-paw client-editor-icon"></i>
+            <%= text_field_tag "client[petlist][]", @client.pets[i].name, class: "form-control", placeholder: "Pet name" %>
+          </span>
+        <% else %>
+          hidden="true">
+          <span class="client-editor-input">
+            <i class="fa fa-paw client-editor-icon"></i>
+            <%= text_field_tag "client[petlist][]", "", class: "form-control", placeholder: "Pet name" %>
+          </span>
+        <% end %>
+      </span>
       <% end %>
-      
-    </span>
-    <% end %>
-    <span id="client-pet-expander" class="glyphicon glyphicon-plus-sign" />
-  </div>
-  <!-- Phone entry fields - expandable to 4 -->
-  <div class="field">
-    <span class="glyphicon glyphicon-phone-alt"></span>
-    <span id="client-phone1" class="client-phone">
-    <%= f.text_field :phone1, :class => "form-control", :placeholder => "Primary phone #" %></span>
-    <span id="client-phone2" class="client-phone"
-    <% if !((@client.phone2) && (@client.phone2 != "")) %>
-       hidden='hidden'
-    <% end %>
-    >    
-    <%= f.text_field :phone2, :class => "form-control", :placeholder => "Secondary phone #" %></span>
-    <span id="client-phone3" class="client-phone"
-    <% if !((@client.phone3) && (@client.phone3 != "")) %>
-       hidden='hidden'
-    <% end %>
-    >    
-    <%= f.text_field :phone3, :class => "form-control", :placeholder => "Additional phone #" %></span>
-    <span id="client-phone4" class="client-phone"
-    <% if !((@client.phone4) && (@client.phone4 != "")) %>
-       hidden='hidden'
-    <% end %>
-    >  
-    <%= f.text_field :phone4, :class => "form-control", :placeholder => "Additional phone #" %></span>
-    <span id="client-phone-expander" class="glyphicon glyphicon-plus-sign" />
-  </div>
-  <!-- Address entry field -->
-  <div class="field">
-    <span class="glyphicon glyphicon-home"></span>
-    <%= f.text_field :address, :class => "form-control", :placeholder => "Address" %>
-  </div>
-  <!-- Note entry field -->
-  <div class="field">
-    <i class="fa fa-sticky-note"></i>
-    <%= f.text_area :notes, :class => "form-control", :placeholder => "Notes" %>
-  </div>
-  <!-- <div class="company">
-    <%= f.label :company_id %><br>
-    <%= f.collection_select(:company_id, Company.all, :id, :name) %>
-  </div> -->
-  <!-- Submit button -->
-  <div class="row">
-    <div class="actions col-xs-12" id="index-main-button">
-  <%= f.submit :class => "btn btn-primary"%>
-  </div>
+      <span class="client-editor-input">
+        <i class="fa fa-paw client-editor-icon"></i>
+        <span id="client-pet-expander" class="glyphicon glyphicon-plus-sign client-editor-icon" />
+      </span>
+    </div>
+    <!-- Phone entry fields - expandable to 4 -->
+    <div class="field client-editor-field">
+      <span id="client-phone1" class="client-phone">
+        <span class="client-editor-input">
+          <span class="glyphicon glyphicon-phone-alt client-editor-icon"></span>
+          <%= f.text_field :phone1, :class => "form-control", :placeholder => "Primary phone #" %>
+        </span>
+      </span>
+      <% (2..4).each do |n| %>
+        <span id="client-phone<%= n %>" class="client-phone"
+          <% if !(eval("@client.phone" + n.to_s) && eval("@client.phone" + n.to_s) != "") %>
+             hidden='hidden'
+          <% end %>
+          >
+          <span class="client-editor-input">
+            <span class="glyphicon glyphicon-phone-alt client-editor-icon"></span>
+            <%= f.text_field ("phone" + n.to_s).to_sym, :class => "form-control", :placeholder => "Additional phone #" %>
+          </span>
+        </span>
+      <% end %>
+      <span class="client-editor-input">
+        <span id="client-phone-expander" class="glyphicon glyphicon-plus-sign" />
+      </span>
+    </div>
+    <!-- Address entry field -->
+    <div class="field client-editor-field">
+      <span class="client-editor-input">
+        <span class="glyphicon glyphicon-home client-editor-icon"></span>
+        <%= f.text_field :address, :class => "form-control", :placeholder => "Address" %>
+      </span>
+    </div>
+    <!-- Note entry field -->
+    <div class="field client-editor-field">
+      <span class="client-editor-input">
+        <i class="fa fa-sticky-note client-editor-icon"></i>
+        <%= f.text_area :notes, :class => "form-control", :placeholder => "Notes" %>
+      </span>
+    </div>
+    <!-- <div class="company">
+      <%= f.label :company_id %><br>
+      <%= f.collection_select(:company_id, Company.all, :id, :name) %>
+    </div> -->
+    <!-- Submit button -->
+    <div class="row client-editor-field">
+      <div class="actions col-xs-12" id="index-main-button">
+    <%= f.submit :class => "btn btn-primary"%>
+    </div>
+    </div>
   </div>
 
 <% end %>
