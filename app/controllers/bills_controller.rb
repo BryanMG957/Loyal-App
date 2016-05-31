@@ -23,6 +23,7 @@ class BillsController < ApplicationController
   # GET /bills/new
   def new
     @bill = Bill.new
+    @bill.date_billed = Time.new
   end
 
   # GET /bills/1/edit
