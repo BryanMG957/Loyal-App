@@ -78,8 +78,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   # Loyal App - configure server name:
-  config.x.protocol = "https://"
-  config.x.host = "loyal-app.herokuapp.com"
+  config.x.protocol = "http://"
+  config.x.host = "www.loyal-app.co"
 
   # Auth0 ID and domain
   config.x.auth0_domain = 'app51444444.auth0.com'
