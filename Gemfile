@@ -24,6 +24,9 @@ gem 'caldav-icloud'
 gem 'faker'
 gem 'nokogiri'
 
+# CookieOverflow fix
+gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use SCSS for stylesheets
