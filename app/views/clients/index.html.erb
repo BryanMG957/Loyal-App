@@ -19,7 +19,7 @@
     <div class="col-xs-2"><%= client.pets.map { |pet| pet.name }.join(", ") %> </div>
     <div class="col-xs-5"><%= link_to '<span class="label label-success">More</span>'.html_safe, client %>
       <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_client_path(client) %>
-      <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, client, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
+      <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, client, method: :delete, data: { confirm: 'Are you sure? This will delete all billing records and pets associated with this client.' } %> </div>
   </div>
 <% end %>
 

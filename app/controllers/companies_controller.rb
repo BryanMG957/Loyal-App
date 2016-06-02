@@ -55,6 +55,8 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1
   # DELETE /companies/1.json
   def destroy
+    Client.where(company: @company).update_all(company: nil)
+    Employee.where(company: @company).update_all(company: nil)
     @company.destroy
     respond_to do |format|
       format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }

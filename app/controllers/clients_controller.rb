@@ -5,7 +5,7 @@ class ClientsController < ApplicationController
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    @clients = Client.all.order("last_name")
   end
 
   # GET /clients/1
@@ -74,6 +74,9 @@ class ClientsController < ApplicationController
   # DELETE /clients/1
   # DELETE /clients/1.json
   def destroy
+    Appointment.where(client: @client).update_all(client: nil)
+    Bill.where(client: @client).update_all(client: nil)
+    Pet.where(client: @client).destroy_all
     @client.destroy
     respond_to do |format|
       format.html { redirect_to clients_url, notice: 'Client was successfully destroyed.' }

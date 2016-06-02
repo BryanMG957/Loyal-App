@@ -16,7 +16,7 @@
     <div class="col-xs-2"><%= calendar.name %> </div>
     <div class="col-xs-3"><%= calendar.apitype %> </div>
     <div class="col-xs-2" id="calendar-color" style="background-color: <%= calendar.color %>; height: 20px;"></div>
-    <div class="col-xs-5"><%= link_to '<span class="label label-success">More</span>'.html_safe,calendar %> <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_calendar_path(calendar) %> <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, calendar, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
+    <div class="col-xs-5"><%= link_to '<span class="label label-success">More</span>'.html_safe,calendar %> <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_calendar_path(calendar) %> <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, calendar, method: :delete, data: { confirm: 'Are you sure? This will delete all appointments associated with this calendar.' } %> </div>
   </div>
 <% end %>
 <br>

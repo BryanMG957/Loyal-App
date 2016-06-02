@@ -5,7 +5,7 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
   def index
-    @appointments = Appointment.all
+    @appointments = Appointment.all.order("start_time DESC")
   end
 
   # GET /appointments/1
@@ -82,6 +82,7 @@ class AppointmentsController < ApplicationController
     notice = "Appointment was successfully deleted"
     notice += sync_api(:destroy)
     @appointment.destroy
+
     respond_to do |format|
       format.html { redirect_to appointments_url, notice: notice }
       format.json { head :no_content }

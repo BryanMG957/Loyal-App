@@ -62,6 +62,7 @@ class CalendarsController < ApplicationController
   # DELETE /calendars/1
   # DELETE /calendars/1.json
   def destroy
+    Appointment.where(calendar: @calendar).destroy_all
     @calendar.destroy
     respond_to do |format|
       format.html { redirect_to calendars_url, notice: 'Calendar was successfully destroyed.' }

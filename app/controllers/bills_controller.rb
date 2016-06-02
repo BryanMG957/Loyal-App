@@ -5,7 +5,7 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.json
   def index
-    @bills = Bill.all
+    @bills = Bill.all.order("id DESC")
   end
   def unbilled
     @clienthash = {}
@@ -72,6 +72,7 @@ class BillsController < ApplicationController
   # DELETE /bills/1
   # DELETE /bills/1.json
   def destroy
+    Appointment.where(bill: @bill).update_all(bill: nil)
     @bill.destroy
     respond_to do |format|
       format.html { redirect_to bills_url, notice: 'Bill was successfully destroyed.' }
