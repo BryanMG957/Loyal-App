@@ -3,11 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-h1{
-  display: flex;
-  justify-content: center;
-}
-
 .row{
   padding-top: 1em;
   padding-left: 1em;
@@ -18,26 +13,6 @@ h1{
 }
 
 @media screen and (min-width: 1000px) {
-  .client-editor {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-  }
-
-  .client-editor-field {
-    width: 60%;
-    padding-top: 15px;
-  }
-
-  .client-editor-icon {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .client-editor-input {
-    display: flex;
-    flex-direction: row;
-  }
   .client-editor-name {
     display: flex;
     flex-direction: row;
