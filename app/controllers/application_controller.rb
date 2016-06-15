@@ -11,6 +11,7 @@ class ApplicationController < ActionController::Base
       # Redirect to page that has the login here
       redirect_to '/'
     end
+    @current_employee = Employee.find_by(session[:userinfo][:employee])
   end
 
 end
