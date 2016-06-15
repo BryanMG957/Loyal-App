@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160527231253) do
+ActiveRecord::Schema.define(version: 20160615021941) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -105,6 +105,9 @@ ActiveRecord::Schema.define(version: 20160527231253) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "calendar_id"
+    t.string   "user_id"
+    t.string   "provider"
+    t.string   "is_admin"
   end
 
   add_index "employees", ["calendar_id"], name: "index_employees_on_calendar_id", using: :btree
@@ -119,6 +122,16 @@ ActiveRecord::Schema.define(version: 20160527231253) do
   end
 
   add_index "pets", ["client_id"], name: "index_pets_on_client_id", using: :btree
+
+  create_table "sessions", force: :cascade do |t|
+    t.string   "session_id", null: false
+    t.text     "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "sessions", ["session_id"], name: "index_sessions_on_session_id", unique: true, using: :btree
+  add_index "sessions", ["updated_at"], name: "index_sessions_on_updated_at", using: :btree
 
   add_foreign_key "appointments", "bills"
   add_foreign_key "appointments", "calendars"
