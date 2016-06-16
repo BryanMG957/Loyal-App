@@ -71,6 +71,7 @@ class BillsController < ApplicationController
   # DELETE /bills/1
   # DELETE /bills/1.json
   def destroy
+    Appointment.where(bill_id: @bill.id).update_all(bill_id: nil)
     @bill.destroy
     respond_to do |format|
       format.html { redirect_to bills_url, notice: 'Bill was successfully destroyed.' }

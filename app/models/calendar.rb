@@ -1,5 +1,6 @@
 class Calendar < ActiveRecord::Base
-  has_many :employees
+  has_many :appointments
+  belongs_to :company
   def to_s
   	name.to_s
   end

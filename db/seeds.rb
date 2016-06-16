@@ -12,7 +12,7 @@ example_co = Company.create(name: "Auston's Dogs",
 								phone: Faker::PhoneNumber.phone_number,
 								website: Faker::Internet.url)
 
-Calendar.create(name: "Test Calendar", apitype: "none", color: "#9999FF")
+Calendar.create(name: "Test Calendar", apitype: "none", color: "#9999FF", company: example_co)
 
 10.times do
 	Client.create(first_name: Faker::Name.first_name,
