@@ -7,7 +7,7 @@ gem 'bootstrap-datepicker-rails'
 
 gem 'bootstrap-sass'
 gem 'normalize-rails'
-#Dependencies of Auth0
+# Dependencies of Auth0
 gem 'omniauth', '~> 1.3'
 gem 'omniauth-auth0', '~> 1.4'
 
@@ -61,15 +61,15 @@ group :development, :test do
   gem 'byebug'
   gem 'hirb'
   gem 'rspec-rails'
-  gem 'capybara'
-  gem 'capybara-webkit'
-  gem 'selenium-webdriver'
-  gem 'factory_girl_rails'
+  # gem 'capybara'
+  # gem 'capybara-webkit'
+  # gem 'selenium-webdriver'
+  # gem 'factory_girl_rails'
 end
 
 group :test do
-  gem 'guard-rspec'
-  gem 'launchy'
+  # gem 'guard-rspec'
+  # gem 'launchy'
 end
 
 group :development do
