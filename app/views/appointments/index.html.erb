@@ -18,7 +18,7 @@
     <div class="col-xs-2"><%= displayDateNoYear(appointment.start_time) %> </div>
     <div class="col-xs-2"><%= appointment.calendar %></div>
     <div class="col-xs-2"><%= appointment.description %> </div>
-    <div class="col-xs-4"><%= link_to '<span class="label label-success">More</span>'.html_safe,appointment %> <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_appointment_path(appointment) %> <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, appointment, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
+    <div class="col-xs-4"><%= link_to '<span class="label label-success">More</span>'.html_safe,appointment %> <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_appointment_path(appointment) %> <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, appointment, method: :delete, data: { confirm: 'Are you sure? This will remove the appointment from all billing records.' } %> </div>
   </div>
 <% end %>
 <br>

@@ -23,7 +23,7 @@ class Auth0Controller < ApplicationController
       session[:userinfo][:employee] = result.id
     else
       # create new employee      
-      e = Employee.new(user_id: user_id, provider: provider, is_admin: true)
+      e = Employee.new(user_id: user_id, provider: provider, is_admin?: true)
       if (name[0])
         e.first_name = name[0]
       end

@@ -1,16 +1,27 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_using_omniauth?
+  before_action :set_company, only: [:edit, :update, :destroy]
 
   # GET /companies
   # GET /companies.json
   def index
-    @companies = Company.all
+    if (@current_employee.is_superuser?)
+      @companies = Company.all
+    elsif (@current_employee.company)
+      @companies = Company.where(id: @current_employee.company)
+    else
+      redirect_to '/unauthorized'
+    end
   end
 
   # GET /companies/1
   # GET /companies/1.json
   def show
+    if ((@current_employee.is_superuser?) || (@current_employee.company_id == params[:id].to_i))
+      @company = Company.find(params[:id])
+    else
+      redirect_to '/unauthorized'
+    end
   end
 
   # GET /companies/new
@@ -55,6 +66,8 @@ class CompaniesController < ApplicationController
   # DELETE /companies/1
   # DELETE /companies/1.json
   def destroy
+    Client.where(company: @company).update_all(company: nil)
+    Employee.where(company: @company).update_all(company: nil)
     @company.destroy
     respond_to do |format|
       format.html { redirect_to companies_url, notice: 'Company was successfully destroyed.' }
@@ -65,7 +78,13 @@ class CompaniesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_company
-      @company = Company.find(params[:id])
+      # Enforce privileges
+      if ((@current_employee.is_superuser?) ||
+          ((@current_employee.is_admin?) && (@current_employee.company_id == params[:id].to_i)))
+        @company = Company.find(params[:id])
+      else
+        redirect_to '/unauthorized'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

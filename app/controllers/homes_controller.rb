@@ -6,4 +6,7 @@ class HomesController < ApplicationController
   	@appointments = Appointment.all
   	render 'calendarmain'
   end
+  def unauthorized
+  	render 'unauthorized'
+  end
 end

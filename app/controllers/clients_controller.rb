@@ -1,16 +1,26 @@
 class ClientsController < ApplicationController
-  before_action :set_client, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_using_omniauth?
+  before_action :set_client, only: [:edit, :update, :destroy]
 
   # GET /clients
   # GET /clients.json
   def index
-    @clients = Client.all
+    if (@current_employee.is_superuser?)
+      @clients = Client.all.order("last_name")
+    else
+      @clients = Client.where(company_id: @current_employee.company_id).order("last_name")
+    end
   end
 
   # GET /clients/1
   # GET /clients/1.json
   def show
+    if (@current_employee.is_superuser? ||
+        (Client.find(params[:id]).company_id == @current_employee.company_id))
+      @client = Client.find(params[:id])
+    else
+      redirect_to '/unauthorized'
+    end
   end
 
   # GET /clients/new
@@ -27,6 +37,7 @@ class ClientsController < ApplicationController
   def create
     pets = params[:client].delete(:petlist)
     @client = Client.new(client_params)
+    @client.company = @current_employee.company
     pets.each do |petname|
       if (petname != "")
         Pet.create(name: petname, client: @client)
@@ -74,6 +85,9 @@ class ClientsController < ApplicationController
   # DELETE /clients/1
   # DELETE /clients/1.json
   def destroy
+    Appointment.where(client: @client).update_all(client: nil)
+    Bill.where(client: @client).update_all(client: nil)
+    Pet.where(client: @client).destroy_all
     @client.destroy
     respond_to do |format|
       format.html { redirect_to clients_url, notice: 'Client was successfully destroyed.' }
@@ -84,7 +98,12 @@ class ClientsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client
-      @client = Client.find(params[:id])
+      if (@current_employee.is_superuser? ||
+        (@current_employee.is_admin? && (Client.find(params[:id]).company_id == @current_employee.company_id)))
+        @client = Client.find(params[:id])
+      else
+        redirect_to '/unauthorized'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

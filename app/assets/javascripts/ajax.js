@@ -45,18 +45,20 @@ function loadPageHandler() {
 	/* Used by views/bills/unbilled.html.erb */
 	/* Used by views/clients/_form.html.erb */
 	$(".expander").on("click", function(){
-		$("." + $(this).attr("tag")).fadeToggle(200);
+		target = $("." + $(this).attr("tag"));
 		button = $(this);
 		console.log (button.classList())
 		if ( button.classList().find(function(item)
 			 { return (item == "glyphicon-plus-sign") })) 
-		{
+		{ //Show target, change button face to -
 			button.removeClass("glyphicon-plus-sign");
 			button.addClass("glyphicon-minus-sign");
+			target.removeAttr("hidden");
 		}
-		else {
+		else { //Hide target, change button face to +
 			button.removeClass("glyphicon-minus-sign");
-			button.addClass("glyphicon-plus-sign");			
+			button.addClass("glyphicon-plus-sign");	
+			target.attr("hidden", "true");		
 		}
 	});
 

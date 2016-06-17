@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "/appointments/:id/editappt_calendar_window" => "appointments#editappt_calendar_window"
   get "/" + Rails.configuration.x.host + "/sign_out" => "auth0#destroy"
   get "/sign_out" => "auth0#destroy"
+  get "/unauthorized" => "homes#unauthorized"
   root 'homes#index'
 
   resources :appointments

@@ -5,7 +5,7 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.json
   def index
-    @bills = Bill.all
+    @bills = Bill.all.order("id DESC")
   end
   def unbilled
     @clienthash = {}
@@ -23,6 +23,7 @@ class BillsController < ApplicationController
   # GET /bills/new
   def new
     @bill = Bill.new
+    @bill.date_billed = Time.new
   end
 
   # GET /bills/1/edit

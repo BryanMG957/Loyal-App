@@ -3,23 +3,6 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-h1{
-  display: flex;
-  justify-content: center;
-}
-
-.white {
-  position: fixed;
-  top: 10%;
-  left: 0%;
-  height: 85%;
-  font-family: sans-serif;
-  width: 100%;
-  background-color: white;
-  margin: 0%;
-  overflow: scroll;
-}
-
 .row{
   padding-top: 1em;
   padding-left: 1em;
@@ -27,4 +10,12 @@ h1{
 
 #index-main-button{
   padding-bottom: 1em;
+}
+
+@media screen and (min-width: 1000px) {
+  .client-editor-name {
+    display: flex;
+    flex-direction: row;
+    width: 95%
+  }
 }

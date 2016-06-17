@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   private
 
   def logged_in_using_omniauth?
-    unless session[:userinfo].present?
+    unless (session[:userinfo].present? || Rails.env == "test")
       # Redirect to page that has the login here
       redirect_to '/'
     end

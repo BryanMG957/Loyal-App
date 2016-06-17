@@ -5,12 +5,10 @@
 
 <div class="white">
   <header class='bill_header'>
-
     <div class='company'>
       <%= @company = Company.find_by(id: 1)
           render 'companies/letterhead' %>
-    </div><br />
-
+    </div>
     <hr />
   </header>
 
@@ -18,7 +16,7 @@
     <strong>For: </strong>
     <%= @client = @bill.client
       render 'clients/letterhead' %>
-  </section>  <br />
+  </section>
 
   <hr />
   <section class='bill_body'>
@@ -41,18 +39,17 @@
         $<%= @bill.discount.to_i %><br />
         <hr />
       <% end %>
-
+      <h5>
       <strong>Total:</strong>
-      $<%= @bill.total_amount.to_i - @bill.discount.to_i %>
+      $<%= @bill.total_amount.to_i - @bill.discount.to_i %></h5>
     </p>
     <br />  <br />  <br />  <br />  <br />  <br />
   </section>
 
   <div class="row">
     <div class="col-xs-12" id="index-main-button">
-  <%= link_to '<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_bill_path(@bill) %> <%= link_to '<button type="button" class="btn btn-default">Back</button>'.html_safe, bills_path %>
+      <%= link_to '<button type="button" class="btn btn-warning">Edit</button>'.html_safe, edit_bill_path(@bill) %> <%= link_to '<button type="button" class="btn btn-default">Back</button>'.html_safe, bills_path %>
+    </div>
   </div>
-  </div>
-
 
 </div>

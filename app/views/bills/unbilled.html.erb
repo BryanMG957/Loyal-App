@@ -1,85 +1,69 @@
 <%= form_for(@bill) do |f| %>
+<div class="white">
 	<h1>Unbilled Items</h1>
-	<div class="white">
-		<table id="unbilled">
-			<thead>
-				<tr>
-					<th>Select</th>
-					<th style='padding: 5px'>Dates</th>
-					<th style='padding: 5px'># of items</th>
-					<th>Client</th>
-					<th>Charge</th>
-					<th>Expand</th>
-					<th></th>
-				</tr>
-			</thead>
-			<tbody>
-				<% @clienthash.each do |key, value| %>
-					<% clientappts = @appointments.where(client_id: key).order(:start_time) %>
-					<tr style='padding: 5px'>
-						<td>
-						</td>
-						<td style='padding: 5px'>
-							<%= clientappts.first.start_time.strftime("%m/%d/%y") %> - 
-							<%= clientappts.last.start_time.strftime("%m/%d/%y") %>
-						</td>
-						<td>
-							<%= value %>
-						</td>
-						<td>
-							<% if (clientappts.first.client) %>
-								<%= clientappts.first.client.first_name %>&nbsp;
-								<%= clientappts.first.client.last_name %>
-							<% else %>
-								No Client
-							<% end %>
-						</td>
-						<td>
-						</td>
-						<td>
-							<span class='expander glyphicon glyphicon-plus-sign' tag='client<%= key %>'></span>
-						</td>
-						<td>
-						</td>
-					</tr>
-					<% clientappts.each do |appt| %>
-						<tr class='client<%= key %>' hidden='hidden'>
-							<td>
-								<%= check_box_tag "bill[appt_ids_to_bill][]", appt.id, false, onclick: "unbilledItemCheckbox(this, #{appt.charge.to_i}, #{appt.client.id});" %>
-							</td>
-							<td>
-								<%= appt.start_time.strftime("%m/%d/%y") %>
-								<%= appt.start_time.strftime("%I:%M %P") %>
-							</td>
-							<td colspan='2'>
-								<%= appt.description %>
-							</td>
-							<td>
-								<%= appt.charge %>
-							</td>
-							<td>
-								<%= link_to "Open Appt", appt %>
-							</td>
-						</tr>
-					<% end %>
-				<% end %>
-			</tbody>
-		</table>
-		<p><br />
-				<div class="field">
-					<%= f.label :discount %>: &nbsp;&nbsp;$<%= f.number_field :discount, value: '0' %>
-				</div>
-				<div class="field">
-					<%= f.label :total_amount %>: &nbsp;&nbsp;$<%= f.number_field :total_amount, readonly: 'readonly' %>
-				</div>
-				<div class="field">
-					<%= f.label "Bill to:" %> &nbsp;&nbsp;
-					<%= f.collection_select :client_id, Client.all, :id, :full_name %>
-				<div class="field">
-					<%= f.label :date_billed %><br>
-					<%= f.datetime_select :date_billed %>
-				</div>
-				<%= f.submit "Create Bill" %>
-		</p>
+
+	<div class="row">
+		<div class="col-xs-1"><strong>Select</strong></div>
+		<div class="col-xs-3"><strong>Dates</strong></div>
+		<div class="col-xs-1"><strong># Items</strong></div>
+		<div class="col-xs-3"><strong>Client</strong></div>
+		<div class="col-xs-1"><strong>Charge</strong></div>
+		<div class="col-xs-1"><strong></strong></div>
 	</div>
-<% end %>
+
+	<% @clienthash.each do |key, value| %>
+	<% clientappts = @appointments.where(client_id: key).order(:start_time) %>
+
+	<div class="row">
+		<div class="col-xs-1"></div>
+		<div class="col-xs-3"><%= clientappts.first.start_time.strftime("%m/%d/%y") %> -
+			<%= clientappts.last.start_time.strftime("%m/%d/%y") %></div>
+			<div class="col-xs-1"> <%= value %> </div>
+			<div class="col-xs-3"><% if (clientappts.first.client) %>
+				<%= clientappts.first.client.first_name %>&nbsp;
+				<%= clientappts.first.client.last_name %>
+				<% else %>
+				No Client
+				<% end %></div>
+				<div class="col-xs-1"></div>
+				<div class="col-xs-1"><span class='expander glyphicon glyphicon-plus-sign' tag='client<%= key %>'></span></div>
+			</div>
+
+			<% clientappts.each do |appt| %>
+
+			<div class="row client<%= key %>" hidden='hidden'>
+				<div class="col-xs-1"><%= check_box_tag "bill[appt_ids_to_bill][]", appt.id, false, onclick: "unbilledItemCheckbox(this, #{appt.charge.to_i}, #{appt.client.id});" %></div>
+				<div class="col-xs-3"><%= appt.start_time.strftime("%m/%d/%y") %>
+					<%= appt.start_time.strftime("%I:%M %P") %></div>
+					<div class="col-xs-1"></div>
+					<div class="col-xs-3"><%= appt.description %></div>
+					<div class="col-xs-1">$<%= appt.charge %></div>
+					<div class="col-xs-1"><%= link_to '<span class="label label-success">Open</span>'.html_safe, appt %></div>
+				</div>
+				<% end %>
+				<% end %>
+				<div class="editor">
+					<div class="field editor-field">
+						<%= f.label "Discount ($)" %>:<%= f.number_field :discount, value: '0', :class => "form-control" %>
+					</div>
+					<div class="field editor-field">
+						<%= f.label "Total Amount ($)" %>:<%= f.number_field :total_amount, readonly: 'readonly', :class => "form-control" %>
+					</div>
+					<div class="field editor-field">
+						<%= f.label "Bill to:" %> &nbsp;&nbsp;
+						<%= f.collection_select :client_id, Client.all, :id, :full_name, {}, {:class => "form-control"} %>
+					<div class="field editor-field">
+						<%= f.label :date_billed %><br>
+						<%= f.text_field :date_billed, :class => "form-control datepicker", :value => displayDate(Time.now) %>
+					</div>
+				</div>
+
+
+
+				<div class="row">
+			    <div class="actions col-xs-10" id="index-main-button">
+			  <%= f.submit :class => "btn btn-primary"%>
+			  </div>
+			  </div>
+
+				<% end %>

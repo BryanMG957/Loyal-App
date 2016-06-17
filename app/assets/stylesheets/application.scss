@@ -40,3 +40,45 @@ body {
   position: fixed;
   top: 20%;
 }
+
+.white {
+  position: fixed;
+  top: 10%;
+  left: 0%;
+  height: 85%;
+  font-family: sans-serif;
+  width: 100%;
+  background-color: white;
+  margin: 0%;
+  overflow: scroll;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+h1, h3 {
+  display: flex;
+  justify-content: center;
+}
+
+@media screen and (min-width: 1000px) {
+  .editor {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .editor .editor-field {
+    width: 60%;
+    padding-top: 15px;
+  }
+
+  .editor .editor-icon {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .editor .editor-input {
+    display: flex;
+    flex-direction: row;
+  }
+}

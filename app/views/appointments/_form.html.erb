@@ -42,7 +42,7 @@
     <%= f.text_field :end_time, :class => "form-control datepicker", :value => displayDate(@appointment.end_time) %><br>
   </div>
   <div class="field">
-    <%= f.label :reminder_before %><br>
+    <%= f.label :reminder_before %> (min)<br>
     <%= f.number_field :reminder_before, :class => "form-control" %>
   </div>
 <!--   <div class="field">
@@ -50,7 +50,7 @@
     <%= f.number_field :reminder_after, :class => "form-control" %>
   </div> -->
   <div class="field">
-    <%= f.label :charge %><br>
+    <%= f.label :charge %> - $<br>
     <%= f.number_field :charge, :class => "form-control" %>
   </div>
   <div class="field">
@@ -62,5 +62,5 @@
     <div class="actions col-xs-12" id="index-main-button">
   <%= f.submit :class => "btn btn-primary"%>
   </div>
-  </div>
+<!--   </div> -->
 <% end %>
