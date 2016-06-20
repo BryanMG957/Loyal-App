@@ -1,16 +1,29 @@
 class AppointmentsController < ApplicationController
   before_action :logged_in_using_omniauth?
-  before_action :set_appointment, only: [:show, :edit, :editappt_calendar_window, :update, :destroy]
-
+  before_action :set_appointment, only: [:edit, :editappt_calendar_window, :update, :destroy]
+  before_action :set_client_dropdown, only: [:new, :newappt_calendar_window, :edit, :editappt_calendar_window, :update]
   # GET /appointments
   # GET /appointments.json
   def index
-    @appointments = Appointment.all.order("start_time DESC")
+    if (@current_employee.is_superuser?)
+      @appointments = Appointment.all.order("start_time DESC")
+    elsif (@current_employee.company)
+      calendars = Calendar.where(company_id: @current_employee.company_id).map { |rec| rec.id }
+      @appointments = Appointment.where(calendar_id: calendars).order("start_time DESC")
+    else
+      redirect_to '/unauthorized'
+    end
   end
 
   # GET /appointments/1
   # GET /appointments/1.json
   def show
+    if (@current_employee.is_superuser? || (@current_employee.is_admin? &&
+        (Appointment.find(params[:id]).calendar.company_id == @current_employee.company_id)))
+      @appointment = Appointment.find(params[:id])
+    else
+      redirect_to '/unauthorized'
+    end
   end
 
   # GET /appointments/new
@@ -145,9 +158,21 @@ class AppointmentsController < ApplicationController
     end
 
     def set_appointment
-      @appointment = Appointment.find(params[:id])
+      if (@current_employee.is_superuser? ||
+        (@current_employee.is_admin? && (Appointment.find(params[:id]).calendar.company_id == @current_employee.company_id)))
+        @appointment = Appointment.find(params[:id])
+      else
+        redirect_to '/unauthorized'
+      end
     end
-
+    # Populate dropdown box for setting appointment's client
+    def set_client_dropdown
+      if (@current_employee.is_superuser?)
+        @clients = Client.all
+      else
+        @clients = Client.where(company: @current_employee.company)
+      end
+    end
     # iCloud connection function
     def icloud_connect
       servernum = sprintf("%02d", rand(1..24))

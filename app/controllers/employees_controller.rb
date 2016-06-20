@@ -1,7 +1,7 @@
 class EmployeesController < ApplicationController
   before_action :logged_in_using_omniauth?
   before_action :set_employee, only: [:edit, :update, :destroy]
-  before_action :set_dropdown, only: [:new, :edit]
+  before_action :set_company_dropdown, only: [:new, :edit]
   # GET /employees
   # GET /employees.json
   def index
@@ -84,7 +84,7 @@ class EmployeesController < ApplicationController
       end
     end
     # Populate dropdown box for setting employee's company
-    def set_dropdown
+    def set_company_dropdown
       if (@current_employee.is_superuser?)
         @allowed_companies = Company.all
       else
