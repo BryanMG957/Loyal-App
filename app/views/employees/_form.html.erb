@@ -29,7 +29,7 @@
   </div>
   <div class="field">
     <%= f.label :company_id %><br>
-    <%= f.collection_select(:company_id, Company.all, :id, :name) %>
+    <%= f.collection_select(:company_id, @allowed_companies, :id, :name) %>
   </div>
 
   <div class="row">

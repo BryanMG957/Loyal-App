@@ -26,7 +26,11 @@ class CompaniesController < ApplicationController
 
   # GET /companies/new
   def new
-    @company = Company.new
+    if (@current_employee.is_superuser?)
+      @company = Company.new
+    else
+      redirect_to '/unauthorized'
+    end
   end
 
   # GET /companies/1/edit

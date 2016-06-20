@@ -1,6 +1,6 @@
 class AppointmentsController < ApplicationController
-  before_action :set_appointment, only: [:show, :edit, :editappt_calendar_window, :update, :destroy]
   before_action :logged_in_using_omniauth?
+  before_action :set_appointment, only: [:show, :edit, :editappt_calendar_window, :update, :destroy]
 
   # GET /appointments
   # GET /appointments.json

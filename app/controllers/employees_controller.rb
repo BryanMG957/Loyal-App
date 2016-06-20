@@ -1,16 +1,26 @@
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: [:show, :edit, :update, :destroy]
   before_action :logged_in_using_omniauth?
-
+  before_action :set_employee, only: [:edit, :update, :destroy]
+  before_action :set_dropdown, only: [:new, :edit]
   # GET /employees
   # GET /employees.json
   def index
-    @employees = Employee.all
+    if (@current_employee.is_superuser?)
+      @employees = Employee.all.order("last_name")
+    else
+      @employees = Employee.where(company_id: @current_employee.company_id).order("last_name")
+    end
   end
 
   # GET /employees/1
   # GET /employees/1.json
   def show
+    if (@current_employee.is_superuser? ||
+        (Employee.find(params[:id]).company_id == @current_employee.company_id))
+      @employee = Employee.find(params[:id])
+    else
+      redirect_to '/unauthorized'
+    end
   end
 
   # GET /employees/new
@@ -66,9 +76,21 @@ class EmployeesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_employee
-      @employee = Employee.find(params[:id])
+      if (@current_employee.is_superuser? ||
+        (@current_employee.is_admin? && (Employee.find(params[:id]).company_id == @current_employee.company_id)))
+        @employee = Employee.find(params[:id])
+      else
+        redirect_to '/unauthorized'
+      end
     end
-
+    # Populate dropdown box for setting employee's company
+    def set_dropdown
+      if (@current_employee.is_superuser?)
+        @allowed_companies = Company.all
+      else
+        @allowed_companies = Company.where(id: @current_employee.company_id)
+      end
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
       params.require(:employee).permit(:first_name, :last_name, :username, :password, :company_id)
