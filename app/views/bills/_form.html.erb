@@ -10,7 +10,10 @@
       </ul>
     </div>
   <% end %>
-
+  <div class="field">
+    <%= f.label :client %>
+    <%= f.collection_select(:client_id, Client.all, :id, :full_name, {}, {:class => "form-control"}) %>
+  </div>
   <div class="field">
     <%= f.label :total_amount %><br>
     <%= f.number_field :total_amount, :class => "form-control" %>
@@ -32,12 +35,17 @@
     <%= f.number_field :discount, :class => "form-control" %>
   </div>
   <div class="field">
-    <%= f.collection_select(:client_id, Client.all, :id, :full_name, {}, {:class => "form-control"}) %>
+    <%= f.label :items %><br>
+    <% @items.each do |item| %>
+      <p>
+        <%= displayDate(item.start_time) %> - <%= displayTime(item.end_time) %><br />
+        <%= item.description %>&nbsp;$<%= item.charge %>
+      </p>
+    <% end %>
   </div>
-
   <div class="row">
     <div class="actions col-xs-12" id="index-main-button">
   <%= f.submit :class => "btn btn-primary"%>
-  </div>
+    </div>
   </div>
 <% end %>

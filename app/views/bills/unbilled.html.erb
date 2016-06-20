@@ -12,7 +12,7 @@
 	</div>
 
 	<% @clienthash.each do |key, value| %>
-	<% clientappts = @appointments.where(client_id: key).order(:start_time) %>
+	<% clientappts = @appointments.reject { |x| x.client_id != key } %>
 
 	<div class="row">
 		<div class="col-xs-1"></div>

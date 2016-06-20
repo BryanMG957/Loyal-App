@@ -1,15 +1,22 @@
 class BillsController < ApplicationController
   before_action :logged_in_using_omniauth?
-  before_action :set_bill, only: [:show, :edit, :update, :destroy]
+  before_action :set_bill, only: [:edit, :update, :destroy]
 
   # GET /bills
   # GET /bills.json
   def index
-    @bills = Bill.all.order("id DESC")
+    if (@current_employee.is_superuser?)
+      @bills = Bill.all.order("id DESC")
+    elsif (@current_employee.company)
+      clients = Client.where(company_id: @current_employee.company_id).map { |rec| rec.id }
+      @bills = Bill.where(client_id: clients).order("id DESC")
+    else
+      redirect_to '/unauthorized'
+    end
   end
   def unbilled
     @clienthash = {}
-    @appointments = Appointment.where("start_time < '" + Time.now.to_s + "' AND bill_id IS NULL" )
+    @appointments = Appointment.find_by_sql "SELECT * FROM calendars c, appointments a WHERE a.calendar_id = c.id AND c.company_id = #{@current_employee.company_id} AND start_time < '#{Time.now.to_s}' AND bill_id IS NULL ORDER BY start_time"
     @appointments.each do |appt|
       @clienthash[appt.client_id] = @clienthash.fetch(appt.client_id, 0) + 1
     end
@@ -18,6 +25,12 @@ class BillsController < ApplicationController
   # GET /bills/1
   # GET /bills/1.json
   def show
+    if (@current_employee.is_superuser? || (@current_employee.is_admin? &&
+        (Bill.find(params[:id]).client.company_id == @current_employee.company_id)))
+      @bill = Bill.find(params[:id])
+    else
+      redirect_to '/unauthorized'
+    end
   end
 
   # GET /bills/new
@@ -83,7 +96,13 @@ class BillsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bill
-      @bill = Bill.find(params[:id])
+      if (@current_employee.is_superuser? ||
+        (@current_employee.is_admin? && (Bill.find(params[:id]).client.company_id == @current_employee.company_id)))
+        @bill = Bill.find(params[:id])
+        @items = Appointment.where(bill_id: params[:id])
+      else
+        redirect_to '/unauthorized'
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
