@@ -3,7 +3,14 @@ class HomesController < ApplicationController
   def index
   end
   def calendarmain
-  	@appointments = Appointment.all
+    if (@current_employee.is_superuser?)
+      @appointments = Appointment.all
+    elsif (@current_employee.company)
+      calendars = Calendar.where(company_id: @current_employee.company_id).map { |rec| rec.id }
+      @appointments = Appointment.where(calendar_id: calendars)
+    else
+      redirect_to '/unauthorized'
+    end
   	render 'calendarmain'
   end
   def unauthorized

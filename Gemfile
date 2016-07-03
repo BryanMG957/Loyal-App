@@ -13,14 +13,14 @@ gem 'omniauth-auth0', '~> 1.4'
 
 # Runtime dependencies of caldav-icloud
 gem 'builder'
-gem 'icalendar', '1.5.4'
+gem 'icalendar', github: "pixiitech/icalendar", branch: "allow-icloud-alarms"
 gem 'net-http-digest_auth'
 gem 'uuid'
 
 # Development dependencies of caldav-icloud
 gem 'fakeweb'
 gem 'rspec'
-gem 'caldav-icloud'
+gem 'caldav-icloud', github: "pixiitech/caldav-icloud", branch: "update-for-icalendar"
 gem 'faker'
 gem 'nokogiri'
 

@@ -2,6 +2,8 @@ class AppointmentsController < ApplicationController
   before_action :logged_in_using_omniauth?
   before_action :set_appointment, only: [:edit, :editappt_calendar_window, :update, :destroy]
   before_action :set_client_dropdown, only: [:new, :newappt_calendar_window, :edit, :editappt_calendar_window, :update]
+  before_action :set_calendar_dropdown, only: [:new, :newappt_calendar_window, :edit, :editappt_calendar_window, :update]
+
   # GET /appointments
   # GET /appointments.json
   def index
@@ -116,8 +118,8 @@ class AppointmentsController < ApplicationController
           cal = icloud_connect
           case crud_action
           when :create
-            result = cal.create_event(:start => @appointment.start_time.to_s, :end => (@appointment.start_time + 1200).to_s, :title => @appointment.description, :description => @appointment.notes)
-            @appointment.uuid = result.properties["uid"]
+            result = cal.create_event(:start => @appointment.start_time.to_s, :end => (@appointment.start_time + 1200).to_s, :title => @appointment.description, :description => @appointment.notes, :reminder_before => @appointment.reminder_before)
+            @appointment.uuid = result.uid #.properties["uid"]
             @appointment.save
             if result
               return " and added to iCloud calendar #{@appointment.calendar.name}."
@@ -127,8 +129,8 @@ class AppointmentsController < ApplicationController
           when :update
             event = cal.find_event(@appointment.uuid)
             cal.delete_event(@appointment.uuid)
-            newevent = cal.create_event(:start => @appointment.start_time.to_s, :end => (@appointment.start_time + 1200).to_s, :title => @appointment.description, :description => @appointment.notes)
-            @appointment.uuid = newevent.properties["uid"]
+            newevent = cal.create_event(:start => @appointment.start_time.to_s, :end => (@appointment.start_time + 1200).to_s, :title => @appointment.description, :description => @appointment.notes, :reminder_before => @appointment.reminder_before)
+            @appointment.uuid = newevent.uid #.properties["uid"]
             @appointment.save
             if newevent
               return " and updated on iCloud calendar #{@appointment.calendar.name}."
@@ -145,8 +147,8 @@ class AppointmentsController < ApplicationController
           return ". Calendar not authorized in iCloud."
         rescue CalDAViCloud::DuplicateError
           return " locally. Duplicate item found in iCloud, could not schedule."
-        rescue
-          return " locally. Could not update iCloud."
+        # rescue
+        #   return " locally. Could not update iCloud."
         end
       when ""
         return " in the local calendar."
@@ -163,6 +165,14 @@ class AppointmentsController < ApplicationController
         @appointment = Appointment.find(params[:id])
       else
         redirect_to '/unauthorized'
+      end
+    end
+    # Populate dropdown box for setting appointment's calendar
+    def set_calendar_dropdown
+      if (@current_employee.is_superuser?)
+        @calendars = Calendar.all
+      else
+        @calendars = Calendar.where(company: @current_employee.company)
       end
     end
     # Populate dropdown box for setting appointment's client

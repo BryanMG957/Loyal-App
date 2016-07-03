@@ -23,7 +23,7 @@
   </div>
   <div class="field">
     <%= f.label :calendar_id %><br>
-    <%= f.collection_select(:calendar_id, Calendar.all, :id, :name,{}, {:class => "form-control"})%>
+    <%= f.collection_select(:calendar_id, @calendars, :id, :name,{}, {:class => "form-control"})%>
   </div>
   <div class="field">
     <%= f.label :client_id %><br>

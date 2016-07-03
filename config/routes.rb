@@ -19,7 +19,6 @@ Rails.application.routes.draw do
   resources :bills
   resources :calendars
   resources :employees
-  resources :pets
   resources :clients
   resources :companies
   # The priority is based upon order of creation: first created -> highest priority.
