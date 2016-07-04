@@ -18,8 +18,12 @@
     <%= f.collection_select(:employee_id, Employee.all, :id, :full_name) %>
   </div> -->
   <div class="field">
+    <% service_options = @service_types.map do |st| %>
+      <% "<option value='#{st.id}' data-default-price='#{st.price}' data-billing-name='#{st.billing_display_name}'>#{st.name}</option>" %>
+    <% end %>
     <%= f.label :service %><br>
-    <%= f.collection_select(:service, @service_types, :id, :name, {}, {:class => "form-control"}) %>
+    <%= select_tag(:appointment_service, raw(service_options.join), {class: "form-control"}) %>
+    <%# f.collection_select(:service, @service_types, :id, :name, {}, {:class => "form-control"}) %>
     <%# f.select(:service, options_for_select([['Walk', 'Walk'], ['Day Care', 'Day Care'], ['Overnight', 'Overnight']]),{}, {:class => "form-control"})  %>
   </div>
   <div class="field">

@@ -21,3 +21,6 @@
 
 # Ignore vendor cache
 /vendor/cache/*
+
+# Ignore vim swapfiles
+*.swp
