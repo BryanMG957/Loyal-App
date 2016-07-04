@@ -19,10 +19,11 @@
   </div> -->
   <div class="field">
     <% service_options = @service_types.map do |st| %>
-      <% "<option value='#{st.id}' data-default-price='#{st.price}' data-billing-name='#{st.billing_display_name}'>#{st.name}</option>" %>
+    <% selected = (@appointment.service.to_i == st.id) ? "selected='selected'" : "" %>
+    <% "<option value='#{st.id}' data-default-price='#{st.price}' data-billing-name='#{st.billing_display_name}' #{selected}>#{st.name}</option>" %>
     <% end %>
     <%= f.label :service %><br>
-    <%= select_tag(:appointment_service, raw(service_options.join), {class: "form-control"}) %>
+    <%= select_tag("appointment[service]", raw(service_options.join), {class: "form-control"}) %>
     <%# f.collection_select(:service, @service_types, :id, :name, {}, {:class => "form-control"}) %>
     <%# f.select(:service, options_for_select([['Walk', 'Walk'], ['Day Care', 'Day Care'], ['Overnight', 'Overnight']]),{}, {:class => "form-control"})  %>
   </div>
