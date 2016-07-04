@@ -19,11 +19,12 @@
   </div> -->
   <div class="field">
     <%= f.label :service %><br>
-    <%= f.select(:service, options_for_select([['Walk', 'Walk'], ['Day Care', 'Day Care'], ['Overnight', 'Overnight']]),{}, {:class => "form-control"})  %>
+    <%= f.collection_select(:service, @service_types, :id, :name, {}, {:class => "form-control"}) %>
+    <%# f.select(:service, options_for_select([['Walk', 'Walk'], ['Day Care', 'Day Care'], ['Overnight', 'Overnight']]),{}, {:class => "form-control"})  %>
   </div>
   <div class="field">
     <%= f.label :calendar_id %><br>
-    <%= f.collection_select(:calendar_id, @calendars, :id, :name,{}, {:class => "form-control"})%>
+    <%= f.collection_select(:calendar_id, @calendars, :id, :name, {}, {:class => "form-control"})%>
   </div>
   <div class="field">
     <%= f.label :client_id %><br>

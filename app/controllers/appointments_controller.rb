@@ -3,6 +3,7 @@ class AppointmentsController < ApplicationController
   before_action :set_appointment, only: [:edit, :editappt_calendar_window, :update, :destroy]
   before_action :set_client_dropdown, only: [:new, :newappt_calendar_window, :edit, :editappt_calendar_window, :update]
   before_action :set_calendar_dropdown, only: [:new, :newappt_calendar_window, :edit, :editappt_calendar_window, :update]
+  before_action :set_service_type_dropdown, only: [:new, :newappt_calendar_window, :edit, :editappt_calendar_window, :update]
 
   # GET /appointments
   # GET /appointments.json
@@ -181,6 +182,13 @@ class AppointmentsController < ApplicationController
         @clients = Client.all
       else
         @clients = Client.where(company: @current_employee.company)
+      end
+    end
+    def set_service_type_dropdown
+      if (@current_employee.is_superuser?)
+        @service_types = ServiceType.all
+      else
+        @service_types = ServiceType.where(company: @current_employee.company)
       end
     end
     # iCloud connection function

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160616041010) do
+ActiveRecord::Schema.define(version: 20160704013929) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -125,6 +125,17 @@ ActiveRecord::Schema.define(version: 20160616041010) do
 
   add_index "pets", ["client_id"], name: "index_pets_on_client_id", using: :btree
 
+  create_table "service_types", force: :cascade do |t|
+    t.string   "name"
+    t.string   "price"
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.integer  "company_id"
+    t.string   "billing_display_name"
+  end
+
+  add_index "service_types", ["company_id"], name: "index_service_types_on_company_id", using: :btree
+
   create_table "sessions", force: :cascade do |t|
     t.string   "session_id", null: false
     t.text     "data"
@@ -144,4 +155,5 @@ ActiveRecord::Schema.define(version: 20160616041010) do
   add_foreign_key "clients", "companies"
   add_foreign_key "employees", "companies"
   add_foreign_key "pets", "clients"
+  add_foreign_key "service_types", "companies"
 end

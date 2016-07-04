@@ -1,0 +1,19 @@
+<div class="white">
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @service_type.name %>
+</p>
+<p>
+  <strong>Billing Display Name:</strong>
+  <%= @service_type.billing_display_name %>
+</p>
+<p>
+  <strong>Price:</strong>
+  <%= @service_type.price %>
+</p>
+
+<%= link_to 'Edit', edit_service_type_path(@service_type) %> |
+<%= link_to 'Back', service_types_path %>
+</div>

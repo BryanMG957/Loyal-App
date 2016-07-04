@@ -4,4 +4,5 @@ class Appointment < ActiveRecord::Base
   belongs_to :client
   belongs_to :bill
   belongs_to :employee
+  belongs_to :service_type
 end

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<div class="white">
+  
+<h1>Listing Service Types</h1>
+
+<div class="row" id="servtype-header">
+  <div class="col-sm-3"><strong>Name</strong></div>
+
+  <div class="col-sm-3"><strong>Billing Display Name</strong></div>
+  <div class="col-sm-2"><strong>Price</strong></div>
+  <div class="col-sm-4"><strong>Options</strong></div>
+</div>
+
+<% @service_types.each do |service_type| %>
+<div class="row">
+  <div class="col-sm-3"><%= service_type.name %> </div>
+  <div class="col-sm-3"><%= service_type.billing_display_name %> </div>
+  <div class="col-sm-2"><%= service_type.price %></div>
+  <div class="col-sm-4"><%= link_to '<span class="label label-success">More</span>'.html_safe, service_type %> <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_service_type_path(service_type) %> <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, service_type, method: :delete, data: { confirm: 'Are you sure?' } %> </div>
+</div>
+<% end %>
+
+<br>
+<div class="row">
+  <div class="col-xs-12" id="index-main-button">
+    <%= link_to '<button type="button" class="btn btn-primary">New Service Type</button>'.html_safe, new_service_type_path %>
+  </div>
+</div>
+
+</div>
