@@ -19,13 +19,11 @@
   </div> -->
   <div class="field">
     <% service_options = @service_types.map do |st| %>
-    <% selected = (@appointment.service.to_i == st.id) ? "selected='selected'" : "" %>
-    <% "<option value='#{st.id}' data-default-price='#{st.price}' data-billing-name='#{st.billing_display_name}' #{selected}>#{st.name}</option>" %>
+      <% selected = (@appointment.service.to_i == st.id) ? "selected='selected'" : "" %>
+      <% "<option value='#{st.id}' data-default-price='#{st.price}' data-billing-name='#{st.billing_display_name}' #{selected}>#{st.name}</option>" %>
     <% end %>
     <%= f.label :service %><br>
     <%= select_tag("appointment[service]", raw(service_options.join), {class: "form-control"}) %>
-    <%# f.collection_select(:service, @service_types, :id, :name, {}, {:class => "form-control"}) %>
-    <%# f.select(:service, options_for_select([['Walk', 'Walk'], ['Day Care', 'Day Care'], ['Overnight', 'Overnight']]),{}, {:class => "form-control"})  %>
   </div>
   <div class="field">
     <%= f.label :calendar_id %><br>
@@ -34,7 +32,18 @@
   <div class="field">
     <%= f.label :client_id %><br>
     <%= search_field_tag "client-searcher", nil, class: "form-control", placeholder: "Search clients and pets", autocomplete: "off" %>
-    <%= f.collection_select(:client_id, @clients, :id, 
+    <% clients_header = "<option value='' selected='selected'>Select a client...</option>" %>
+    <% clients = @clients.map do |client| %>
+      <% selected = (@appointment.client_id == client.id) ? "selected='selected'" : "" %>
+      <% if (client.pets) %>
+        <% pets = client.pets.join(" & ") %>
+      <% else %>
+        <% pets = "" %>
+      <% end %>
+      <% "<option value='#{client.id}' data-pets='#{pets}' #{selected}>#{client.dropdown_label}</option>" %>
+    <% end %>
+    <%= select_tag("appointment[client_id]", raw(clients.unshift(clients_header).join), {class: "form-control"}) %>
+    <%# f.collection_select(:client_id, @clients, :id, 
         :dropdown_label, {}, {:class => "form-control"}) %>
   </div>
   <div class="field">

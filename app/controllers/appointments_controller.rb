@@ -10,9 +10,11 @@ class AppointmentsController < ApplicationController
   def index
     if (@current_employee.is_superuser?)
       @appointments = Appointment.all.order("start_time DESC")
+      @service_types = ServiceType.all
     elsif (@current_employee.company)
       calendars = Calendar.where(company_id: @current_employee.company_id).map { |rec| rec.id }
       @appointments = Appointment.where(calendar_id: calendars).order("start_time DESC")
+      @service_types = ServiceType.where(company_id: @current_employee.company_id)
     else
       redirect_to '/unauthorized'
     end
@@ -21,9 +23,13 @@ class AppointmentsController < ApplicationController
   # GET /appointments/1
   # GET /appointments/1.json
   def show
-    if (@current_employee.is_superuser? || (@current_employee.is_admin? &&
-        (Appointment.find(params[:id]).calendar.company_id == @current_employee.company_id)))
-      @appointment = Appointment.find(params[:id])
+    if (@current_employee.is_superuser?)
+      @appointment = Appointment.find(params[:id])                              
+      @service_types = ServiceType.all
+    elsif (@current_employee.is_admin? &&
+        (Appointment.find(params[:id]).calendar.company_id == @current_employee.company_id))
+      @appointment = Appointment.find(params[:id]) 
+      @service_types = ServiceType.where(company_id: @current_employee.company_id)
     else
       redirect_to '/unauthorized'
     end

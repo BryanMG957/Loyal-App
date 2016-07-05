@@ -4,10 +4,15 @@
 var fillInApptData = function() {
   var service_field = document.getElementById("appointment_service");
   if (!service_field) return;
+  var client_field = document.getElementById("appointment_client_id");
   var selected_service = service_field.selectedIndex + 1;
+  var selected_client = client_field.selectedIndex + 1; 
   $("#appointment_charge").val(
       $("#appointment_service :nth-of-type(" + selected_service + ")").attr("data-default-price"));
   $("#appointment_reminder_before").val(15);
+  var billing_name = $("#appointment_service :nth-of-type(" + selected_service + ")").attr("data-billing-name");
+  var pets = $("#appointment_client_id :nth-of-type(" + selected_client + ")").attr("data-pets");
+  $("#appointment_description").val(billing_name + (pets ? " - " + pets : ""));
 }
 
 function appointmentLoad() {
@@ -29,5 +34,5 @@ function appointmentLoad() {
   $("#appointment_client_id, #appointment_service").on("change", function() {
     fillInApptData();    
   });
-  fillInApptData();    
+  //fillInApptData();    
 }
