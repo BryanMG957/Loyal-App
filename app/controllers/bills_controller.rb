@@ -15,7 +15,7 @@ class BillsController < ApplicationController
     end
   end
   def unbilled
-    if (@current_employee.company && @current_employee.is_admin?)
+    if (@current_employee.is_superuser? || (@current_employee.company && @current_employee.is_admin?))
       @clienthash = {}
       @appointments = Appointment.find_by_sql "SELECT * FROM calendars c, appointments a WHERE a.calendar_id = c.id AND c.company_id = #{@current_employee.company_id} AND start_time < '#{Time.now.to_s}' AND bill_id IS NULL ORDER BY start_time"
       @appointments.each do |appt|
