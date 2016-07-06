@@ -1,5 +1,5 @@
 class HomesController < ApplicationController
-	before_action :logged_in_using_omniauth?, only: [:calendarmain]
+  before_action :logged_in_using_omniauth?, only: [:calendarmain]
   def index
   end
   def calendarmain
@@ -11,9 +11,8 @@ class HomesController < ApplicationController
     else
       redirect_to '/unauthorized'
     end
-  	render 'calendarmain'
   end
   def unauthorized
-  	render 'unauthorized'
+    render 'unauthorized'
   end
 end

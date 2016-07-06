@@ -7,8 +7,7 @@
 
 <p>
   <strong>Service Type:</strong>
-  <% service_type = @service_types.find_by(id: @appointment.service) %>
-  <%= if (service_type) then service_type.name end %>
+  <%= @appointment.service_type.name %>
 </p>
 
 <p>

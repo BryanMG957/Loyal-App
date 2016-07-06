@@ -7,8 +7,10 @@ class ClientsController < ApplicationController
   def index
     if (@current_employee.is_superuser?)
       @clients = Client.all.order("last_name")
-    else
+    elsif (@current_employee.company_id)
       @clients = Client.where(company_id: @current_employee.company_id).order("last_name")
+    else
+      redirect_to '/unauthorized'
     end
   end
 

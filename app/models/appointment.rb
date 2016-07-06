@@ -5,4 +5,7 @@ class Appointment < ActiveRecord::Base
   belongs_to :bill
   belongs_to :employee
   belongs_to :service_type
+  def service_type
+    ServiceType.find_by(id: self.service.to_i)
+  end
 end

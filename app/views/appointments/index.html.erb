@@ -14,8 +14,7 @@
 
 <% @appointments.each do |appointment| %>
   <div class="row">
-  <% service_type = @service_types.find_by(id: appointment.service) %>
-    <div class="col-xs-2"><%= if (service_type) then service_type.name; end  %> </div>
+    <div class="col-xs-2"><%= appointment.service_type.name %> </div>
     <div class="col-xs-2"><%= displayDateNoYear(appointment.start_time) %> </div>
     <div class="col-xs-2"><%= appointment.calendar %></div>
     <div class="col-xs-2"><%= appointment.description %> </div>

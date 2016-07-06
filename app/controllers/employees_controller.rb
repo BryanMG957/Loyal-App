@@ -7,8 +7,10 @@ class EmployeesController < ApplicationController
   def index
     if (@current_employee.is_superuser?)
       @employees = Employee.all.order("last_name")
-    else
+    elsif (@current_employee.company)
       @employees = Employee.where(company_id: @current_employee.company_id).order("last_name")
+    else
+      redirect_to '/unauthorized'
     end
   end
 

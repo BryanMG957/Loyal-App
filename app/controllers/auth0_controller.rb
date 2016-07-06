@@ -13,24 +13,14 @@ class Auth0Controller < ApplicationController
     if (fullname)
       name = fullname.split(" ")
     end
-    p raw_info
-    puts "USER_ID: #{user_id}"
-    puts "PROVIDER: #{provider}"
-    puts "FULLNAME: #{fullname}"
-    puts "EMAIL: #{email}"
     result = Employee.find_by(user_id: user_id, provider: provider)
     if (result)
       session[:userinfo][:employee] = result.id
     else
       # create new employee      
-      e = Employee.new(user_id: user_id, provider: provider, is_admin?: true)
-      if (name[0])
-        e.first_name = name[0]
-      end
-      if (name[1])
-        e.last_name = name[1]
-      end
-      e.save
+      (name[0] ? first_name = name[0] : first_name = "User")
+      (name[1] ? last_name = name[0] : last_name = "User")
+      e = Employee.create(first_name: first_name, last_name: last_name, user_id: user_id, provider: provider, is_admin?: true)
       session[:userinfo][:employee] = e.id
     end
     # Redirect to the URL you want after successful auth

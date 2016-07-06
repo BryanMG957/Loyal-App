@@ -22,7 +22,7 @@
   <section class='bill_body'>
     <% @bill.appointments.each do |appt| %>
       <p>
-        <strong>Service Type:</strong>&nbsp;<%= appt.service.capitalize %>&nbsp;-&nbsp;
+        <strong>Service Type:</strong>&nbsp;<%= appt.service_type.to_s.capitalize %>&nbsp;-&nbsp;
         <strong>Day:</strong>&nbsp;<%= appt.start_time.strftime("%m/%d/%y") %>&nbsp;-&nbsp;
         <strong>Charge:</strong>&nbsp;$<%= appt.charge.to_i %><br />
         <%= appt.description %>
