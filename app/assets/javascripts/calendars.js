@@ -13,8 +13,16 @@ function setApiType(apitype) {
 		$(".api_google").show();
 	}
 }
+
+function checkInput(type) {
+   var input = document.createElement("input");
+    input.setAttribute("type", type);
+     return input.type == type;
+}
+
 function calendarLoad() {
-  if (!Modernizr.rgba) {
+  if (!checkInput("color")) {
+    console.log("Browser does not support color picker.");
     $(".ie_color_options").show();
     $("#calendar_color").hide();
     $(".ie_color_sample").css("background-color", $("#calendar_color").val());
