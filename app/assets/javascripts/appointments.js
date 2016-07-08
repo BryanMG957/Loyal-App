@@ -22,17 +22,20 @@ function appointmentLoad() {
     showMeridian: true
   });
   $("#client-searcher").on("keyup", function() {
-	  var dropdown = $("#appointment_client_id");
-	  var clients = dropdown.children();
-	  for ( var i = 0; i < clients.length; i++ ) {
-	    if (clients[i].innerHTML.toLowerCase().search($(this).val().toLowerCase()) > -1) {
-		  dropdown.val(clients[i].value);
-		  break;
-	    }
+    var dropdown = $("#appointment_client_id");
+    var clients = dropdown.children();
+    for ( var i = 0; i < clients.length; i++ ) {
+      if (clients[i].innerHTML.toLowerCase().search($(this).val().toLowerCase()) > -1) {
+	dropdown.val(clients[i].value);
+	break;
+      }
     }
+    fillInApptData();
+  });
+  $("#client-searcher").on("blur", function() {
+    $(this).val("");
   });
   $("#appointment_client_id, #appointment_service").on("change", function() {
     fillInApptData();    
   });
-  //fillInApptData();    
 }

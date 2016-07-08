@@ -24,6 +24,9 @@ gem 'caldav-icloud', github: "pixiitech/caldav-icloud", branch: "update-for-ical
 gem 'faker'
 gem 'nokogiri'
 
+# Rollbar
+gem 'rollbar'
+
 # CookieOverflow fix
 gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 
