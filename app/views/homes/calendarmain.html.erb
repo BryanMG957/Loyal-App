@@ -19,7 +19,7 @@
 						<% end %>
 			      {
 			      	  id     : '<%= appt.id %>',
-		            title  : '<%= appt.description %>',
+		            title  : '<%= appt.description.html_safe %>',
 		            start  : '<%= appt.start_time.strftime("%Y-%m-%dT%H:%M:%S") %>',
 		            <% if !(appt.end_time.nil?) %>
 		            end    : '<%= appt.end_time.strftime("%Y-%m-%dT%H:%M:%S") %>',

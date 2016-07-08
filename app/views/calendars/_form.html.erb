@@ -26,6 +26,18 @@
   <div class="field api api_none api_icloud api_google">
     <%= f.label :color %><br />
     <%= f.color_field :color %>
+    <span class="ie_color_sample">XXXXXX</span>
+    <span class="ie_color_options">
+      <%= radio_button("ie_colors", nil, "#000000", {class: "calendar_color_option"}) %>Black
+
+    <%= radio_button("ie_colors", nil, "#FF0000", {class: "calendar_color_option"}) %>Red
+    <%= radio_button("ie_colors", nil, "#00FF00", {class: "calendar_color_option"}) %>Green
+    <%= radio_button("ie_colors", nil, "#0000FF", {class: "calendar_color_option"}) %>Blue  
+    <%= radio_button("ie_colors", nil, "#cc3300", {class: "calendar_color_option"}) %>Amber
+    <%= radio_button("ie_colors", nil, "#000066", {class: "calendar_color_option"}) %>Navy
+  <%= radio_button("ie_colors", nil, "#006600", {class: "calendar_color_option"}) %>Forest
+    <%= radio_button("ie_colors", nil, "#FF0066", {class: "calendar_color_option"}) %>Pink
+    </span> 
   </div>
   <div class="field api api_icloud api_google">
     <%= f.label :username %><br>

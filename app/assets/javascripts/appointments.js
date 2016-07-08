@@ -12,7 +12,7 @@ var fillInApptData = function() {
   $("#appointment_reminder_before").val(15);
   var billing_name = $("#appointment_service :nth-of-type(" + selected_service + ")").attr("data-billing-name");
   var pets = $("#appointment_client_id :nth-of-type(" + selected_client + ")").attr("data-pets");
-  $("#appointment_description").val(billing_name + (pets ? " - " + pets : ""));
+  $("#appointment_description").val((pets ? pets + " - " : "") + billing_name) ;
 }
 
 function appointmentLoad() {

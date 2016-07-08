@@ -14,5 +14,13 @@ function setApiType(apitype) {
 	}
 }
 function calendarLoad() {
-	
+  if (!Modernizr.rgba) {
+    $(".ie_color_options").show();
+    $("#calendar_color").hide();
+    $(".ie_color_sample").css("background-color", $("#calendar_color").val());
+  }
+  $(".calendar_color_option").on("click", function() {
+    $("#calendar_color").val($(this).val());
+    $(".ie_color_sample").css("background-color", $(this).val());
+  }); 
 }

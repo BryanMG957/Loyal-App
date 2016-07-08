@@ -83,6 +83,7 @@ function loadPageHandler() {
 		}
 	});
 
+        calendarLoad();
 	appointmentLoad();
 }
 
