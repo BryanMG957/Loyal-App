@@ -60,6 +60,11 @@ h1, h3 {
   justify-content: center;
 }
 
+.nav-dev, .navbar-brand-dev {
+  background-color: #663166;
+  color: black;
+}
+
 @media screen and (min-width: 1000px) {
   .editor {
     display: flex;

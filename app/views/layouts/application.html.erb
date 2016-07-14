@@ -37,8 +37,13 @@
           <span class="icon-bar"></span>
         </button>
 
+        <% unless Rails.env == "development" %>
         <a class="navbar-brand" href=/>Loyal</a>
         <ul class="nav navbar-nav">
+        <% else %>
+        <a class="navbar-brand-dev navbar-brand" href=/>Loyal</a>
+        <ul class="nav navbar-nav nav-dev">
+        <% end %>
           <li>
             <% unless session[:userinfo].present? %>
               <button type="button" onclick="window.signin();" class="btn btn-default navbar-btn" id="login-button">Sign In</button>
@@ -50,7 +55,11 @@
       </div>
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <% unless Rails.env == "development" %>
         <span class="nav navbar-brand">
+        <% else %>
+        <span class="nav navbar-brand nav-dev">
+      <% end %>
             <% if (@current_employee && @current_employee.first_name) %>
               &nbsp;&nbsp;Welcome,
               <%= @current_employee.first_name %>
@@ -59,7 +68,11 @@
               &nbsp;<%= @current_employee.last_name %>
             <% end %>
         </span>
+        <% unless Rails.env == "development" %>
         <ul class="nav navbar-nav">
+        <% else %>
+        <ul class="nav navbar-nav nav-dev">
+        <% end %>
           <% if session[:userinfo].present? %>
             <li><%= link_to 'Calendar', calendarmain_path %></li>
             <li><%= link_to 'Appointments', appointments_path %></li>

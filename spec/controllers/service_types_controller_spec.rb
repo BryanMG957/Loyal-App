@@ -23,12 +23,11 @@ RSpec.describe ServiceTypesController, type: :controller do
   # This should return the minimal set of attributes required to create a valid
   # ServiceType. As you add validations to ServiceType, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+  let(:company) {
+    FactoryGirl.create(:company)
   }
-
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+  let(:service_type) {
+    FactoryGirl.create(:service_type, company: company)
   }
 
   # This should return the minimal set of values that should be in the session
@@ -38,7 +37,6 @@ RSpec.describe ServiceTypesController, type: :controller do
 
   describe "GET #index" do
     it "assigns all service_types as @service_types" do
-      service_type = ServiceType.create! valid_attributes
       get :index, {}, valid_session
       expect(assigns(:service_types)).to eq([service_type])
     end
@@ -46,7 +44,6 @@ RSpec.describe ServiceTypesController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested service_type as @service_type" do
-      service_type = ServiceType.create! valid_attributes
       get :show, {:id => service_type.to_param}, valid_session
       expect(assigns(:service_type)).to eq(service_type)
     end
@@ -61,7 +58,6 @@ RSpec.describe ServiceTypesController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested service_type as @service_type" do
-      service_type = ServiceType.create! valid_attributes
       get :edit, {:id => service_type.to_param}, valid_session
       expect(assigns(:service_type)).to eq(service_type)
     end

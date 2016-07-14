@@ -24,10 +24,12 @@
 		            <% if !(appt.end_time.nil?) %>
 		            end    : '<%= appt.end_time.strftime("%Y-%m-%dT%H:%M:%S") %>',
 		            <% end %>
+                <% if appt.calendar %>
 		            color	 : '<%= appt.calendar.color %>',
-		            <% if (appt.calendar.color == "#FFFFFF") %>
-		            textColor : '#000000',
-		            <% end %>
+                  <% if (appt.calendar.color == "#FFFFFF") %>
+                  textColor : '#000000',
+                  <% end %>
+                <% end %>
 		        },
 		    <% end %>
 		    ],

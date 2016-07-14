@@ -13,7 +13,7 @@ gem 'omniauth-auth0', '~> 1.4'
 
 # Runtime dependencies of caldav-icloud
 gem 'builder'
-gem 'icalendar', github: "pixiitech/icalendar", branch: "allow-icloud-alarms"
+gem 'icalendar'
 gem 'net-http-digest_auth'
 gem 'uuid'
 
