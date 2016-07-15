@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160704013929) do
+ActiveRecord::Schema.define(version: 20160715025520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,19 @@ ActiveRecord::Schema.define(version: 20160704013929) do
 
   add_index "employees", ["company_id"], name: "index_employees_on_company_id", using: :btree
 
+  create_table "payments", force: :cascade do |t|
+    t.datetime "date_received"
+    t.decimal  "amount"
+    t.string   "ref"
+    t.string   "memo"
+    t.integer  "client_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+    t.string   "payment_type"
+  end
+
+  add_index "payments", ["client_id"], name: "index_payments_on_client_id", using: :btree
+
   create_table "pets", force: :cascade do |t|
     t.string   "name"
     t.text     "notes"
@@ -154,6 +167,7 @@ ActiveRecord::Schema.define(version: 20160704013929) do
   add_foreign_key "calendars", "companies"
   add_foreign_key "clients", "companies"
   add_foreign_key "employees", "companies"
+  add_foreign_key "payments", "clients"
   add_foreign_key "pets", "clients"
   add_foreign_key "service_types", "companies"
 end

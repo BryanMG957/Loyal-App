@@ -1,0 +1,36 @@
+<div class="white">
+  <p id="notice"><%= notice %></p>
+
+  <p>
+    <strong>Date received:</strong>
+    <%= @payment.date_received %>
+  </p>
+
+  <p>
+    <strong>Amount:</strong>
+    <%= @payment.amount %>
+  </p>
+
+  <p>
+    <strong>Type:</strong>
+    <%= @payment.payment_type %>
+  </p>
+
+  <p>
+    <strong>Ref:</strong>
+    <%= @payment.ref %>
+  </p>
+
+  <p>
+    <strong>Client:</strong>
+    <%= @payment.client %>
+  </p>
+
+  <p>
+    <strong>Memo:</strong>
+    <%= @payment.memo %>
+  </p>
+
+  <%= link_to 'Edit', edit_payment_path(@payment) %> |
+  <%= link_to 'Back', payments_path %>
+</div>
