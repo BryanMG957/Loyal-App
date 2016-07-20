@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
   before_action :logged_in_using_omniauth?
-  before_action :set_client, only: [:edit, :update, :destroy]
+  before_action :set_client, only: [:edit, :update, :destroy, :ledger]
 
   # GET /clients
   # GET /clients.json
@@ -14,6 +14,30 @@ class ClientsController < ApplicationController
     end
   end
 
+  # GET /clients/1/ledger
+  # GET /clients.json
+  def ledger
+    if ((@current_employee.is_superuser?) || (@current_employee.company_id && @current_employee.is_admin? && @client.company == @current_employee.company))
+      @transactions = []
+      Payment.where(client_id: params[:client]).order("date_received").each do |payment|
+        @transactions << Transaction.new
+          date: payment.date_received,
+          description: "Payment by #{payment.payment_type}",
+          credit: payment.amount,
+          charge: nil)
+      end
+      @bills = Bill.where(client_id: params[:client]).each do |bill|
+        @transactions << Transaction.new(
+          date: bill.date_billed,
+          description: "Invoice #{bill.id}",
+          credit: nil,
+          charge: bill.total_amount)
+      end
+    else
+      redirect_to '/unauthorized'
+    end
+  end
+  
   # GET /clients/1
   # GET /clients/1.json
   def show
