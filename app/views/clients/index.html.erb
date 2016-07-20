@@ -1,6 +1,5 @@
 <p id="notice" ><%= notice %></p>
 
-
 <div class="white">
 
 <h1>Clients</h1>
@@ -17,8 +16,9 @@
     <div class="col-xs-2"><%= client.first_name %> </div>
     <div class="col-xs-3"><%= client.last_name %> </div>
     <div class="col-xs-2"><%= client.pets.map { |pet| pet.name }.join(", ") %> </div>
-    <div class="col-xs-5"><%= link_to '<span class="label label-success">More</span>'.html_safe, client %>
-      <%= link_to '<span class="label label-warning">Edit</span>'.html_safe, edit_client_path(client) %>
+    <div class="col-xs-5">
+      <%= link_to '<span class="label label-success">Ledger</span>'.html_safe, {:controller => "/clients", :action => "ledger", :id => client.id } %>
+      <%= link_to '<span class="label label-warning">View/Edit</span>'.html_safe, edit_client_path(client) %>
       <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, client, method: :delete, data: { confirm: 'Are you sure? This will delete all billing records and pets associated with this client.' } %> </div>
   </div>
 <% end %>

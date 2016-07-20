@@ -1,4 +1,5 @@
 class ClientsController < ApplicationController
+  include AppointmentsHelper
   before_action :logged_in_using_omniauth?
   before_action :set_client, only: [:edit, :update, :destroy, :ledger]
 
@@ -19,19 +20,26 @@ class ClientsController < ApplicationController
   def ledger
     if ((@current_employee.is_superuser?) || (@current_employee.company_id && @current_employee.is_admin? && @client.company == @current_employee.company))
       @transactions = []
-      Payment.where(client_id: params[:client]).order("date_received").each do |payment|
-        @transactions << Transaction.new
+      Payment.where(client_id: params[:id]).order("date_received").each do |payment|
+        @transactions << Transaction.new(
           date: payment.date_received,
           description: "Payment by #{payment.payment_type}",
           credit: payment.amount,
-          charge: nil)
+          charge: nil,
+          item_id: payment.id,
+          item_type: "payment")
       end
-      @bills = Bill.where(client_id: params[:client]).each do |bill|
+      @bills = Bill.where(client_id: params[:id]).each do |bill|
         @transactions << Transaction.new(
           date: bill.date_billed,
           description: "Invoice #{bill.id}",
           credit: nil,
-          charge: bill.total_amount)
+          charge: bill.total_amount,
+          item_id: bill.id,
+          item_type: "bill")
+      end
+      @transactions.sort! do |a, b|
+        (a.date < b.date) ? -1 : 1 
       end
     else
       redirect_to '/unauthorized'

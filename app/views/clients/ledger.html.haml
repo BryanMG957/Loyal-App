@@ -22,16 +22,21 @@
   - @transactions.each do |transaction|
     .row
       .col-xs-2
-        = transaction.date
+        = displayDate(transaction.date)
       .col-xs-4
         = transaction.description
+        - if transaction.link
+          = transaction.link
       .col-xs-2
         - if transaction.credit
           = "$%.2f" % transaction.credit
-          - balance += transaction.credit
+          - balance -= transaction.credit
       .col-xs-2
         - if transaction.charge
           = "$%.2f" % transaction.charge
-          - balance -= transaction.charge
+          - balance += transaction.charge
       .col-xs-2
-        - "$%.2f" % balance
+        = "$%.2f" % balance
+  %br
+  %hr
+  = link_to '<span class="label label-success">Back to Clients</span>'.html_safe, clients_path 
