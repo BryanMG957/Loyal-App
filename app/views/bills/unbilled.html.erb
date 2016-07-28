@@ -51,7 +51,7 @@
 					</div>
 					<div class="field editor-field">
 						<%= f.label "Bill to:" %> &nbsp;&nbsp;
-						<%= f.collection_select :client_id, Client.all, :id, :full_name, {}, {:class => "form-control"} %>
+						<%= f.collection_select :client_id, @clients, :id, :full_name, {}, {:class => "form-control"} %>
 					<div class="field editor-field">
 						<%= f.label :date_billed %><br>
 						<%= f.text_field :date_billed, :class => "form-control datepicker", :value => displayDate(Time.now) %>
