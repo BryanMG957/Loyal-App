@@ -4,6 +4,7 @@ class Transaction
   attr_reader :credit
   attr_reader :charge
   attr_reader :link
+  attr_reader :object
   
   def initialize(args)
     @date = args[:date]
@@ -11,6 +12,7 @@ class Transaction
     @credit = args[:credit]
     @charge = args[:charge]
     @link = args[:link]
+    @object = args[:object]
   end
 
   def modify_balance(balance)

@@ -65,6 +65,10 @@ h1, h3 {
   color: black;
 }
 
+.hidden {
+  display: none;
+}
+
 @media screen and (min-width: 1000px) {
   .editor {
     display: flex;

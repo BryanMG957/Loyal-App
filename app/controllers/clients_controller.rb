@@ -20,8 +20,10 @@ class ClientsController < ApplicationController
   def ledger
     if ((@current_employee.is_superuser?) || (@current_employee.company_id && @current_employee.is_admin? && @client.company == @current_employee.company))
       @transactions = []
+      @payment = Payment.new(client_id: params[:id], date_received: Time.new)
       Payment.where(client_id: params[:id]).order("date_received").each do |payment|
         @transactions << Transaction.new(
+          object: payment,
           date: payment.date_received,
           description: "Payment by #{payment.payment_type}",
           credit: payment.amount,
@@ -31,6 +33,7 @@ class ClientsController < ApplicationController
       end
       @bills = Bill.where(client_id: params[:id]).each do |bill|
         @transactions << Transaction.new(
+          object: bill,
           date: bill.date_billed,
           description: "Invoice #{bill.id}",
           credit: nil,

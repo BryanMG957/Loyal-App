@@ -83,7 +83,11 @@ function loadPageHandler() {
 		}
 	});
 
-        calendarLoad();
+  $("#register_a_payment_link").on("click", function() {
+    $("#register_a_payment").toggle(200);
+  });
+
+  calendarLoad();
 	appointmentLoad();
 }
 

@@ -1,0 +1,30 @@
+= form_for(@payment) do |f|
+  .row
+    .col-xs-3.field
+      %strong
+        = f.label :date_received
+        %br
+        = f.text_field :date_received, :class => "form-control datepicker", :value => displayDate(@payment.date_received)
+    .col-xs-3.field
+      %strong
+        = f.label :amount
+        %br
+        = f.text_field :amount
+    .col-xs-2.field
+      %strong
+        = f.label :payment_type
+        %br
+        = f.radio_button :payment_type, "cash", {id: "payment_type_cash"}
+        = f.label :cash
+        = f.radio_button :payment_type, "check", {id: "payment_type_check"}
+        = f.label :check
+    .col-xs-2.field
+      %strong
+        = f.label :ref
+        %br
+        = f.text_field :ref
+  .row
+    .col-xs-12.field
+      %strong
+        = f.hidden_field :client_id, {value: @client.id}
+        = f.submit class: "label-success"

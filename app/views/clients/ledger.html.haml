@@ -2,41 +2,53 @@
   = notice
 .white
   %h4= "Ledger for #{@client.full_name}"
+  .col-xs-12
+    %span.label.label-success#register_a_payment_link Register a payment
+    %br
+    %br
+    %div#register_a_payment{style: "display: none"}
+      = render "payments/new_payment"
+
   #ledger-header.row
-    .col-xs-2
-      %strong
-        Date
     .col-xs-4
       %strong
+        Date
+    .col-xs-3
+      %strong
         Description
-    .col-xs-2
+    .col-xs-1
       %strong
         Credit
-    .col-xs-2
+    .col-xs-1
       %strong
         Charge
-    .col-xs-2
+    .col-xs-1
       %strong
         Balance
+    .col-xs-1
+      %strong
+        Actions
   - balance = BigDecimal.new(0)
   - @transactions.each do |transaction|
     .row
-      .col-xs-2
-        = displayDate(transaction.date)
       .col-xs-4
+        = displayDate(transaction.date)
+      .col-xs-3
         = transaction.description
         - if transaction.link
           = transaction.link
-      .col-xs-2
+      .col-xs-1
         - if transaction.credit
           = "$%.2f" % transaction.credit
           - balance -= transaction.credit
-      .col-xs-2
+      .col-xs-1
         - if transaction.charge
           = "$%.2f" % transaction.charge
           - balance += transaction.charge
-      .col-xs-2
+      .col-xs-1
         = "$%.2f" % balance
+      .col-xs-1
+        = link_to 'Delete', transaction.object, method: :delete, date: { confirm: 'Are you sure?' }
   %br
   %hr
   = link_to '<span class="label label-success">Back to Clients</span>'.html_safe, clients_path 
