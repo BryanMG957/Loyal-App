@@ -38,7 +38,7 @@
     <%= f.label :items %><br>
     <% @items.each do |item| %>
       <p>
-        <%= displayDate(item.start_time) %> - <%= displayTime(item.end_time) %><br />
+        <%= displayDate(item.start_time) %> - <%= displayTime(item.end_time) %>
         <%= item.description %>&nbsp;$<%= item.charge %>
       </p>
     <% end %>
