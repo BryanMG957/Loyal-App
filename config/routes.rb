@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post "/calendars/pull_calendars" => "calendars#pull_calendars"
   get "/calendarmain" => "homes#calendarmain"
   get "/bills/unbilled" => "bills#unbilled"
+  get "/bills/:id/remove_appt/:appt_id" => "bills#remove_appt"
   get "/appointments/newappt_calendar_window/:new_date" => "appointments#newappt_calendar_window"
   get "/appointments/:id/editappt_calendar_window" => "appointments#editappt_calendar_window"
   get "/clients/:id/ledger" => "clients#ledger"

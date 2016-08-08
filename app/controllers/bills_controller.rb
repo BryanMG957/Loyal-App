@@ -1,6 +1,6 @@
 class BillsController < ApplicationController
   before_action :logged_in_using_omniauth?
-  before_action :set_bill, only: [:edit, :update, :destroy]
+  before_action :set_bill, only: [:edit, :update, :destroy, :remove_appt]
 
   # GET /bills
   # GET /bills.json
@@ -14,6 +14,7 @@ class BillsController < ApplicationController
       redirect_to '/unauthorized'
     end
   end
+
   def unbilled
     if (@current_employee.is_superuser?)
       @clients = Client.all
@@ -31,6 +32,16 @@ class BillsController < ApplicationController
       redirect_to '/unauthorized'
     end
   end
+
+  # DELETE /bills/1/remove_appt/1
+  def remove_appt
+    @item = @items.find_by(id: params[:appt_id])
+    if @item
+      @item.update_attributes(bill_id: nil)
+    end
+    redirect_to "/bills/#{params[:id]}/edit"
+  end
+
   # GET /bills/1
   # GET /bills/1.json
   def show

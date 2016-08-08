@@ -4,9 +4,9 @@
 
 <%= render 'form' %>
 
-<div class="row">
-  <div class="col-xs-12" id="index-main-button">
-<%= link_to '<button type="button" class="btn btn-warning">More</button>'.html_safe, @bill %> <%= link_to '<button type="button" class="btn btn-default">Back</button>'.html_safe, bills_path %>
+<div class="row centered">
+  <div class="actions col-xs-12" id="index-main-button">
+    <%= link_to '<button type="button" class="btn btn-warning">View</button>'.html_safe, @bill %> <%= link_to '<button type="button" class="btn btn-default">Back</button>'.html_safe, bills_path %>
 </div>
 </div>
 </div>
