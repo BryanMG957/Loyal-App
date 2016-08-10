@@ -6,8 +6,11 @@ class Appointment < ActiveRecord::Base
   belongs_to :employee
   belongs_to :service_type
   def service_type
-    begin
-      ServiceType.find_by(id: self.service.to_i)
+    serv_type = ServiceType.find_by(id: self.service.to_i)
+    if serv_type.nil?
+      return ServiceType.new(name: "Default")
+    else
+      return serv_type
     end
   end
 end

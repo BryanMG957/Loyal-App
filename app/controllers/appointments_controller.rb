@@ -22,10 +22,10 @@ class AppointmentsController < ApplicationController
   # GET /appointments/1.json
   def show
     if (@current_employee.is_superuser?)
-      @appointment = Appointment.find(params[:id])                              
+      @appointment = Appointment.find(params[:id])
     elsif (@current_employee.is_admin? &&
         (Appointment.find(params[:id]).calendar.company_id == @current_employee.company_id))
-      @appointment = Appointment.find(params[:id]) 
+      @appointment = Appointment.find(params[:id])
     else
       redirect_to '/unauthorized'
     end
@@ -65,7 +65,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params)
     respond_to do |format|
       if @appointment.save
-        notice = "Appointment was successfully created"
+        notice = "Appointment was created"
         notice += sync_api(:create)
         format.html { redirect_to @appointment, notice: notice }
         format.json { render :show, status: :created, location: @appointment }
@@ -110,56 +110,8 @@ class AppointmentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
 
-    # Common calendar API function for icloud and google, with error handler
-    # called by create, update and destroy
-    # Accepts symbol :create, :update, or :destroy, returns success/error message
-    # (to be appended to notice)
     def sync_api(crud_action)
-      case @appointment.calendar.apitype
-      when "icloud"
-        begin
-          cal = icloud_connect
-          case crud_action
-          when :create
-            result = cal.create_event(:start => @appointment.start_time.to_s, :end => (@appointment.start_time + 1200).to_s, :title => @appointment.description, :description => @appointment.notes, :reminder_before => @appointment.reminder_before)
-            @appointment.uuid = result.uid #.properties["uid"]
-            @appointment.save
-            if result
-              return " and added to iCloud calendar #{@appointment.calendar.name}."
-            else
-              return " locally. Unable to add to iCloud calendar #{@appointment.calendar.name}."
-            end
-          when :update
-            event = cal.find_event(@appointment.uuid)
-            cal.delete_event(@appointment.uuid)
-            newevent = cal.create_event(:start => @appointment.start_time.to_s, :end => (@appointment.start_time + 1200).to_s, :title => @appointment.description, :description => @appointment.notes, :reminder_before => @appointment.reminder_before)
-            @appointment.uuid = newevent.uid #.properties["uid"]
-            @appointment.save
-            if newevent
-              return " and updated on iCloud calendar #{@appointment.calendar.name}."
-            else
-              return " locally. Unable to update iCloud calendar #{@appointment.calendar.name}."
-            end
-          when :destroy
-            cal.delete_event(@appointment.uuid)
-            return " and removed from iCloud calendar."
-          end
-        rescue CalDAViCloud::NotExistError
-          return ". Calendar not found in iCloud."
-        rescue CalDAViCloud::AuthenticationError
-          return ". Calendar not authorized in iCloud."
-        rescue CalDAViCloud::DuplicateError
-          return " locally. Duplicate item found in iCloud, could not schedule."
-        # rescue
-        #   return " locally. Could not update iCloud."
-        end
-      when ""
-        return " in the local calendar."
-      when "none"
-        return " in the local calendar."
-      else
-        return " locally. Calendar API #{@appointment.calendar.apitype} not yet implemented."
-      end
+      return CalendarAPI::call(crud_action, @appointment)
     end
 
     def set_appointment
@@ -181,9 +133,9 @@ class AppointmentsController < ApplicationController
     # Populate dropdown box for setting appointment's client
     def set_client_dropdown
       if (@current_employee.is_superuser?)
-        @clients = Client.all
+        @clients = Client.all.includes(:pets)
       else
-        @clients = Client.where(company: @current_employee.company)
+        @clients = Client.where(company: @current_employee.company).includes(:pet)
       end
     end
     def set_service_type_dropdown
@@ -192,12 +144,6 @@ class AppointmentsController < ApplicationController
       else
         @service_types = ServiceType.where(company: @current_employee.company)
       end
-    end
-    # iCloud connection function
-    def icloud_connect
-      servernum = sprintf("%02d", rand(1..24))
-      url = "https://p#{servernum}-caldav.icloud.com#{@appointment.calendar.url}"
-      CalDAViCloud::Client.new(:uri => url, :user => @appointment.calendar.username , :password => @appointment.calendar.password)
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params

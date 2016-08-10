@@ -1,0 +1,41 @@
+= form_for(@bill) do |f|
+  - if @bill.errors.any?
+    #error_explanation
+      %h2
+      = #pluralize(@bill.errors.count, "error") + " prohibited this bill from being saved:"
+      %ul
+        - @bill.errors.full_messages.each do |message|
+          %li
+            = message
+  .editor
+    .field.editor-field
+      = f.label :client
+      = f.collection_select(:client_id, Client.all, :id, :full_name, {}, {:class => "form-control"})
+    .field.editor-field
+      = f.label :total_amount
+      %br
+      = f.number_field :total_amount, :class => "form-control"
+    .field.editor-field
+      = f.label :date_billed
+      %br
+      = f.text_field :date_billed, :class => "form-control datepicker", :value => displayDate(@bill.date_billed)
+    .field.editor-field
+      = f.label :discount
+      %br
+      = f.number_field :discount, :class => "form-control"
+    .field.editor-field
+      = f.label :items
+      - @items.each do |item|
+        .row
+          .col-xs-4
+            = displayDate(item.start_time) + " - " + displayTime(item.end_time)
+          .col-xs-4
+            = item.description
+          .col-xs-2
+            = item.charge
+          .col-xs-2
+            = link_to "Edit", edit_appointment_path(item), class: "label label-warning"
+            = link_to "Remove", "remove_appt/#{item.id}", data: { confirm: 'Are you sure?' }, class: "label label-danger"
+    .row
+      .actions.col-xs-12#index-main-button
+        = f.submit :class => "btn btn-primary"
