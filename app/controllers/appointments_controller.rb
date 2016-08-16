@@ -135,7 +135,7 @@ class AppointmentsController < ApplicationController
       if (@current_employee.is_superuser?)
         @clients = Client.all.includes(:pets)
       else
-        @clients = Client.where(company: @current_employee.company).includes(:pet)
+        @clients = Client.where(company: @current_employee.company).includes(:pets)
       end
     end
     def set_service_type_dropdown
