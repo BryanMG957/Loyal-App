@@ -2,6 +2,7 @@ class Client < ActiveRecord::Base
   validates :first_name, :last_name, presence: true
   belongs_to :company
   has_many :pets
+  include Archiver
   def to_s
   	return full_name
   end

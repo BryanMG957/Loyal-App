@@ -19,7 +19,7 @@
     <div class="col-xs-5">
       <%= link_to '<span class="label label-success">Ledger</span>'.html_safe, {:controller => "/clients", :action => "ledger", :id => client.id } %>
       <%= link_to '<span class="label label-warning">View/Edit</span>'.html_safe, edit_client_path(client) %>
-      <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, client, method: :delete, data: { confirm: 'Are you sure? This will delete all billing records and pets associated with this client.' } %> </div>
+      <%= link_to '<span class="label label-danger">Delete</span>'.html_safe, client, method: :delete, data: { confirm: 'Are you sure? This will archive the client.' } %> </div>
   </div>
 <% end %>
 

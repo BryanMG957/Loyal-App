@@ -7,9 +7,9 @@ class ClientsController < ApplicationController
   # GET /clients.json
   def index
     if (@current_employee.is_superuser?)
-      @clients = Client.all.order("last_name")
+      @clients = Client.active.order("last_name")
     elsif (@current_employee.company_id)
-      @clients = Client.where(company_id: @current_employee.company_id).order("last_name")
+      @clients = Client.where(archived: false, company_id: @current_employee.company_id).order("last_name")
     else
       redirect_to '/unauthorized'
     end
@@ -42,13 +42,13 @@ class ClientsController < ApplicationController
           item_type: "bill")
       end
       @transactions.sort! do |a, b|
-        (a.date < b.date) ? -1 : 1 
+        (a.date < b.date) ? -1 : 1
       end
     else
       redirect_to '/unauthorized'
     end
   end
-  
+
   # GET /clients/1
   # GET /clients/1.json
   def show
@@ -122,12 +122,9 @@ class ClientsController < ApplicationController
   # DELETE /clients/1
   # DELETE /clients/1.json
   def destroy
-    Appointment.where(client: @client).update_all(client: nil)
-    Bill.where(client: @client).update_all(client: nil)
-    Pet.where(client: @client).destroy_all
-    @client.destroy
+    @client.archive
     respond_to do |format|
-      format.html { redirect_to clients_url, notice: 'Client was successfully destroyed.' }
+      format.html { redirect_to clients_url, notice: 'Client was successfully archived.' }
       format.json { head :no_content }
     end
   end

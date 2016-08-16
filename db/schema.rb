@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160715025520) do
+ActiveRecord::Schema.define(version: 20160816041519) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,11 +28,12 @@ ActiveRecord::Schema.define(version: 20160715025520) do
     t.integer  "client_id"
     t.integer  "bill_id"
     t.integer  "employee_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "uuid"
     t.string   "service"
     t.string   "description"
+    t.boolean  "archived",        default: false
   end
 
   add_index "appointments", ["bill_id"], name: "index_appointments_on_bill_id", using: :btree
@@ -47,8 +48,9 @@ ActiveRecord::Schema.define(version: 20160715025520) do
     t.datetime "date_paid"
     t.integer  "discount"
     t.integer  "client_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "archived",     default: false
   end
 
   add_index "bills", ["client_id"], name: "index_bills_on_client_id", using: :btree
@@ -59,20 +61,21 @@ ActiveRecord::Schema.define(version: 20160715025520) do
     t.string   "server_outgoing"
     t.string   "username"
     t.string   "password"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "url"
     t.string   "uid"
     t.string   "apitype"
     t.string   "color"
     t.integer  "company_id"
+    t.boolean  "archived",        default: false
   end
 
   add_index "calendars", ["company_id"], name: "index_calendars_on_company_id", using: :btree
 
   create_table "clients", force: :cascade do |t|
-    t.string   "first_name",   null: false
-    t.string   "last_name",    null: false
+    t.string   "first_name",                   null: false
+    t.string   "last_name",                    null: false
     t.string   "email"
     t.string   "phone1"
     t.string   "phone2"
@@ -83,8 +86,9 @@ ActiveRecord::Schema.define(version: 20160715025520) do
     t.integer  "company_id"
     t.string   "first_name_2"
     t.string   "last_name_2"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "archived",     default: false
   end
 
   add_index "clients", ["company_id"], name: "index_clients_on_company_id", using: :btree
@@ -95,22 +99,24 @@ ActiveRecord::Schema.define(version: 20160715025520) do
     t.string   "phone"
     t.string   "website"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "archived",    default: false
   end
 
   create_table "employees", force: :cascade do |t|
-    t.string   "first_name",    null: false
-    t.string   "last_name",     null: false
+    t.string   "first_name",                    null: false
+    t.string   "last_name",                     null: false
     t.string   "username"
     t.string   "password"
     t.integer  "company_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
     t.string   "user_id"
     t.string   "provider"
     t.boolean  "is_admin?"
     t.boolean  "is_superuser?"
+    t.boolean  "archived",      default: false
   end
 
   add_index "employees", ["company_id"], name: "index_employees_on_company_id", using: :btree
@@ -132,8 +138,9 @@ ActiveRecord::Schema.define(version: 20160715025520) do
     t.string   "name"
     t.text     "notes"
     t.integer  "client_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.boolean  "archived",   default: false
   end
 
   add_index "pets", ["client_id"], name: "index_pets_on_client_id", using: :btree

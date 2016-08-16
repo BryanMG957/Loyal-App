@@ -133,9 +133,9 @@ class AppointmentsController < ApplicationController
     # Populate dropdown box for setting appointment's client
     def set_client_dropdown
       if (@current_employee.is_superuser?)
-        @clients = Client.all.includes(:pets)
+        @clients = Client.active.includes(:pets)
       else
-        @clients = Client.where(company: @current_employee.company).includes(:pets)
+        @clients = Client.where(archived: false, company: @current_employee.company).includes(:pets)
       end
     end
     def set_service_type_dropdown
