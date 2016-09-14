@@ -12,24 +12,26 @@
 	</div>
 
 	<% @clienthash.each do |key, value| %>
-	<% clientappts = @appointments.reject { |x| x.client_id != key } %>
+    <% clientappts = @appointments.by_client_id(key) %>
 
-	<div class="row">
-		<div class="col-xs-1"></div>
-		<div class="col-xs-3"><%= clientappts.first.start_time.strftime("%m/%d/%y") %> -
-			<%= clientappts.last.start_time.strftime("%m/%d/%y") %></div>
-			<div class="col-xs-1"> <%= value %> </div>
-			<div class="col-xs-3"><% if (clientappts.first.client) %>
-				<%= clientappts.first.client.first_name %>&nbsp;
-				<%= clientappts.first.client.last_name %>
-				<% else %>
-				No Client
-				<% end %></div>
-				<div class="col-xs-1"></div>
-				<div class="col-xs-1"><span class='expander glyphicon glyphicon-plus-sign' tag='client<%= key %>'></span></div>
-			</div>
+    <div class="row">
+      <div class="col-xs-1"></div>
+      <div class="col-xs-3"><%= clientappts.first.start_time.strftime("%m/%d/%y") %> -
+        <%= clientappts.last.start_time.strftime("%m/%d/%y") %></div>
+      <div class="col-xs-1"> <%= value %> </div>
+      <div class="col-xs-3">
+        <% if (clientappts.first.client) %>
+          <%= clientappts.first.client.first_name %>&nbsp;
+          <%= clientappts.first.client.last_name %>
+        <% else %>
+        No Client
+        <% end %>
+      </div>
+      <div class="col-xs-1"></div>
+      <div class="col-xs-1"><span class='expander glyphicon glyphicon-plus-sign' tag='client<%= key %>'></span></div>
+    </div>
 
-			<% clientappts.each do |appt| %>
+    <% clientappts.each do |appt| %>
 
 			<div class="row client<%= key %>" hidden='hidden'>
 				<div class="col-xs-1"><%= check_box_tag "bill[appt_ids_to_bill][]", appt.id, false, onclick: "unbilledItemCheckbox(this, #{appt.charge.to_i}, #{appt.client.id});" %></div>
@@ -40,30 +42,29 @@
 					<div class="col-xs-1">$<%= appt.charge %></div>
 					<div class="col-xs-1"><%= link_to '<span class="label label-success">Open</span>'.html_safe, appt %></div>
 				</div>
-				<% end %>
-				<% end %>
-				<div class="editor">
-					<div class="field editor-field">
-						<%= f.label "Discount ($)" %>:<%= f.number_field :discount, value: '0', :class => "form-control" %>
-					</div>
-					<div class="field editor-field">
-						<%= f.label "Total Amount ($)" %>:<%= f.number_field :total_amount, readonly: 'readonly', :class => "form-control" %>
-					</div>
-					<div class="field editor-field">
-						<%= f.label "Bill to:" %> &nbsp;&nbsp;
-						<%= f.collection_select :client_id, @clients, :id, :full_name, {}, {:class => "form-control"} %>
-					<div class="field editor-field">
-						<%= f.label :date_billed %><br>
-						<%= f.text_field :date_billed, :class => "form-control datepicker", :value => displayDate(Time.now) %>
-					</div>
-				</div>
+    <% end %>
+  <% end %>
 
+  <div class="editor">
+    <div class="field editor-field">
+      <%= f.label "Discount ($)" %>:<%= f.number_field :discount, value: '0', :class => "form-control" %>
+    </div>
+    <div class="field editor-field">
+      <%= f.label "Total Amount ($)" %>:<%= f.number_field :total_amount, readonly: 'readonly', :class => "form-control" %>
+    </div>
+    <div class="field editor-field">
+      <%= f.label "Bill to:" %> &nbsp;&nbsp;
+      <%= f.collection_select :client_id, @clients, :id, :full_name, {}, {:class => "form-control"} %>
+    <div class="field editor-field">
+      <%= f.label :date_billed %><br>
+      <%= f.text_field :date_billed, :class => "form-control datepicker", :value => displayDate(Time.now) %>
+    </div>
+  </div>
 
+  <div class="row">
+    <div class="actions col-xs-10" id="index-main-button">
+  <%= f.submit :class => "btn btn-primary"%>
+    </div>
+  </div>
 
-				<div class="row">
-			    <div class="actions col-xs-10" id="index-main-button">
-			  <%= f.submit :class => "btn btn-primary"%>
-			  </div>
-			  </div>
-
-				<% end %>
+<% end %>
