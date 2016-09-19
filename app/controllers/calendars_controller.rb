@@ -8,24 +8,14 @@ class CalendarsController < ApplicationController
   # GET /calendars
   # GET /calendars.json
   def index
-    if (@current_employee.is_superuser?)
-      @calendars = Calendar.all
-    elsif (@current_employee.company)
-      @calendars = Calendar.where(company_id: @current_employee.company_id)
-    else
-      redirect_to '/unauthorized'
-    end
+    @calendars = policy_scope(Calendar)
   end
 
   # GET /calendars/1
   # GET /calendars/1.json
   def show
-    if (@current_employee.is_superuser? ||
-        (Calendar.find(params[:id]).company_id == @current_employee.company_id))
-      @calendar = Calendar.find(params[:id])
-    else
-      redirect_to '/unauthorized'
-    end
+    @calendar = Calendar.find(params[:id])
+    authorize @calendar
   end
 
   # GET /calendars/new
@@ -60,7 +50,7 @@ class CalendarsController < ApplicationController
   def update
     if calendar_params[:password] == "********"
       params[:calendar].delete(:password)
-    end  
+    end
     respond_to do |format|
       if @calendar.update(calendar_params)
         format.html { redirect_to @calendar, notice: 'Calendar was successfully updated.' }
@@ -95,12 +85,8 @@ class CalendarsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_calendar
-      if (@current_employee.is_superuser? ||
-        (@current_employee.is_admin? && (Calendar.find(params[:id]).company_id == @current_employee.company_id)))
-        @calendar = Calendar.find(params[:id])
-      else
-        redirect_to '/unauthorized'
-      end
+      @calendar = Calendar.find(params[:id])
+      authorize @calendar
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

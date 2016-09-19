@@ -5,32 +5,20 @@ class CompaniesController < ApplicationController
   # GET /companies
   # GET /companies.json
   def index
-    if (@current_employee.is_superuser?)
-      @companies = Company.all
-    elsif (@current_employee.company)
-      @companies = Company.where(id: @current_employee.company)
-    else
-      redirect_to '/unauthorized'
-    end
+    @companies = policy_scope(Company)
   end
 
   # GET /companies/1
   # GET /companies/1.json
   def show
-    if ((@current_employee.is_superuser?) || (@current_employee.company_id == params[:id].to_i))
-      @company = Company.find(params[:id])
-    else
-      redirect_to '/unauthorized'
-    end
+    @company = Company.find(params[:id])
+    authorize @company
   end
 
   # GET /companies/new
   def new
-    if (@current_employee.is_superuser?)
-      @company = Company.new
-    else
-      redirect_to '/unauthorized'
-    end
+    @company = Company.new
+    authorize @company
   end
 
   # GET /companies/1/edit
@@ -83,12 +71,8 @@ class CompaniesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_company
       # Enforce privileges
-      if ((@current_employee.is_superuser?) ||
-          ((@current_employee.is_admin?) && (@current_employee.company_id == params[:id].to_i)))
-        @company = Company.find(params[:id])
-      else
-        redirect_to '/unauthorized'
-      end
+      @company = Company.find(params[:id])
+      authorize @company
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

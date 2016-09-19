@@ -8,27 +8,14 @@ class AppointmentsController < ApplicationController
   # GET /appointments
   # GET /appointments.json
   def index
-    if (@current_employee.is_superuser?)
-      @appointments = Appointment.all.order("start_time DESC")
-    elsif (@current_employee.company)
-      calendars = Calendar.where(company_id: @current_employee.company_id).map { |rec| rec.id }
-      @appointments = Appointment.where(calendar_id: calendars).order("start_time DESC")
-    else
-      redirect_to '/unauthorized'
-    end
+    @appointments = policy_scope(Appointment).includes(:service_type).order("start_time DESC")
   end
 
   # GET /appointments/1
   # GET /appointments/1.json
   def show
-    if (@current_employee.is_superuser?)
-      @appointment = Appointment.find(params[:id])
-    elsif (@current_employee.is_admin? &&
-        (Appointment.find(params[:id]).calendar.company_id == @current_employee.company_id))
-      @appointment = Appointment.find(params[:id])
-    else
-      redirect_to '/unauthorized'
-    end
+    @appointment = Appointment.find(params[:id])
+    authorize @appointment
   end
 
   # GET /appointments/new
@@ -115,36 +102,24 @@ class AppointmentsController < ApplicationController
     end
 
     def set_appointment
-      if (@current_employee.is_superuser? ||
-        (@current_employee.is_admin? && (Appointment.find(params[:id]).calendar.company_id == @current_employee.company_id)))
-        @appointment = Appointment.find(params[:id])
-      else
-        redirect_to '/unauthorized'
-      end
+      @appointment = Appointment.find(params[:id])
+      authorize @appointment
     end
+
     # Populate dropdown box for setting appointment's calendar
     def set_calendar_dropdown
-      if (@current_employee.is_superuser?)
-        @calendars = Calendar.all
-      else
-        @calendars = Calendar.where(company: @current_employee.company)
-      end
+      @calendars = policy_scope(Calendar)
     end
+
     # Populate dropdown box for setting appointment's client
     def set_client_dropdown
-      if (@current_employee.is_superuser?)
-        @clients = Client.active.includes(:pets)
-      else
-        @clients = Client.where(archived: false, company: @current_employee.company).includes(:pets)
-      end
+      @clients = policy_scope(Client).includes(:pets)
     end
+
     def set_service_type_dropdown
-      if (@current_employee.is_superuser?)
-        @service_types = ServiceType.all
-      else
-        @service_types = ServiceType.where(company: @current_employee.company)
-      end
+      @service_types = policy_scope(ServiceType)
     end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def appointment_params
       params.require(:appointment).permit(:service, :start_time, :end_time, :charge, :description, :reminder_before, :reminder_after, :status, :notes, :calendar_id, :client_id, :bill_id, :employee_id, :new_date)

@@ -5,25 +5,15 @@ class PetsController < ApplicationController
   # GET /pets
   # GET /pets.json
   def index
-    if (@current_employee.is_superuser?)
-      @pets = Pet.all
-    elsif (@current_employee.company)
-      clients = Client.where(company_id: @current_employee.company_id).map { |rec| rec.id }
-      @pets = Pet.where(client_id: clients)
-    else
-      redirect_to '/unauthorized'
-    end
+    @pets = policy_scope(Pet)
+    authorize @pets
   end
 
   # GET /pets/1
   # GET /pets/1.json
   def show
-    if (@current_employee.is_superuser? || (@current_employee.is_admin? &&
-        (Pet.find(params[:id]).client.company_id == @current_employee.company_id)))
-      @pet = Pet.find(params[:id])
-    else
-      redirect_to '/unauthorized'
-    end
+    @pet = Pet.find(params[:id])
+    authorize @pet
   end
 
   # GET /pets/new
@@ -78,12 +68,8 @@ class PetsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_pet
-      if (@current_employee.is_superuser? ||
-        (@current_employee.is_admin? && (Pet.find(params[:id]).client.company_id == @current_employee.company_id)))
-        @pet = Pet.find(params[:id])
-      else
-        redirect_to '/unauthorized'
-      end
+      @pet = Pet.find(params[:id])
+      authorize @pet
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

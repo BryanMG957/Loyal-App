@@ -5,24 +5,14 @@ class EmployeesController < ApplicationController
   # GET /employees
   # GET /employees.json
   def index
-    if (@current_employee.is_superuser?)
-      @employees = Employee.all.order("last_name")
-    elsif (@current_employee.company)
-      @employees = Employee.where(company_id: @current_employee.company_id).order("last_name")
-    else
-      redirect_to '/unauthorized'
-    end
+    @employees = policy_scope(Employee).order("last_name")
   end
 
   # GET /employees/1
   # GET /employees/1.json
   def show
-    if (@current_employee.is_superuser? ||
-        (Employee.find(params[:id]).company_id == @current_employee.company_id))
-      @employee = Employee.find(params[:id])
-    else
-      redirect_to '/unauthorized'
-    end
+    @employee = Employee.find(params[:id])
+    authorize @employee
   end
 
   # GET /employees/new
@@ -67,7 +57,7 @@ class EmployeesController < ApplicationController
   # DELETE /employees/1
   # DELETE /employees/1.json
   def destroy
-    Appointment.where(employee: @employee).update_all(employee: nil)
+    Appointment.where(employee_id: @employee.id).update_all(employee_id: nil)
     @employee.destroy
     respond_to do |format|
       format.html { redirect_to employees_url, notice: 'Employee was successfully destroyed.' }
@@ -78,21 +68,15 @@ class EmployeesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_employee
-      if (@current_employee.is_superuser? ||
-        (@current_employee.is_admin? && (Employee.find(params[:id]).company_id == @current_employee.company_id)))
-        @employee = Employee.find(params[:id])
-      else
-        redirect_to '/unauthorized'
-      end
+      @employee = Employee.find(params[:id])
+      authorize @employee
     end
+
     # Populate dropdown box for setting employee's company
     def set_company_dropdown
-      if (@current_employee.is_superuser?)
-        @allowed_companies = Company.all
-      else
-        @allowed_companies = Company.where(id: @current_employee.company_id)
-      end
+      @allowed_companies = policy_scope(Company)
     end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
       params.require(:employee).permit(:first_name, :last_name, :username, :password, :company_id)

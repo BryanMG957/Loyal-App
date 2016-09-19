@@ -1,63 +1,47 @@
 class ClientsController < ApplicationController
   include AppointmentsHelper
   before_action :logged_in_using_omniauth?
-  before_action :set_client, only: [:edit, :update, :destroy, :ledger]
+  before_action :set_client, only: [:show, :edit, :update, :destroy, :ledger]
 
   # GET /clients
   # GET /clients.json
   def index
-    if (@current_employee.is_superuser?)
-      @clients = Client.active.order("last_name")
-    elsif (@current_employee.company_id)
-      @clients = Client.where(archived: false, company_id: @current_employee.company_id).order("last_name")
-    else
-      redirect_to '/unauthorized'
-    end
+    @clients = policy_scope(Client).order("last_name").includes(:pets)
   end
 
   # GET /clients/1/ledger
   # GET /clients.json
   def ledger
-    if ((@current_employee.is_superuser?) || (@current_employee.company_id && @current_employee.is_admin? && @client.company == @current_employee.company))
-      @transactions = []
-      @payment = Payment.new(client_id: params[:id], date_received: Time.new)
-      Payment.where(client_id: params[:id]).order("date_received").each do |payment|
-        @transactions << Transaction.new(
-          object: payment,
-          date: payment.date_received,
-          description: "Payment by #{payment.payment_type}",
-          credit: payment.amount,
-          charge: nil,
-          item_id: payment.id,
-          item_type: "payment")
-      end
-      @bills = Bill.where(client_id: params[:id]).each do |bill|
-        @transactions << Transaction.new(
-          object: bill,
-          date: bill.date_billed,
-          description: "Invoice #{bill.id}",
-          credit: nil,
-          charge: bill.total_amount,
-          item_id: bill.id,
-          item_type: "bill")
-      end
-      @transactions.sort! do |a, b|
-        (a.date < b.date) ? -1 : 1
-      end
-    else
-      redirect_to '/unauthorized'
+    @transactions = []
+    @payment = Payment.new(client_id: params[:id], date_received: Time.new)
+    Payment.where(client_id: params[:id]).order("date_received").each do |payment|
+      @transactions << Transaction.new(
+        object: payment,
+        date: payment.date_received,
+        description: "Payment by #{payment.payment_type}",
+        credit: payment.amount,
+        charge: nil,
+        item_id: payment.id,
+        item_type: "payment")
+    end
+    @bills = Bill.where(client_id: params[:id]).each do |bill|
+      @transactions << Transaction.new(
+        object: bill,
+        date: bill.date_billed,
+        description: "Invoice #{bill.id}",
+        credit: nil,
+        charge: bill.total_amount,
+        item_id: bill.id,
+        item_type: "bill")
+    end
+    @transactions.sort! do |a, b|
+      (a.date < b.date) ? -1 : 1
     end
   end
 
   # GET /clients/1
   # GET /clients/1.json
   def show
-    if (@current_employee.is_superuser? ||
-        (Client.find(params[:id]).company_id == @current_employee.company_id))
-      @client = Client.find(params[:id])
-    else
-      redirect_to '/unauthorized'
-    end
   end
 
   # GET /clients/new
@@ -132,12 +116,8 @@ class ClientsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_client
-      if (@current_employee.is_superuser? ||
-        (@current_employee.is_admin? && (Client.find(params[:id]).company_id == @current_employee.company_id)))
-        @client = Client.find(params[:id])
-      else
-        redirect_to '/unauthorized'
-      end
+      @client = Client.find(params[:id])
+      authorize @client
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

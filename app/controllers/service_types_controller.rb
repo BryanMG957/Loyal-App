@@ -5,22 +5,12 @@ class ServiceTypesController < ApplicationController
   # GET /service_types
   # GET /service_types.json
   def index
-    if (@current_employee.is_superuser?)
-      @service_types = ServiceType.all 
-    elsif (@current_employee.company)
-      @service_types = ServiceType.where(company_id: @current_employee.company_id)
-    else
-      redirect_to '/unauthorized'
-    end
+    @service_types = policy_scope(ServiceType)
   end
 
   def show
-    if (@current_employee.is_superuser? || (@current_employee.is_admin? &&
-        (ServiceType.find(params[:id]).company_id == @current_employee.company_id)))
-      @service_type = ServiceType.find(params[:id])
-    else
-      redirect_to '/unauthorized'
-    end
+    @service_type = ServiceType.find(params[:id])
+    authorize @service_type
   end
 
   # GET /service_types/1.json
@@ -76,20 +66,14 @@ class ServiceTypesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_service_type
-      if (@current_employee.is_superuser? ||
-        (@current_employee.is_admin? && (ServiceType.find(params[:id]).company_id == @current_employee.company_id)))
-        @service_type = ServiceType.find(params[:id])
-      else
-        redirect_to '/unauthorized'
-      end
+      @service_type = ServiceType.find(params[:id])
+      authorize @service_type
     end
+
     def set_company_dropdown
-      if (@current_employee.is_superuser?)
-        @allowed_companies = Company.all
-      else
-        @allowed_companies = Company.where(id: @current_employee.company_id)
-      end
+      @allowed_companies = policy_scope(Company)
     end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_type_params
       params.require(:service_type).permit(:name, :price, :company_id, :billing_display_name)

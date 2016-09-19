@@ -7,6 +7,7 @@ gem 'bootstrap-datepicker-rails'
 
 gem 'bootstrap-sass'
 gem 'normalize-rails'
+
 # Dependencies of Auth0
 gem 'omniauth', '~> 1.3'
 gem 'omniauth-auth0', '~> 1.4'
@@ -33,6 +34,9 @@ gem 'activerecord-session_store', github: 'rails/activerecord-session_store'
 # HAML
 gem 'haml'
 gem 'haml-rails'
+
+# Pundit Authorization
+gem 'pundit'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'

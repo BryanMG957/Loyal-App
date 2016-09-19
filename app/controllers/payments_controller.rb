@@ -6,25 +6,14 @@ class PaymentsController < ApplicationController
   # GET /payments
   # GET /payments.json
   def index
-    if (@current_employee.is_superuser?)
-      @payments = Payment.all.order("id DESC")
-    elsif (@current_employee.company)
-      clients = Client.where(company_id: @current_employee.company_id).map { |rec| rec.id }
-      @payments = Payment.where(client_id: clients).order("id DESC")
-    else
-      redirect_to '/unauthorized'
-    end
+    @payments = policy_scope(Payment).order("id DESC")
   end
 
   # GET /payments/1
   # GET /payments/1.json
   def show
-    if (@current_employee.is_superuser? || (@current_employee.is_admin? &&
-        (Payment.find(params[:id]).client.company_id == @current_employee.company_id)))
-      @payment = Payment.find(params[:id])
-    else
-      redirect_to '/unauthorized'
-    end
+    @payment = Payment.find(params[:id])
+    authorize @payment
   end
 
   # GET /payments/new
@@ -81,20 +70,12 @@ class PaymentsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_payment
-      if (@current_employee.is_superuser? ||
-        (@current_employee.is_admin? && (Payment.find(params[:id]).client.company_id == @current_employee.company_id)))
-        @payment = Payment.find(params[:id])
-      else
-        redirect_to '/unauthorized'
-      end
+      @payment = Payment.find(params[:id])
+      authorize @payment
     end
 
     def set_client_dropdown
-      if (@current_employee.is_superuser?)
-        @clients = Client.all
-      else
-        @clients = Client.where(company: @current_employee.company)
-      end
+      @clients = policy_scope(Client)
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def payment_params

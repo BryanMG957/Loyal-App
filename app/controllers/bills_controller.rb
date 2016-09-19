@@ -5,14 +5,7 @@ class BillsController < ApplicationController
   # GET /bills
   # GET /bills.json
   def index
-    if (@current_employee.is_superuser?)
-      @bills = Bill.all.order("id DESC")
-    elsif (@current_employee.company)
-      clients = Client.where(company_id: @current_employee.company_id).map { |rec| rec.id }
-      @bills = Bill.where(client_id: clients).order("id DESC")
-    else
-      redirect_to '/unauthorized'
-    end
+    @bills = policy_scope(Bill).order("id DESC")
   end
 
   def unbilled
@@ -45,12 +38,8 @@ class BillsController < ApplicationController
   # GET /bills/1
   # GET /bills/1.json
   def show
-    if (@current_employee.is_superuser? || (@current_employee.is_admin? &&
-        (Bill.find(params[:id]).client.company_id == @current_employee.company_id)))
-      @bill = Bill.find(params[:id])
-    else
-      redirect_to '/unauthorized'
-    end
+    @bill = Bill.find(params[:id])
+    authorize @bill
   end
 
   # GET /bills/new
@@ -116,13 +105,9 @@ class BillsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bill
-      if (@current_employee.is_superuser? ||
-        (@current_employee.is_admin? && (Bill.find(params[:id]).client.company_id == @current_employee.company_id)))
-        @bill = Bill.find(params[:id])
-        @items = Appointment.where(bill_id: params[:id])
-      else
-        redirect_to '/unauthorized'
-      end
+      @bill = Bill.find(params[:id])
+      authorize @bill
+      @items = Appointment.where(bill_id: params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
